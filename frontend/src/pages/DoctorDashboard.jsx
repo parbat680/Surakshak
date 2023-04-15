@@ -11,9 +11,43 @@ import {
   Typography,
   Grid,
 } from '@mui/material';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  } from 'chart.js';
 import { Line } from "react-chartjs-2";
 
 const DoctorDashboard = () => {
+
+
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        PointElement,
+        LineElement,
+        Title,
+        Tooltip,
+        Legend
+      );
+
+    const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'Chart.js Line Chart',
+          },
+        },
+      };
   const [selectedPatient, setSelectedPatient] = useState(null);
   const patients = [
     {
@@ -131,7 +165,7 @@ const DoctorDashboard = () => {
           {selectedPatient ? selectedPatient.name : "No patient selected"}
         </Typography>
         <br />
-        <Line data={chartData} options={chartOptions}/>
+        <Line data={chartData} options={options}/>
         
       </Grid>
     </Grid>
