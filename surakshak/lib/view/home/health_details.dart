@@ -18,6 +18,7 @@ class HealthDetails extends StatefulWidget {
 final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
+final TextEditingController _diabetesTextController = TextEditingController();
 
 class _HealthDetailsState extends State<HealthDetails> {
   final items = ['Blood Pressure', 'Pulse Rate', 'Diabetes'];
@@ -327,14 +328,14 @@ diabetes() {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const Text(
-            'InputValue: ',
+            'Sugar level: ',
             style: TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
             height: 40,
             child: TextField(
-              controller: _systolicTextController,
+              controller: _diabetesTextController,
               decoration: const InputDecoration(
                   hintText: 'Enter value',
                   border: OutlineInputBorder(
