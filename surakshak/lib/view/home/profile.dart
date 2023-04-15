@@ -1,7 +1,8 @@
-import 'package:age_well/models/user.dart';
-import 'package:age_well/services/repo/profile.dart';
+import 'package:surakshak/models/user.dart';
+import 'package:surakshak/services/repo/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -67,7 +68,8 @@ class UserCard extends StatelessWidget {
         .toColumn(mainAxisAlignment: MainAxisAlignment.spaceAround)
         .padding(horizontal: 20, vertical: 10)
         .decorated(
-            color: const Color(0xff3977ff), borderRadius: BorderRadius.circular(20))
+            color: const Color(0xff3977ff),
+            borderRadius: BorderRadius.circular(20))
         .elevation(
           5,
           shadowColor: const Color(0xff3977ff),
@@ -92,12 +94,12 @@ class SettingsItemModel {
 }
 
 const List<SettingsItemModel> settingsItems = [
-  SettingsItemModel(
-    icon: Icons.edit,
-    color: Color(0xff8D7AEE),
-    title: 'Edit Profile',
-    description: 'view and edit profile details',
-  ),
+  // SettingsItemModel(
+  //   icon: Icons.edit,
+  //   color: Color(0xff8D7AEE),
+  //   title: 'Edit Profile',
+  //   description: 'view and edit profile details',
+  // ),
   SettingsItemModel(
     icon: Icons.settings,
     color: Color(0xffF468B7),
@@ -126,15 +128,22 @@ const List<SettingsItemModel> settingsItems = [
 
 class Settings extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => settingsItems
-      .map((settingsItem) => SettingsItem(
-            settingsItem.icon,
-            settingsItem.color,
-            settingsItem.title,
-            settingsItem.description,
-          ))
-      .toList()
-      .toColumn();
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), 'Change Language', 'Toggle Languages'),
+        settingsItems
+            .map((settingsItem) => SettingsItem(
+                  settingsItem.icon,
+                  settingsItem.color,
+                  settingsItem.title,
+                  settingsItem.description,
+                ))
+            .toList()
+            .toColumn()
+      ],
+    );
+  }
 }
 
 class SettingsItem extends StatefulWidget {
@@ -144,6 +153,7 @@ class SettingsItem extends StatefulWidget {
   final Color iconBgColor;
   final String title;
   final String description;
+  // final Icon
 
   @override
   _SettingsItemState createState() => _SettingsItemState();
@@ -211,7 +221,116 @@ class _SettingsItemState extends State<SettingsItem> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
+        // trailingToggleButton,
       ].toRow(),
+    );
+  }
+  // trailingToggleButton() {
+  //   return ToggleButtons(
+  //               direction: Axis.horizontal
+  //               onPressed: (int index) {
+  //                 setState(() {
+  //                   // The button that is tapped is set to true, and the others to false.
+  //                   for (int i = 0; i < _selectedWeather.length; i++) {
+  //                     _selectedWeather[i] = i == index;
+  //                   }
+  //                 });
+  //               },
+  // }
+}
+
+class SettingsItemToggle extends StatefulWidget {
+  const SettingsItemToggle(
+      this.icon, this.iconBgColor, this.title, this.description);
+
+  final IconData icon;
+  final Color iconBgColor;
+  final String title;
+  final String description;
+  // final Icon
+
+  @override
+  _SettingsItemToggleState createState() => _SettingsItemToggleState();
+}
+
+class _SettingsItemToggleState extends State<SettingsItemToggle> {
+  bool pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final settingsItem =
+        ({required Widget child}) => Styled.widget(child: child)
+            .alignment(Alignment.center)
+            .borderRadius(all: 15)
+            .ripple()
+            .backgroundColor(Colors.white, animate: true)
+            .clipRRect(all: 25) // clip ripple
+            .borderRadius(all: 25, animate: true)
+            .elevation(
+              pressed ? 0 : 20,
+              borderRadius: BorderRadius.circular(25),
+              shadowColor: const Color(0x30000000),
+            ) // shadow borderRadius
+            .constrained(height: 80)
+            .padding(vertical: 12) // margin
+            .gestures(
+              onTapChange: (tapStatus) => setState(() => pressed = tapStatus),
+              onTapDown: (details) => print('tapDown'),
+              onTap: () => print('onTap'),
+            )
+            .animate(const Duration(milliseconds: 150), Curves.easeOut);
+
+    final Widget icon = Icon(widget.icon, size: 20, color: Colors.white)
+        .padding(all: 12)
+        .decorated(
+          color: widget.iconBgColor,
+          borderRadius: BorderRadius.circular(30),
+        )
+        .padding(left: 15, right: 10);
+
+    final Widget title = Text(
+      widget.title,
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 16,
+      ),
+    ).padding(bottom: 5);
+
+    final Widget description = Text(
+      widget.description,
+      style: const TextStyle(
+        color: Colors.black26,
+        fontWeight: FontWeight.bold,
+        fontSize: 12,
+      ),
+    );
+
+    return settingsItem(
+      child: <Widget>[
+        icon,
+        <Widget>[
+          title,
+          description,
+        ].toColumn(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+        SizedBox(width: 7,),
+        trailingToggleButton(),
+      ].toRow(),
+    );
+  }
+
+  trailingToggleButton() {
+    // Here, default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
+    return ToggleSwitch(
+      initialLabelIndex: 0,
+      totalSwitches: 2,
+      minWidth: 66,
+      labels: ['English', 'Hindi'],
+      onToggle: (index) {
+        print('switched to: $index');
+      },
     );
   }
 }

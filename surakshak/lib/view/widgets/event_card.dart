@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../extensions/card.dart';
-import 'package:age_well/theme/fontStyles.dart';
+import 'package:surakshak/theme/fontStyles.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/event.dart';

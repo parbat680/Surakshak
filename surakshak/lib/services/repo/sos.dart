@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:age_well/services/data/api.dart';
+import 'package:surakshak/services/data/api.dart';
 import 'package:get/get.dart';
 
 class SosHelper {

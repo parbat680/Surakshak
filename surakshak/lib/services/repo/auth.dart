@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:age_well/services/repo/cached.dart';
-import 'package:age_well/view/home/bottom_nav.dart';
+import 'package:surakshak/services/repo/cached.dart';
+import 'package:surakshak/view/home/bottom_nav.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 

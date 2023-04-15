@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:age_well/models/volunteer.dart';
-import 'package:age_well/services/data/api.dart';
+import 'package:surakshak/models/volunteer.dart';
+import 'package:surakshak/services/data/api.dart';
 import 'package:get/get.dart';
 
 class VolenteerHelper {

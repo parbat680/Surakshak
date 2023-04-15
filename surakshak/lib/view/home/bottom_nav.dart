@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:age_well/view/home/events.dart';
-import 'package:age_well/view/home/health_tab.dart';
-import 'package:age_well/view/home/home.dart';
-import 'package:age_well/view/home/profile.dart';
+import 'package:surakshak/view/home/events.dart';
+import 'package:surakshak/view/home/health_tab.dart';
+import 'package:surakshak/view/home/home.dart';
+import 'package:surakshak/view/home/profile.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
 import 'package:flutter/material.dart';

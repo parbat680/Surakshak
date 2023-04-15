@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:age_well/models/event.dart';
-import 'package:age_well/services/data/api.dart';
+import 'package:surakshak/models/event.dart';
+import 'package:surakshak/services/data/api.dart';
 
 class EventHandler {
   static final ApiHandler _apiHandler = ApiHandler();

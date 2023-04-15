@@ -1,8 +1,8 @@
-import 'package:age_well/models/medicine.dart';
+import 'package:surakshak/models/medicine.dart';
 import 'package:get/get.dart';
 
 import '../../extensions/card.dart';
-import 'package:age_well/theme/fontStyles.dart';
+import 'package:surakshak/theme/fontStyles.dart';
 import 'package:flutter/material.dart';
 
 class MedicineCard extends StatelessWidget {
