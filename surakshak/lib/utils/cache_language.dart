@@ -13,7 +13,7 @@ class CacheLanguage {
     final lang = prefs.getString(_language);
 
     if (lang == null) {
-      return 'hn';
+      return 'en';
     }
 
     return lang;
