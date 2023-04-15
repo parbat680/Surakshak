@@ -96,4 +96,80 @@ class LanguageHN extends Languages {
   // View reminders
   @override
   String get viewReminders => 'याददाश्त देखें';
+
+  @override
+  // TODO: implement addHealthDetails
+  String get addHealthDetails => throw UnimplementedError();
+
+  @override
+  // TODO: implement bookCab
+  String get bookCab => throw UnimplementedError();
+
+  @override
+  // TODO: implement changeLanguage
+  String get changeLanguage => throw UnimplementedError();
+
+  @override
+  // TODO: implement date
+  String get date => throw UnimplementedError();
+
+  @override
+  // TODO: implement delete
+  String get delete => throw UnimplementedError();
+
+  @override
+  // TODO: implement duration
+  String get duration => throw UnimplementedError();
+
+  @override
+  // TODO: implement help
+  String get help => throw UnimplementedError();
+
+  @override
+  // TODO: implement logoutAccount
+  String get logoutAccount => throw UnimplementedError();
+
+  @override
+  // TODO: implement manageSettings
+  String get manageSettings => throw UnimplementedError();
+
+  @override
+  // TODO: implement music
+  String get music => throw UnimplementedError();
+
+  @override
+  // TODO: implement news
+  String get news => throw UnimplementedError();
+
+  @override
+  // TODO: implement notifications
+  String get notifications => throw UnimplementedError();
+
+  @override
+  // TODO: implement showMore
+  String get showMore => throw UnimplementedError();
+
+  @override
+  // TODO: implement support
+  String get support => throw UnimplementedError();
+
+  @override
+  // TODO: implement time
+  String get time => throw UnimplementedError();
+
+  @override
+  // TODO: implement toggleLanguages
+  String get toggleLanguages => throw UnimplementedError();
+
+  @override
+  // TODO: implement update
+  String get update => throw UnimplementedError();
+
+  @override
+  // TODO: implement userSettings
+  String get userSettings => throw UnimplementedError();
+
+  @override
+  // TODO: implement viewMap
+  String get viewMap => throw UnimplementedError();
 }
