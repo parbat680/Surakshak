@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'dart:developer';
 
-import 'package:age_well/extensions/card.dart';
-import 'package:age_well/services/repo/medicines.dart';
-import 'package:age_well/theme/fontStyles.dart';
-import 'package:age_well/utils/image.dart';
+import 'package:surakshak/extensions/card.dart';
+import 'package:surakshak/services/repo/medicines.dart';
+import 'package:surakshak/theme/fontStyles.dart';
+import 'package:surakshak/utils/image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:get/get.dart';

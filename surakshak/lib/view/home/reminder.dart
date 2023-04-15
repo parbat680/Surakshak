@@ -1,7 +1,7 @@
-import 'package:age_well/services/repo/medicines.dart';
-import 'package:age_well/theme/fontStyles.dart';
-import 'package:age_well/view/add_medicine.dart';
-import 'package:age_well/view/widgets/medicine_box.dart';
+import 'package:surakshak/services/repo/medicines.dart';
+import 'package:surakshak/theme/fontStyles.dart';
+import 'package:surakshak/view/add_medicine.dart';
+import 'package:surakshak/view/widgets/medicine_box.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

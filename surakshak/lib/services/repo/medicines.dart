@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:age_well/models/medicine.dart';
-import 'package:age_well/services/data/api.dart';
+import 'package:surakshak/models/medicine.dart';
+import 'package:surakshak/services/data/api.dart';
 import 'package:get/get.dart';
 
 class MedicineHandler {
