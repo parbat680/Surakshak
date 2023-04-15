@@ -1,10 +1,23 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:surakshak/bloc/locale/locale_bloc.dart';
 import 'package:surakshak/models/user.dart';
 import 'package:surakshak/services/repo/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
+import 'package:surakshak/utils/cache_language.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     ProfileHandler.getVolunteers();
@@ -131,7 +144,8 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), 'Change Language', 'Toggle Languages'),
+        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), 'Change Language',
+            'Toggle Languages'),
         settingsItems
             .map((settingsItem) => SettingsItem(
                   settingsItem.icon,
@@ -255,6 +269,13 @@ class SettingsItemToggle extends StatefulWidget {
 
 class _SettingsItemToggleState extends State<SettingsItemToggle> {
   bool pressed = false;
+  late LocaleBloc _localeBloc;
+
+  @override
+  void initState() {
+    _localeBloc = BlocProvider.of<LocaleBloc>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -315,7 +336,9 @@ class _SettingsItemToggleState extends State<SettingsItemToggle> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
         ),
-        SizedBox(width: 7,),
+        SizedBox(
+          width: 7,
+        ),
         trailingToggleButton(),
       ].toRow(),
     );
@@ -324,12 +347,16 @@ class _SettingsItemToggleState extends State<SettingsItemToggle> {
   trailingToggleButton() {
     // Here, default theme colors are used for activeBgColor, activeFgColor, inactiveBgColor and inactiveFgColor
     return ToggleSwitch(
-      initialLabelIndex: 0,
+      initialLabelIndex: CacheLanguage.getLanguage() == 'en' ? 0 : 1,
       totalSwitches: 2,
       minWidth: 66,
       labels: ['English', 'Hindi'],
       onToggle: (index) {
-        print('switched to: $index');
+        if (index == 0) {
+          _localeBloc.add(ChangeLocaleInfo(locale: 'en'));
+        } else {
+          _localeBloc.add(ChangeLocaleInfo(locale: 'hn'));
+        }
       },
     );
   }

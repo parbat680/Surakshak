@@ -96,4 +96,47 @@ class LanguageEN extends Languages {
   // View reminders
   @override
   String get viewReminders => 'View Reminders';
+
+  @override
+  String get music => 'Music';
+  @override
+  String get showMore => 'Show More';
+  @override
+  String get date => 'Date';
+  @override
+  String get time => 'Time';
+  @override
+  String get bookCab => 'Book a cab';
+  @override
+  String get viewMap => 'View on Map';
+
+  @override
+  String get duration => 'Duration';
+  @override
+  String get update => 'Update';
+  @override
+  String get delete => 'Delete';
+  @override
+  String get addHealthDetails => 'Add Health Details';
+  @override
+  @override
+  String get userSettings => 'User Settings';
+  @override
+  String get changeLanguage => 'Change Language';
+  @override
+  String get toggleLanguages => 'Toggle Languages';
+
+  @override
+  String get manageSettings => 'Manage App Settings';
+  @override
+  String get notifications => 'Notifications';
+  @override
+  String get news => 'Take over the news in time';
+  @override
+  String get support => 'Support';
+  @override
+  String get help => 'We are here to help';
+
+  @override
+  String get logoutAccount => 'Logout of your account';
 }
