@@ -45,7 +45,7 @@ const Header = () => {
                 </div>
                 <div className="flex ml-auto text-xl pr-3">
                     <Button className='bg-teal-400'>
-                        <Link to='/login'>Sign In</Link>
+                        <Link to='/login'>Login</Link>
                     </Button>
                     <Navbar.Toggle />
                 </div>

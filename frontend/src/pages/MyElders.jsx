@@ -5,8 +5,31 @@ import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
 import { useNavigate } from 'react-router-dom'
 import { deepPurple } from '@mui/material/colors';
+import { useEffect } from 'react';
+import axios from 'axios';
+import { constant } from '../constants';
 
 function MyElders() {
+
+  useEffect(() => {
+
+    axios.post(constant.API_URL + '/api/v1/volunteer/display/patients', {
+      headers: {
+        'Content-Type': 'application/json',
+        'token': localStorage.getItem('token')
+      },
+    })
+      .then(res => {
+        // setLoader(false);
+        console.log(res)
+      })
+      .catch(err => {
+        alert("Something went wrong")
+        console.log("Frontend err: ", err)
+      });
+  }, [])
+
+
 
   const navigate = useNavigate();
 
@@ -24,7 +47,7 @@ function MyElders() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 
-      <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
           <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
             <Avatar
               sx={{ bgcolor: deepPurple[500] }}

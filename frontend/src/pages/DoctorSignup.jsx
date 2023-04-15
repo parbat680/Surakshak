@@ -46,7 +46,7 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
         console.log(res)
         localStorage.setItem("token", res.token);
         localStorage.setItem("type", 'doctor');
-        navigate('/doctor/dashboard')
+        navigate('/doctordashboard')
       }
       
     } catch (err) {

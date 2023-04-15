@@ -213,7 +213,9 @@ function Yoga() {
   if(isStartPose) {
     return (
       <div className="yoga-container">
+        
         <div className="performance-container">
+        <br></br><br></br><br></br><br></br><br></br><br></br>
             <div className="pose-performance">
               <h4>Pose Time: {poseTime} s</h4>
             </div>

@@ -4,14 +4,8 @@ import RegisterPic from '../assets/register.json'
 // import { Navigate, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/surakshak-logo-white.png';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { useNavigate } from 'react-router-dom';
 
-
-const Login = () => {
+const DoctorLogin = () => {
     const DefaultOptions = {
         loop: true,
         autoplay: true,
@@ -23,19 +17,12 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    const [type, setType] = useState("")
 
-   
-    const handleTypeChange = (event) => {
-        setType(event.target.value)
-    }
-
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(email, password, type)
         try {
-            const response = await fetch(`http://35.154.145.51:5000/api/v1/${type}/login`,
+            const response = await fetch("http://35.154.145.51:5000/api/v1/doctor/login",
                 {
                     method: "POST",
                     headers: {
@@ -47,17 +34,10 @@ const Login = () => {
             );
             console.log(response);
 
-            if(response.status===200){
-                console.log(response)
-                alert("Logged In successfully!!!")
-                let res = await response.json();
-                console.log('res: ', res)
-                localStorage.setItem('token', res.token);
-                localStorage.setItem('type', type);
-                navigate(`/${type}dashboard`)
-            }
-
-
+            // localStorage.setItem("token", payload.data.token);
+            // localStorage.setItem("user", JSON.stringify(payload.data));
+            // setisLoggedIn(true)
+            // setuserid(payload.data.user._id);
         } catch (err) {
             console.log(err);
             alert("Something Went Wrong");
@@ -78,7 +58,7 @@ const Login = () => {
                     <div className="w-[500px] bg-white rounded-lg drop-shadow-lg">
                         <div className="space-y-2 py-8 px-10">
                             <h1 className="text-2xl text-center font-bold leading-tight tracking-tight text-teal-400 md:text-2xl">
-                                Login
+                                Sign In as Doctor
                             </h1>
                             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-4" action="#">
 
@@ -113,25 +93,6 @@ const Login = () => {
                                     <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900">Password</label>
                                     <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="" />
                                 </div>
-
-                                <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                                    <InputLabel id="demo-simple-select-standard-label">Login Type</InputLabel>
-                                    <Select
-                                    onChange={handleTypeChange}
-                                        labelId="demo-simple-select-standard-label"
-                                        id="demo-simple-select-standard"
-                                        value={type}
-                                        // onChange={handleChange}
-                                        label="Login Type"
-                                    >
-                                        <MenuItem value="">
-                                        </MenuItem>
-                                        <MenuItem value={'volunteer'}>Volunteer</MenuItem>
-                                        <MenuItem value={'doctor'}>Doctor</MenuItem>
-                                        <MenuItem value={'ngo'}>NGO</MenuItem>
-                                        <MenuItem value={'hospital'}>Hospital</MenuItem>
-                                    </Select>
-                                </FormControl>
 
 
                                 <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign In</button>
@@ -170,4 +131,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default DoctorLogin
