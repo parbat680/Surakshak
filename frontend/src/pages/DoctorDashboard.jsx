@@ -92,8 +92,27 @@ const DoctorDashboard = () => {
   }, []);
 
   const handlePatientClick = (patient) => {
-    
-    setSelectedPatient(patient);
+    let now = new Date();
+    var date= dateformat(now, 'yyyyy/MM/dd');
+    fetch("http://35.154.145.51:5000/api/v1/doctor/get/patientdetails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsibmFtZSI6IkRyLiBTYXdhbnQiLCJlbWFpbCI6InNhd2FudGRyQGdtYWlsLmNvbSJ9LCJpYXQiOjE2ODE1NTg3NDIsImV4cCI6MTY4NDE1MDc0Mn0.c5dw8IDhDEmM_T_w2qj3yV-KK6hA6Ioxzh-wf8ptga4",
+      },
+      body:JSON.stringify({
+        "id":patient._id,
+        "date":date
+      })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPatients(data[0].seniorId);
+        console.log(data);
+      })
+      .catch((e) => console.log(e));
+    // setSelectedPatient(patient);
   };
 
   const chartData = {
