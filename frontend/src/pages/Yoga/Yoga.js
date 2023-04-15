@@ -268,6 +268,7 @@ function Yoga() {
     <div
       className="yoga-container"
     >
+      <br></br><br></br><br></br>
       <DropDown
         poseList={poseList}
         currentPose={currentPose}
