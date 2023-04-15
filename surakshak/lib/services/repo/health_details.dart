@@ -1,4 +1,5 @@
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -12,7 +13,11 @@ class HealthDetailsHandler {
   static update(HealthDetailsModel healthDetailsModel) async {
     try {
       print("try");
-      var response = await _apiHandler.post("senior/add/healthdetails", healthDetailsModel.toJson());
+      var response = await _apiHandler.post("senior/add/healthdetails", jsonEncode({
+        'sistolic' : healthDetailsModel.sistolic,
+        'diastolic' : healthDetailsModel.diastolic,
+        'pulse' : healthDetailsModel.pulseRate
+      }) as Map);
       print(response.data);
       if(response.statusCode == 200){
         log('Successful');

@@ -22,8 +22,8 @@ final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
 final TextEditingController _diabetesTextController = TextEditingController();
-HealthDetailsModel healthDetailsModel = HealthDetailsModel(
-    diabetes: '', sistolic: '', diastolic: '', pulseRate: '', date: '');
+HealthDetailsModel healthDetailsModel =
+    HealthDetailsModel(sistolic: '', diastolic: '', pulseRate: '');
 
 updateInformation() async {
   print("inside");
@@ -245,24 +245,23 @@ class _HealthDetailsState extends State<HealthDetails> {
                           // Initial Value
                           value: dropDownvalue.value.toString(),
 
-                            // Down Arrow Icon
-                            icon: const Icon(Icons.keyboard_arrow_down),
+                          // Down Arrow Icon
+                          icon: const Icon(Icons.keyboard_arrow_down),
 
-                            // Array list of items
-                            items: items.map((String item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item).paddingAll(8),
-                              );
-                            }).toList(),
-                            // After selecting the desired option,it will
-                            // change button value to selected value
-                            onChanged: (String? newValue) {
-                              dropDownvalue.value = newValue!;
-                              // Text('Hello');
-                            },
-                          ),
-                          
+                          // Array list of items
+                          items: items.map((String item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(item).paddingAll(8),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            dropDownvalue.value = newValue!;
+                            // Text('Hello');
+                          },
+                        ),
                       ],
                     ),
                     if (dropDownvalue.value == 'Blood Pressure')
@@ -291,7 +290,6 @@ class _HealthDetailsState extends State<HealthDetails> {
                   // Get.back();
                   print('done');
                   log('Pressed');
-                  healthDetailsModel.diabetes = _diabetesTextController.value;
                   healthDetailsModel.diastolic = _distolicTextController.value;
                   healthDetailsModel.sistolic = _systolicTextController.value;
                   healthDetailsModel.pulseRate = _pulseRateTextController.value;
