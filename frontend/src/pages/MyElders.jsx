@@ -22,81 +22,113 @@ function MyElders() {
       <p className='text-center text-4xl font-alkatra text-blue-800'>It's our duty to take care of our elders</p>
       <br></br>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent:'center' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+      <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
           <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
             <Avatar
               sx={{ bgcolor: deepPurple[500] }}
               alt="Remy Sharp"
-              src="/broken-image.jpg"
+              src="broken-image.jpg"
             />
-            <Typography color="text.primary">Chris Dias</Typography>
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
+          </Breadcrumbs>
+        </div>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
+            <Avatar
+              sx={{ bgcolor: deepPurple[500] }}
+              alt="Remy Sharp"
+              src="broken-image.jpg"
+            />
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
+          </Breadcrumbs>
+        </div>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
+            <Avatar
+              sx={{ bgcolor: deepPurple[500] }}
+              alt="Remy Sharp"
+              src="broken-image.jpg"
+            />
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
+          </Breadcrumbs>
+        </div>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
+            <Avatar
+              sx={{ bgcolor: deepPurple[500] }}
+              alt="Remy Sharp"
+              src="broken-image.jpg"
+            />
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
+          </Breadcrumbs>
+        </div>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
+            <Avatar
+              sx={{ bgcolor: deepPurple[500] }}
+              alt="Remy Sharp"
+              src="broken-image.jpg"
+            />
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
           </Breadcrumbs>
         </div>
 
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
           <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
             <Avatar
               sx={{ bgcolor: deepPurple[500] }}
               alt="Remy Sharp"
-              src="/broken-image.jpg"
+              src="broken-image.jpg"
             />
-            <Typography color="text.primary">Chris Dias</Typography>
+            <div>
+              <Typography variant="h6" component="div">
+                Chris Dias
+              </Typography>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                9637261594
+              </Typography>
+            </div>
           </Breadcrumbs>
         </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-            />
-            <Typography color="text.primary">Chris Dias</Typography>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-            />
-            <Typography color="text.primary">Chris Dias</Typography>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-            />
-            <Typography color="text.primary">Chris Dias</Typography>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-            />
-            <Typography color="text.primary">Chris Dias</Typography>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '10px', paddingBottom: '10px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="/broken-image.jpg"
-            />
-            <Typography color="text.primary">Chris Dias</Typography>
-          </Breadcrumbs>
-        </div>
-        
-        
+
+
       </div>
 
     </div>
