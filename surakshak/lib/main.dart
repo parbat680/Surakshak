@@ -29,13 +29,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => LocaleBloc(),
-      child: GetMaterialApp(
-        title: 'Surakshak',
-        debugShowCheckedModeBanner: false,
-        theme: LightTheme,
-        home: CacheData().getToken() == null
-            ? const PasskeyScreen()
-            : BottomNavBar(),
+      child: BlocBuilder<LocaleBloc, LocaleState>(
+        builder: (context, state) {
+          return GetMaterialApp(
+            title: 'Surakshak',
+            debugShowCheckedModeBanner: false,
+            theme: LightTheme,
+            home: CacheData().getToken() == null
+                ? const PasskeyScreen()
+                : BottomNavBar(),
+          );
+        },
       ),
     );
   }

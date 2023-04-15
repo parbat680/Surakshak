@@ -90,10 +90,65 @@ class LanguageHN extends Languages {
   String get uploadImage => 'दवा छवि अपलोड करें';
 
   @override
-  // TODO: implement healthDetails
   String get healthDetails => "स्वास्थ्य विवरण";
 
-  // View reminders
   @override
-  String get viewReminders => 'याददाश्त देखें';
+  String get viewReminders => 'दवा प्रबंधन';
+
+  @override
+  String get addHealthDetails => 'स्वास्थ्य विवरण जोड़ें';
+
+  @override
+  String get bookCab => 'सवारी खोज';
+
+  @override
+  String get changeLanguage => 'भाषा बदलें';
+
+  @override
+  String get date => 'तारीख';
+
+  @override
+  String get delete => 'डिलीट';
+
+  @override
+  String get duration => 'अवधि';
+
+  @override
+  String get help => 'मदद';
+
+  @override
+  String get logoutAccount => 'लॉगआउट';
+
+  @override
+  String get manageSettings => 'सेटिंग्स प्रबंधित करें';
+
+  @override
+  String get music => 'संगीत';
+
+  @override
+  String get news => 'समाचार';
+
+  @override
+  String get notifications => 'सूचनाएं';
+
+  @override
+  String get showMore => 'और दिखाओ';
+
+  @override
+  String get support => 'सहायता';
+
+  @override
+  String get time => 'समय';
+
+  @override
+  String get toggleLanguages => 'टॉगल भाषाएं';
+
+  @override
+  String get update => 'अपडेट';
+
+  @override
+  String get userSettings => 'उपयोगकर्ता सेटिंग';
+
+  @override
+  String get viewMap => 'मानचित्र';
 }

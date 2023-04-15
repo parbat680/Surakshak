@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 
 import '../utils/cache_language.dart';
@@ -60,4 +59,24 @@ abstract class Languages {
 
   // View reminders
   String get viewReminders;
+
+  String get music;
+  String get showMore;
+  String get date;
+  String get time;
+  String get bookCab;
+  String get viewMap;
+  String get duration;
+  String get update;
+  String get delete;
+  String get addHealthDetails;
+  String get userSettings;
+  String get changeLanguage;
+  String get toggleLanguages;
+  String get manageSettings;
+  String get notifications;
+  String get news;
+  String get support;
+  String get help;
+  String get logoutAccount;
 }
