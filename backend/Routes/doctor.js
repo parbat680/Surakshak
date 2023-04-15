@@ -5,6 +5,7 @@ const auth = require('../Authentication/GetBearerToken');
 const { genSaltSync, hashSync, compareSync } = require("bcrypt");
 const fetchuser = require('../Middlewares/fetchuser');
 const SeniorCitizensSchema = require('../Schemas/SeniorCitizensSchema');
+const HealthDetails = require('../Schemas/HealthDetails');
 
 router.post('/signup', async (req, res) => {
     try {
@@ -129,5 +130,30 @@ router.get('/get/patients', fetchuser, async (req, res) => {
     }
 })
 
+router.post('/get/patientdetails', fetchuser, async (req, res) => {
+    try {
+        let date = new Date(req.body.date)
+        let predate = new Date(req.body.date)
+        date.setDate(predate.getDate() + 2);
+        predate.setDate(predate.getDate() - 7);
+        // console.log(date )
+        // console.log(predate)
+        // const find = await SeniorCitizensSchema.findById(req.body.id)
+        const findAll = await HealthDetails.find({
+            $and: [{ seniorId: req.body.id }, {
+                date: {
+                    $lte: date + 1,
+                    $gt: predate
+                }
+            }]
+        })
+
+        // console.log(findAll)
+        res.status(200).json(findAll)
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json(err.message);
+    }
+})
 
 module.exports = router

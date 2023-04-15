@@ -7,7 +7,8 @@ const multer = require('../Middlewares/multer')
 
 router.post('/add', fetchuser, multer.upload.single('image'), async (req, res) => {
     try {
-        // console.log(req.user)
+        // console.log(req.body)
+        // console.log(req.file)
         const userFind = await NgoSchema.findOne({ email: req.user.email })
         // console.log(userFind)
         const newEvent = new EventSchema({
