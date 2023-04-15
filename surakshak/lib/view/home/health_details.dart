@@ -128,10 +128,12 @@ class _HealthDetailsState extends State<HealthDetails> {
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Languages.of(context).days),
+                    SizedBox(width: 40),
                     Text(Languages.of(context).bloodPressure),
+                    SizedBox(width: 30),
                     Text(Languages.of(context).pulseRate),
                   ],
                 ),
@@ -163,7 +165,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                           return Container(
                             height: 40,
                             width: double.infinity,
-                            padding: const EdgeInsets.only(left: 30, right: 30),
+                            padding: const EdgeInsets.only(left: 10, right: 30),
                             child: SizedBox(
                               height: 40,
                               width: double.infinity,
@@ -172,10 +174,15 @@ class _HealthDetailsState extends State<HealthDetails> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(date),
-                                  GestureDetector(
-                                      onTap: () {},
-                                      child: Text(
-                                          '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}')),
+                                  // Text(
+                                  //     '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}'),
+                                  Row(
+                                    children: [
+                                      Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / "),
+                                  Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}"),
+                                    ],
+                                  ),
+                                          
                                   GestureDetector(
                                       onTap: () {},
                                       child: Text(healthDetails[i]

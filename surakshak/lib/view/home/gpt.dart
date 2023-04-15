@@ -79,7 +79,7 @@ class _GPTPageState extends State<GPTPage> {
   @override
   void dispose() {
     _prompt.dispose();
-
+    
     openAI.close();
     super.dispose();
   }
