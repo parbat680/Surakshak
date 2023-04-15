@@ -27,7 +27,7 @@ class Auth {
     if (response.statusCode == 200) {
       log("jdjd");
       cache.addToken(jsonDecode(response.toString())['token']);
-      Get.to(() => const BottomNavBar());
+      Get.offAll(() => const BottomNavBar());
     } else {
       Get.snackbar("Error", "Something went wrong");
     }
