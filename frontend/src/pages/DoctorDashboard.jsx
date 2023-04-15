@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   Paper,
   TableContainer,
@@ -10,44 +10,45 @@ import {
   Button,
   Typography,
   Grid,
-} from '@mui/material';
+} from "@mui/material";
 import {
-    Chart as ChartJS,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import PatientTable from "../components/PatientTable";
+
+const DoctorDashboard = () => {
+  const [patient, setPatients] = useState([]);
+
+  ChartJS.register(
     CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
     Title,
     Tooltip,
-    Legend,
-  } from 'chart.js';
-import { Line } from "react-chartjs-2";
+    Legend
+  );
 
-const DoctorDashboard = () => {
-
-
-    ChartJS.register(
-        CategoryScale,
-        LinearScale,
-        PointElement,
-        LineElement,
-        Title,
-        Tooltip,
-        Legend
-      );
-
-    const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'Chart.js Line Chart',
-          },
-        },
-      };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Doctor Report",
+      },
+    },
+  };
   const [selectedPatient, setSelectedPatient] = useState(null);
   const patients = [
     {
@@ -73,7 +74,25 @@ const DoctorDashboard = () => {
     },
   ];
 
+  useEffect(() => {
+    fetch("http://35.154.145.51:5000/api/v1/doctor/get/patients", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsibmFtZSI6IkRyLiBTYXdhbnQiLCJlbWFpbCI6InNhd2FudGRyQGdtYWlsLmNvbSJ9LCJpYXQiOjE2ODE1NTg3NDIsImV4cCI6MTY4NDE1MDc0Mn0.c5dw8IDhDEmM_T_w2qj3yV-KK6hA6Ioxzh-wf8ptga4",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setPatients(data[0].seniorId);
+        console.log(data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   const handlePatientClick = (patient) => {
+    
     setSelectedPatient(patient);
   };
 
@@ -104,47 +123,26 @@ const DoctorDashboard = () => {
     ],
   };
 
-  const chartOptions = {
-    
-        scales: {
-          x: {
-            type: "category",
-            labels: [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-            ],
-          },
-          y: {
-            beginAtZero: true,
-          },
-        },
-  };
-
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} sx={{ height: "100vh" }}>
       <Grid item xs={12}>
         <Typography variant="h4">Patient List</Typography>
       </Grid>
-      <Grid item xs={4}>
+      <Grid item md={4} xs={12}>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Patient ID</TableCell>
+                <TableCell>Phone</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-            {patients.map((patient) => (
-                <TableRow key={patient.id}>
-                  <TableCell>{patient.id}</TableCell>
-                  <TableCell>{patient.name}</TableCell>
+              {patient.map((p) => (
+                <TableRow key={p.uniqueId}>
+                  <TableCell>{p.phone}</TableCell>
+                  <TableCell>{p.name}</TableCell>
                   <TableCell>
                     <Button
                       variant="contained"
@@ -160,18 +158,16 @@ const DoctorDashboard = () => {
           </Table>
         </TableContainer>
       </Grid>
-      <Grid item xs={8}>
+      <Grid item md={8} xs={12} sx={{ overflow: "hidden" }}>
         <Typography variant="h4">
           {selectedPatient ? selectedPatient.name : "No patient selected"}
         </Typography>
         <br />
-        <Line data={chartData} options={options}/>
-        
+        <Line data={chartData} options={options} />
+        <PatientTable />
       </Grid>
     </Grid>
   );
 };
 
 export default DoctorDashboard;
-
-            
