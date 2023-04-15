@@ -1,3 +1,5 @@
+import 'package:surakshak/languages/language.dart';
+import 'package:surakshak/languages/language_hi.dart';
 import 'package:surakshak/models/medicine.dart';
 import 'package:get/get.dart';
 
@@ -64,7 +66,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "duration: ${meds.duration.toString()}",
+                    "${Languages.of(context).duration} : ${meds.duration.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -73,7 +75,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "Time: ${meds.time.toString()}",
+                    "${Languages.of(context).time} : ${meds.time.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -98,7 +100,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange),
                           child: Text(
-                            "Update",
+                            Languages.of(context).update,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -114,7 +116,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
                           child: Text(
-                            "Delete",
+                            Languages.of(context).delete,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -131,7 +133,7 @@ class MedicineCard extends StatelessWidget {
     );
   }
 
-  getDescription() {
+  getDescription(BuildContext context) {
     RxBool showMore = false.obs;
 
     return Obx(() => Column(
@@ -151,7 +153,7 @@ class MedicineCard extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_drop_down),
                   label: Text(
-                    showMore.value ? "show less" : "show more",
+                    showMore.value ? Languages.of(context).showLess : Languages.of(context).showMore,
                     style: poppins.copyWith(color: Colors.blue),
                   )),
             )

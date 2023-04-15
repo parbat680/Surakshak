@@ -7,6 +7,8 @@ import 'package:styled_widget/styled_widget.dart';
 import 'package:surakshak/utils/cache_language.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
+import '../../languages/language.dart';
+
 class ProfileScreen extends StatefulWidget {
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -28,9 +30,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .scrollable();
 
     return <Widget>[
-      const Text(
-        'User settings',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+      Text(
+        '${Languages.of(context).userSettings}',
+        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
       ).alignment(Alignment.center).padding(bottom: 20),
       UserCard(),
       Settings(),
@@ -98,7 +100,9 @@ class SettingsItemModel {
   final Color color;
   final String title;
   final String description;
+  // final BuildContext context;
   const SettingsItemModel({
+    // required this.context,
     required this.color,
     required this.description,
     required this.icon,
@@ -114,6 +118,7 @@ const List<SettingsItemModel> settingsItems = [
   //   description: 'view and edit profile details',
   // ),
   SettingsItemModel(
+    // context: context,
     icon: Icons.settings,
     color: Color(0xffF468B7),
     title: 'Settings',
@@ -144,10 +149,11 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), 'Change Language',
-            'Toggle Languages'),
+        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), '${Languages.of(context).changeLanguage}',
+            '${Languages.of(context).toggleLanguages}'),
         settingsItems
             .map((settingsItem) => SettingsItem(
+
                   settingsItem.icon,
                   settingsItem.color,
                   settingsItem.title,
