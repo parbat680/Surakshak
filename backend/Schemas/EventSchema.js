@@ -53,6 +53,9 @@ const EventSchema = mongoose.Schema({
     },
     image:{
         type:String,
+    },
+    location:{
+        type:String
     }
 });
 

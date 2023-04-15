@@ -23,7 +23,8 @@ router.post('/add', fetchuser, multer.upload.single('image'), async (req, res) =
             food: req.body.food,
             pick: req.body.pick,
             desc: req.body.desc,
-            image: `${process.env.URI}api/image/${req.file.filename}`
+            image: `${process.env.URI}api/image/${req.file.filename}`,
+            location: req.body.location
         })
 
 
