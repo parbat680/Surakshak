@@ -245,23 +245,24 @@ class _HealthDetailsState extends State<HealthDetails> {
                           // Initial Value
                           value: dropDownvalue.value.toString(),
 
-                          // Down Arrow Icon
-                          icon: const Icon(Icons.keyboard_arrow_down),
+                            // Down Arrow Icon
+                            icon: const Icon(Icons.keyboard_arrow_down),
 
-                          // Array list of items
-                          items: items.map((String item) {
-                            return DropdownMenuItem(
-                              value: item,
-                              child: Text(item).paddingAll(8),
-                            );
-                          }).toList(),
-                          // After selecting the desired option,it will
-                          // change button value to selected value
-                          onChanged: (String? newValue) {
-                            dropDownvalue.value = newValue!;
-                            // Text('Hello');
-                          },
-                        ),
+                            // Array list of items
+                            items: items.map((String item) {
+                              return DropdownMenuItem(
+                                value: item,
+                                child: Text(item).paddingAll(8),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {
+                              dropDownvalue.value = newValue!;
+                              // Text('Hello');
+                            },
+                          ),
+                          
                       ],
                     ),
                     if (dropDownvalue.value == 'Blood Pressure')

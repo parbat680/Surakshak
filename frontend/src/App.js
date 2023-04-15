@@ -13,6 +13,7 @@ import ManagePatients from './pages/ElderStats';
 import NavigationBar from './components/NavigationBar'
 import MyElders from './pages/MyElders';
 import ElderStats from './pages/ElderStats';
+import DoctorDashboard from './pages/doctor_dash';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/yoga" element={<Yoga />}></Route> 
         <Route exact path="/volunteerdashboard" element={<VolunteerDashboard />}></Route>        
         <Route exact path="/myelders" element={<MyElders />}></Route> 
+        <Route exact path="/doctor/dashboard" element={<DoctorDashboard />}></Route> 
         <Route exact path="/elderstats" element={<ElderStats />}></Route> 
 
       </Routes>
