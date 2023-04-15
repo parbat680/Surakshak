@@ -19,6 +19,7 @@ app.use('/api/v1/hospital', require('./Routes/hospitals'))
 app.use('/api/v1/ngo', require('./Routes/ngo'))
 app.use('/api/v1/event', require('./Routes/events'))
 app.use('/api/v1/sos', require('./Routes/sos'))
+app.use('/api/v1/health', require('./Routes/healthDetails'))
 
 
 
