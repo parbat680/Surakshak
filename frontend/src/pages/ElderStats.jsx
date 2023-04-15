@@ -52,6 +52,7 @@ export default function ElderStats() {
 
     return (
         <div style={{ display: 'flex', marginTop: '50px', flexDirection: 'column' }}>
+           
 
             <TableContainer sx={{ justifyContent: 'center', display: 'flex', flexDirection: 'column', backgroundColor: '#e8e8e8', alignItems: 'center', paddingTop: '30px', paddingBottom: '50px' }} component={Paper}>
                 <Typography variant="h5" component="div">
