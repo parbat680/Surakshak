@@ -79,4 +79,6 @@ abstract class Languages {
   String get support;
   String get help;
   String get logoutAccount;
+  String get home;
+  String get showLess;
 }

@@ -64,7 +64,7 @@ class _BottomNavBarState extends State<BottomNavBar>
 
   get _tabBar => [
         TabItem(
-            title: Languages.of(context).appName,
+            title: Languages.of(context).home,
             icon: Icons.home_outlined,
             activeIcon: Icons.home_filled),
         TabItem(

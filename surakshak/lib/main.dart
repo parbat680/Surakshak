@@ -16,6 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheLanguage.init();
   await GetStorage.init();
+  await CacheLanguage.init();
   runApp(MyApp());
 }
 

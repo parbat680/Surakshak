@@ -14,11 +14,11 @@ class HealthDetailsModel {
         required this.date,
     });
 
-    String diabetes;
-    String sistolic;
-    String diastolic;
-    String pulseRate;
-    String date;
+    var diabetes;
+    var sistolic;
+    var diastolic;
+    var pulseRate;
+    var date;
 
     factory HealthDetailsModel.fromJson(Map<String, dynamic> json) => HealthDetailsModel(
         diabetes: json["diabetes"] ?? "",
@@ -32,7 +32,7 @@ class HealthDetailsModel {
         "diabetes": diabetes,
         "sistolic": sistolic,
         "diastolic": diastolic,
-        "pulseRate": pulseRate,
+        "pulse": pulseRate,
         "date": date,
     };
 }

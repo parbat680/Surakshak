@@ -1,13 +1,17 @@
 import 'dart:developer';
 
+// import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:surakshak/utils/get_current_location.dart';
+import 'package:surakshak/view/home/health_details.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../extensions/card.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:flutter/material.dart';
 
+import '../../languages/language.dart';
 import '../../models/event.dart';
 
 class EventCard extends StatelessWidget {
@@ -17,6 +21,7 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // GetCurrentLocation getCurrentLocation = GetCurrentLocation();
     String date = DateFormat('dd/MM/yyyy').format(DateTime.parse(event.date!));
     return Container(
       constraints: const BoxConstraints(
@@ -84,14 +89,14 @@ class EventCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              getDescription(),
+              getDescription(context),
               const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
                   Text(
-                    "Date: ",
+                    "${Languages.of(context).date} : ",
                     style: poppins.copyWith(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -103,7 +108,7 @@ class EventCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "Time:",
+                    "${Languages.of(context).time} :",
                     style: poppins.copyWith(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -124,22 +129,15 @@ class EventCard extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: ElevatedButton(
-                      onPressed: () {
-                        String url =
-                            "https://www.google.com/maps/search/?api=1&query='${event.address}";
-                        try {
-                          launchUrl(
-                            Uri.parse(url),
-                            mode: LaunchMode.externalApplication,
-                          );
-                        } catch (e) {
-                          log("maps Error");
-                        }
+                      onPressed: () async {
+                        // Position link = await getCurrentLocation.determinePosition();
+                        // log(link.toString());
+                        await updateInformation();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),
                       child: Text(
-                        "Book a Cab ",
+                        "${Languages.of(context).bookCab}",
                         style: poppins.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w400),
                       ),
@@ -163,7 +161,7 @@ class EventCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange),
                       child: Text(
-                        "View on Map",
+                        "${Languages.of(context).viewMap}",
                         style: poppins.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w400),
                       ),
@@ -178,7 +176,7 @@ class EventCard extends StatelessWidget {
     );
   }
 
-  getDescription() {
+  getDescription(BuildContext context) {
     RxBool showMore = false.obs;
 
     return Obx(() => Column(
@@ -198,7 +196,7 @@ class EventCard extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_drop_down),
                   label: Text(
-                    showMore.value ? "show less" : "show more",
+                    showMore.value ? Languages.of(context).showLess : Languages.of(context).showMore,
                     style: poppins.copyWith(color: Colors.blue),
                   )),
             )

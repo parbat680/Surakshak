@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:surakshak/extensions/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,7 +8,6 @@ import 'package:surakshak/services/repo/health_details.dart';
 
 import '../../languages/language.dart';
 import '../../models/health_details.dart';
-import '../../models/medicine.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import '../../theme/fontStyles.dart';
 
@@ -21,10 +22,13 @@ final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
 final TextEditingController _diabetesTextController = TextEditingController();
-HealthDetailsModel? healthDetailsModel;
+HealthDetailsModel healthDetailsModel = HealthDetailsModel(
+    diabetes: '', sistolic: '', diastolic: '', pulseRate: '', date: '');
 
 updateInformation() async {
-  await HealthDetailsHandler.update(healthDetailsModel!);
+  print("inside");
+  await HealthDetailsHandler.update(healthDetailsModel);
+  log('Function executed');
 }
 
 class _HealthDetailsState extends State<HealthDetails> {
@@ -197,106 +201,111 @@ class _HealthDetailsState extends State<HealthDetails> {
 
   healthDetailsPopUp() {
     showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: ((context) {
-          return Dialog(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Enter Health Details',
-                  style: TextStyle(
-                    fontSize: 24,
-                    // fontWeight: FontWeight.bold,
-                  ),
-                ).marginOnly(top: 10, left: 10),
-                Container(
-                  margin: const EdgeInsets.only(top: 10),
-                  height: 1,
-                  width: double.infinity,
-                  color: Colors.black38,
+      barrierDismissible: true,
+      context: context,
+      builder: ((context) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Enter Health Details',
+                style: TextStyle(
+                  fontSize: 24,
+                  // fontWeight: FontWeight.bold,
                 ),
-                // AspectRatio(
-                //         aspectRatio: 12 / 10,
-                //         child: Lottie.asset('assets/alert_image.json',
-                //             fit: BoxFit.fill))
-                //     .paddingAll(10),
+              ).marginOnly(top: 10, left: 10),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                height: 1,
+                width: double.infinity,
+                color: Colors.black38,
+              ),
+              // AspectRatio(
+              //         aspectRatio: 12 / 10,
+              //         child: Lottie.asset('assets/alert_image.json',
+              //             fit: BoxFit.fill))
+              //     .paddingAll(10),
 
-                Obx(() => Column(children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          const Text(
-                            'Select Parameter: ',
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w600),
-                          ),
-                          DropdownButton(
-                            // Initial Value
-                            value: dropDownvalue.value.toString(),
+              Obx(() => Column(children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          'Select Parameter: ',
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w600),
+                        ),
+                        DropdownButton(
+                          // Initial Value
+                          value: dropDownvalue.value.toString(),
 
-                            // Down Arrow Icon
-                            icon: const Icon(Icons.keyboard_arrow_down),
+                          // Down Arrow Icon
+                          icon: const Icon(Icons.keyboard_arrow_down),
 
-                            // Array list of items
-                            items: items.map((String item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item).paddingAll(8),
-                              );
-                            }).toList(),
-                            // After selecting the desired option,it will
-                            // change button value to selected value
-                            onChanged: (String? newValue) {
-                              dropDownvalue.value = newValue!;
-                              // Text('Hello');
-                            },
-                          ),
-                        ],
-                      ),
-                      if (dropDownvalue.value == 'Blood Pressure')
-                        bloodPressure()
-                      else if (dropDownvalue.value == 'Pulse Rate')
-                        pulseRate()
-                      else if (dropDownvalue.value == 'Diabetes')
-                        diabetes()
-                    ])),
-                // Obx(
-                //   () => Flexible(child: Text("Auto request in: $_start")),
-                // ),
-                // if (dropDownvalue.value == 'Blood Pressure')
-                //   const Text('Blood Pressure')
-                // else if (dropDownvalue.value == 'Pulse Rate')
-                //   const Text('Pulse Rate')
-                // else if (dropDownvalue.value == 'Diabetes')
-                //   const Text('Diabetes'),
-                const SizedBox(
-                  height: 10,
-                ),
+                          // Array list of items
+                          items: items.map((String item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: Text(item).paddingAll(8),
+                            );
+                          }).toList(),
+                          // After selecting the desired option,it will
+                          // change button value to selected value
+                          onChanged: (String? newValue) {
+                            dropDownvalue.value = newValue!;
+                            // Text('Hello');
+                          },
+                        ),
+                      ],
+                    ),
+                    if (dropDownvalue.value == 'Blood Pressure')
+                      bloodPressure()
+                    else if (dropDownvalue.value == 'Pulse Rate')
+                      pulseRate()
+                    else if (dropDownvalue.value == 'Diabetes')
+                      diabetes()
+                  ])),
+              // Obx(
+              //   () => Flexible(child: Text("Auto request in: $_start")),
+              // ),
+              // if (dropDownvalue.value == 'Blood Pressure')
+              //   const Text('Blood Pressure')
+              // else if (dropDownvalue.value == 'Pulse Rate')
+              //   const Text('Pulse Rate')
+              // else if (dropDownvalue.value == 'Diabetes')
+              //   const Text('Diabetes'),
+              const SizedBox(
+                height: 10,
+              ),
 
-                ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () async {
-                    healthDetailsModel?.diabetes = _diabetesTextController.value as String;
-                    healthDetailsModel?.diastolic = _diabetesTextController.value as String;
-                    healthDetailsModel?.sistolic = _systolicTextController.value as String;
-                    healthDetailsModel?.pulseRate = _pulseRateTextController.value as String;
-                    await updateInformation();
-                    Get.back();
-                  },
-                  child: const Text('Submit'),
-                ).marginSymmetric(horizontal: 21),
-              ],
-            ).paddingAll(10),
-          );
-        }));
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                onPressed: () async {
+                  // Get.back();
+                  print('done');
+                  log('Pressed');
+                  healthDetailsModel.diabetes = _diabetesTextController.value;
+                  healthDetailsModel.diastolic = _distolicTextController.value;
+                  healthDetailsModel.sistolic = _systolicTextController.value;
+                  healthDetailsModel.pulseRate = _pulseRateTextController.value;
+                  print('no error');
+                  log('Done????');
+                  await updateInformation();
+                  Get.back();
+                },
+                child: const Text('Submit'),
+              ).marginSymmetric(horizontal: 21),
+            ],
+          ).paddingAll(10),
+        );
+      }),
+    );
   }
 
   pulseRate() {

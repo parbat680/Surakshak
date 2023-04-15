@@ -1,3 +1,4 @@
+import 'package:surakshak/languages/language.dart';
 import 'package:surakshak/services/repo/medicines.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:surakshak/view/add_medicine.dart';
@@ -32,7 +33,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Reminders",
+                Languages.of(context).viewReminders,
                 style: poppins.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -45,7 +46,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                 child: Text(
-                  "Add Medicine",
+                  Languages.of(context).addMedicine,
                   style: poppins.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w400),
                 ),

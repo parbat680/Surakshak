@@ -49,6 +49,8 @@ dependencies:
   url_launcher: ^6.1.10
   number_inc_dec: ^0.8.0
   toggle_switch: ^2.0.1
+  # geolocator: ^9.0.2
+  # location: ^3.0.0
   
   loader_overlay: ^2.1.0
   dio: ^4.0.6
