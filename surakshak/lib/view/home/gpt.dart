@@ -57,6 +57,7 @@ class _GPTPageState extends State<GPTPage> {
   void _chatGpt3ExampleStream() async {
     isLoading(true);
     history.add(_prompt.text);
+
     final request = CompleteText(
         prompt: _prompt.text, model: kTranslateModelV3, maxTokens: 200);
 
@@ -66,7 +67,8 @@ class _GPTPageState extends State<GPTPage> {
       _prompt.clear();
       debugPrint(it.toString());
       isLoading(false);
-      tController.sink.add(it);
+      history.add(it!.choices.last.text);
+      setState(() {});
     }).onError((err) {
       print(err.toString());
     });
@@ -75,7 +77,7 @@ class _GPTPageState extends State<GPTPage> {
   @override
   void dispose() {
     _prompt.dispose();
-    tController.close();
+
     openAI.close();
     super.dispose();
   }
@@ -90,7 +92,7 @@ class _GPTPageState extends State<GPTPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Flexible(
+              Expanded(
                   child: ListView.builder(
                       itemCount: history.length,
                       shrinkWrap: true,
@@ -100,27 +102,27 @@ class _GPTPageState extends State<GPTPage> {
                           child: Text(history[index]),
                         );
                       })),
-              Expanded(
-                child: StreamBuilder<CTResponse?>(
-                    stream: tController.stream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return SingleChildScrollView(
-                          child: Text(
-                            snapshot.data!.choices.last.text,
-                            style: poppins.copyWith(fontSize: 18),
-                          ),
-                        );
-                      } else if (snapshot.data == null) {
-                        return Text(
-                          "Ask me Anything you want",
-                          style: poppins.copyWith(fontSize: 18),
-                        );
-                      }
+              // Expanded(
+              //   child: StreamBuilder<CTResponse?>(
+              //       stream: tController.stream,
+              //       builder: (context, snapshot) {
+              //         if (snapshot.hasData) {
+              //           return SingleChildScrollView(
+              //             child: Text(
+              //               snapshot.data!.choices.last.text,
+              //               style: poppins.copyWith(fontSize: 18),
+              //             ),
+              //           );
+              //         } else if (snapshot.data == null) {
+              //           return Text(
+              //             "Ask me Anything you want",
+              //             style: poppins.copyWith(fontSize: 18),
+              //           );
+              //         }
 
-                      return Text("loading");
-                    }),
-              ),
+              //         return Text("loading");
+              //       }),
+              // ),
               _inputCard(MediaQuery.of(context).size),
             ],
           ),
