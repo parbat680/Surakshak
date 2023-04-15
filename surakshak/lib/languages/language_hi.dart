@@ -95,27 +95,27 @@ class LanguageHN extends Languages {
 
   // View reminders
   @override
-  String get viewReminders => 'याददाश्त देखें';
+  String get viewReminders => 'दवा प्रबंधन';
 
   @override
   // TODO: implement addHealthDetails
-  String get addHealthDetails => throw UnimplementedError();
+  String get addHealthDetails => 'स्वास्थ्य विवरण जोड़ें';
 
   @override
   // TODO: implement bookCab
-  String get bookCab => throw UnimplementedError();
+  String get bookCab => 'सवारी खोज';
 
   @override
   // TODO: implement changeLanguage
-  String get changeLanguage => throw UnimplementedError();
+  String get changeLanguage => 'भाषा बदलें';
 
   @override
   // TODO: implement date
-  String get date => throw UnimplementedError();
+  String get date => 'तारीख';
 
   @override
   // TODO: implement delete
-  String get delete => throw UnimplementedError();
+  String get delete => 'डिलीट';
 
   @override
   // TODO: implement duration
