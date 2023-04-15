@@ -23,9 +23,12 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import PatientTable from "../components/PatientTable";
+import { SelectAllRounded } from "@mui/icons-material";
 
 const DoctorDashboard = () => {
   const [patient, setPatients] = useState([]);
+  const [patientData,setPatientData]= useState([]);
+  const [selectPatient,setSelectPatient]= useState([]);
 
   ChartJS.register(
     CategoryScale,
@@ -49,30 +52,8 @@ const DoctorDashboard = () => {
       },
     },
   };
-  const [selectedPatient, setSelectedPatient] = useState(null);
-  const patients = [
-    {
-      id: 1,
-      name: "John Doe",
-      bloodPressure: [120, 130, 125, 140, 115],
-      heartRate: [70, 80, 85, 90, 95],
-      diabetes: [90, 95, 100, 105, 110],
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      bloodPressure: [130, 140, 135, 150, 125],
-      heartRate: [80, 90, 95, 100, 105],
-      diabetes: [80, 85, 90, 95, 100],
-    },
-    {
-      id: 3,
-      name: "Bob Johnson",
-      bloodPressure: [140, 150, 145, 160, 135],
-      heartRate: [90, 100, 105, 110, 115],
-      diabetes: [70, 75, 80, 85, 90],
-    },
-  ];
+  
+ 
 
   useEffect(() => {
     fetch("http://35.154.145.51:5000/api/v1/doctor/get/patients", {
@@ -92,10 +73,13 @@ const DoctorDashboard = () => {
   }, []);
 
   const handlePatientClick = (patient) => {
-    let now = new Date();
-    var date= dateformat(now, 'yyyyy/MM/dd');
+    const today = new Date();
+const year = today.getFullYear();
+const month = (today.getMonth() + 1).toString().padStart(2, '0');
+const day = today.getDate().toString().padStart(2, '0');
     fetch("http://35.154.145.51:5000/api/v1/doctor/get/patientdetails", {
       method: "POST",
+      
       headers: {
         "Content-Type": "application/json",
         token:
@@ -103,42 +87,53 @@ const DoctorDashboard = () => {
       },
       body:JSON.stringify({
         "id":patient._id,
-        "date":date
+        "date":`${year}/${month}/${day}`
       })
     })
       .then((res) => res.json())
       .then((data) => {
-        setPatients(data[0].seniorId);
+       
         console.log(data);
+        setPatientData(data);
+        makeData();
+        
       })
       .catch((e) => console.log(e));
     // setSelectedPatient(patient);
   };
+
+  const makeData=()=> {
+    var bp=[];
+    var heart=[];
+    console.log(patientData,"data")
+    for(var i=0;i<patientData.length;i++){
+      bp[i]=patientData[i].bloodPressure.sistolic;
+
+      if(patientData[i].pulse===-1) continue;
+      heart[i]= patientData[i].pulse;
+    }
+
+    setSelectPatient({bloodPressure:bp,pulse:heart})
+  }
 
   const chartData = {
     labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"],
     datasets: [
       {
         label: "Blood Pressure",
-        data: selectedPatient ? selectedPatient.bloodPressure : [],
+        data: selectPatient.bloodPressure,
         fill: false,
         borderColor: "#EC932F",
         tension: 0.1,
       },
       {
         label: "Heart Rate",
-        data: selectedPatient ? selectedPatient.heartRate : [],
+        data: selectPatient ? selectPatient.pulse : [],
         fill: false,
         borderColor: "#36A2EB",
         tension: 0.1,
       },
-      {
-        label: "Diabetes",
-        data: selectedPatient ? selectedPatient.diabetes : [],
-        fill: false,
-        borderColor: "#FF6384",
-        tension: 0.1,
-      },
+      
     ],
   };
 
@@ -166,7 +161,7 @@ const DoctorDashboard = () => {
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => handlePatientClick(patient)}
+                      onClick={() => handlePatientClick(p)}
                     >
                       View Details
                     </Button>
@@ -179,11 +174,11 @@ const DoctorDashboard = () => {
       </Grid>
       <Grid item md={8} xs={12} sx={{ overflow: "hidden" }}>
         <Typography variant="h4">
-          {selectedPatient ? selectedPatient.name : "No patient selected"}
+          {/* {selectedPatient ? selectedPatient.name : "No patient selected"} */}
         </Typography>
         <br />
         <Line data={chartData} options={options} />
-        <PatientTable />
+        <PatientTable data={patientData}/>
       </Grid>
     </Grid>
   );
