@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
         title: 'Surakshak',
         debugShowCheckedModeBanner: false,
         theme: LightTheme,
-        home: CacheData().getToken() == null ? const PasskeyScreen() : Speech(),
+        home: CacheData().getToken() == null
+            ? const PasskeyScreen()
+            : BottomNavBar(),
       ),
     );
   }

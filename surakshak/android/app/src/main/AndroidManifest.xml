@@ -12,7 +12,7 @@
     </intent>
 </queries>
    <application
-        android:label="age_well"
+        android:label="surakshak"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
