@@ -129,5 +129,12 @@ router.get('/get/patients', fetchuser, async (req, res) => {
     }
 })
 
+router.get('/get/patientdetails', fetchuser, async (req, res) => {
+    try {
+        
+    } catch (err) {
+
+    }
+})
 
 module.exports = router
