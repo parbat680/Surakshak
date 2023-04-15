@@ -13,7 +13,7 @@ import ManagePatients from './pages/ElderStats';
 import NavigationBar from './components/NavigationBar'
 import MyElders from './pages/MyElders';
 import ElderStats from './pages/ElderStats';
-import DoctorDashboard from './pages/doctor_dash';
+import DoctorDashboard from './pages/DoctorDashboard';
 
 function App() {
   return (
