@@ -66,6 +66,9 @@ const Header = () => {
                         <Dropdown.Item>
                             <Link to='/volunteersignup'>As Volunteer</Link>
                         </Dropdown.Item>
+                        <Dropdown.Item>
+                            <Link to='/doctorsignup'>As Doctor</Link>
+                        </Dropdown.Item>
                     </Dropdown>
                     <Navbar.Toggle />
                 </div>
