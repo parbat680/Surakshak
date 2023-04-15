@@ -151,4 +151,10 @@ class LanguageHN extends Languages {
 
   @override
   String get viewMap => 'मानचित्र';
+
+  @override
+  String get home => 'होम';
+
+  @override
+  String get showLess => 'कम दिखाएं';
 }

@@ -8,19 +8,26 @@ import { deepPurple } from '@mui/material/colors';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { constant } from '../constants';
+import { useState } from 'react';
 
 function MyElders() {
 
-  useEffect(() => {
+  const [elders, setElders] = useState([]);
 
-    axios.post(constant.API_URL + '/api/v1/volunteer/display/patients', {
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    console.log(token)
+    const formdata = new FormData()
+
+    axios.post(constant.API_URL + '/api/v1/volunteer/display/patients', formdata, {
       headers: {
         'Content-Type': 'application/json',
-        'token': localStorage.getItem('token')
+        'token': "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsiZW1haWwiOiJyaWNoYXJkQHRlc3QuY29tIiwibmFtZSI6IkNocmlzIERpYXMgIn0sImlhdCI6MTY4MTU5Mzc4MywiZXhwIjoxNjg0MTg1NzgzfQ.Xk-rCqsi8YeUugPiuUnnw3SffJput-uudl-JK-gn4PM"
       },
     })
       .then(res => {
         // setLoader(false);
+        setElders(res.data)
         console.log(res)
       })
       .catch(err => {
@@ -47,109 +54,29 @@ function MyElders() {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
+        {
+          elders.length > 0 ? elders.map((item, index) =>
+            <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
+              <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
+                <Avatar
+                  sx={{ bgcolor: deepPurple[500] }}
+                  alt="Remy Sharp"
+                  src="broken-image.jpg"
+                />
+                <div>
+                  <Typography variant="h6" component="div">
+                    {item.seniorId.name}
+                  </Typography>
+                  <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  {item.seniorId.phone}
+                  </Typography>
+                </div>
+              </Breadcrumbs>
             </div>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
-            </div>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
-            </div>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
-            </div>
-          </Breadcrumbs>
-        </div>
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
-            </div>
-          </Breadcrumbs>
-        </div>
+          ) : <h1>No products found</h1>
+        }
 
-        <div style={{ backgroundColor: '#e8e8e8', paddingTop: '5px', paddingBottom: '5px', marginLeft: '5%', marginRight: '5%', marginTop: '5px', border: '1px solid grey', borderRadius: '4px', paddingLeft: '1%', paddingRight: '10%' }} role="presentation" onClick={navigateToElderStats}>
-          <Breadcrumbs sx={{ display: 'flex', justifyContent: 'center' }} aria-label="breadcrumb">
-            <Avatar
-              sx={{ bgcolor: deepPurple[500] }}
-              alt="Remy Sharp"
-              src="broken-image.jpg"
-            />
-            <div>
-              <Typography variant="h6" component="div">
-                Chris Dias
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                9637261594
-              </Typography>
-            </div>
-          </Breadcrumbs>
-        </div>
+
 
 
       </div>

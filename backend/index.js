@@ -7,7 +7,7 @@ const ConnectionDB = require("./database");
 const multer = require('./Middlewares/multer')
 app.use(express.json());
 ConnectionDB();
-// const chatBot = require('./WhatsappBot/messages')
+const chatBot = require('./WhatsappBot/messages')
 //Comments
 app.use(cors())
 app.use("/api/image", multer.router)
@@ -20,6 +20,8 @@ app.use('/api/v1/ngo', require('./Routes/ngo'))
 app.use('/api/v1/event', require('./Routes/events'))
 app.use('/api/v1/sos', require('./Routes/sos'))
 app.use('/api/v1/health', require('./Routes/healthDetails'))
+app.use('/api/v1/doctor', require('./Routes/doctor'))
+app.use('/api/v1/pathology', require('./Routes/pathology'))
 
 
 

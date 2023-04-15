@@ -10,6 +10,7 @@ import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../extensions/card.dart';
+import '../languages/language.dart';
 
 class AddMedicineScreen extends StatefulWidget {
   const AddMedicineScreen({super.key});
@@ -39,11 +40,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   child: FastForm(
                     formKey: _formKey,
                     children: [
-                      LabelText("Add Medicine"),
+                      LabelText("${Languages.of(context).addMedicine}"),
                       FastTextField(
                         contentPadding: const EdgeInsets.all(15),
                         name: 'medicine_name',
-                        labelText: 'Medicine Name',
+                        labelText: '${Languages.of(context).medicineName}',
                         placeholder: 'Medicine Name',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -62,8 +63,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                         keyboardType: TextInputType.number,
                         contentPadding: const EdgeInsets.all(15),
                         name: 'medicine_duration',
-                        labelText: 'Medicine Duration in days',
-                        placeholder: 'Medicine Duration in days',
+                        labelText: '${Languages.of(context).duration}',
+                        placeholder: '${Languages.of(context).duration}',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Enter medicine dosage";
@@ -79,7 +80,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       ),
                       FastChoiceChips(
                         name: 'choice_chips',
-                        labelText: 'Choice Chips',
+                        labelText: '${Languages.of(context).choiceChips}',
                         alignment: WrapAlignment.center,
                         chipPadding: const EdgeInsets.all(8.0),
                         onSaved: (value) {
@@ -89,34 +90,34 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                           FastChoiceChip(
                             avatar: const Icon(Icons.calendar_view_week),
                             selected: false,
-                            value: 'Everyday',
+                            value: '${Languages.of(context).everyday}',
                           ),
                           FastChoiceChip(
-                            value: 'Monday',
-                          ),
-                          FastChoiceChip(
-                            selected: false,
-                            value: 'Tuesday',
+                            value: '${Languages.of(context).monday}',
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: 'Wednesday',
+                            value: '${Languages.of(context).tuesday}',
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: 'Thursday',
+                            value: '${Languages.of(context).wednesday}',
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: 'Friday',
+                            value: '${Languages.of(context).thursday}',
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: 'Saturday',
+                            value: '${Languages.of(context).friday}',
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: 'Sunday',
+                            value: '${Languages.of(context).saturday}',
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: '${Languages.of(context).sunday}',
                           ),
                         ],
                         validator: (value) => value == null || value.isEmpty
@@ -128,7 +129,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       ),
                       FastTimePicker(
                         name: 'time',
-                        labelText: 'Dosage Time',
+                        labelText: '${Languages.of(context).dosageTime}',
                         onChanged: (TimeOfDay? value) {
                           if (!dosage_time.contains(value)) {
                             dosage_time.add(value!);
@@ -154,7 +155,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                 ))
                             .toList(),
                       ),
-                      LabelText("Upload medicine Image"),
+                      LabelText("${Languages.of(context).uploadImage}"),
                       Container(
                               padding: const EdgeInsets.all(20),
                               height: 200,
@@ -203,7 +204,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             minimumSize: const Size(double.infinity, 50),
                             backgroundColor: Colors.green),
                         child: Text(
-                          "Add Medicine",
+                          "${Languages.of(context).addMedicine}",
                           style: poppins.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w400),
                         ),

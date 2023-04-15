@@ -1,38 +1,35 @@
 import 'dart:convert';
 
-HealthDetailsModel healthDetailsFromJson(String str) => HealthDetailsModel.fromJson(json.decode(str));
+HealthDetailsModel healthDetailsFromJson(String str) =>
+    HealthDetailsModel.fromJson(json.decode(str));
 
-String healthDetailsToJson(HealthDetailsModel data) => json.encode(data.toJson());
+String healthDetailsToJson(HealthDetailsModel data) =>
+    json.encode(data.toJson());
 
 class HealthDetailsModel {
-    HealthDetailsModel({
-        required this.diabetes,
-        required this.sistolic,
-        required this.diastolic,
-        required this.pulseRate,
-        
-        required this.date,
-    });
+  HealthDetailsModel({
+    required this.sistolic,
+    required this.diastolic,
+    required this.pulseRate,
+    required this.date,
+  });
 
-    String diabetes;
-    String sistolic;
-    String diastolic;
-    String pulseRate;
-    String date;
+  var sistolic;
+  var diastolic;
+  var pulseRate;
+  var date;
 
-    factory HealthDetailsModel.fromJson(Map<String, dynamic> json) => HealthDetailsModel(
-        diabetes: json["diabetes"] ?? "",
-        sistolic: json["sistolic"] ?? "",
-        diastolic: json["diastolic"] ?? "",
-        pulseRate: json["pulseRate"] ?? "",
+  factory HealthDetailsModel.fromJson(Map<String, dynamic> json) =>
+      HealthDetailsModel(
+        sistolic: json["bloodPressure"]["sistolic"] ?? "",
+        diastolic: json["bloodPressure"]["diastolic"] ?? "",
+        pulseRate: json["pulse"] ?? "",
         date: json["date"] ?? "",
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
-        "diabetes": diabetes,
+  Map<String, dynamic> toJson() => {
         "sistolic": sistolic,
         "diastolic": diastolic,
-        "pulseRate": pulseRate,
-        "date": date,
-    };
+        "pulse": pulseRate,
+      };
 }

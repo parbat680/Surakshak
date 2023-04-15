@@ -1,33 +1,35 @@
 const express = require('express');
-const router = express.Router();
-const HospitalSchema = require('../Schemas/HospitalSchema');
-const { genSaltSync, hashSync, compareSync } = require("bcrypt");
-const NgoSchema = require('../Schemas/NgoSchema');
+const DoctorSchema = require('../Schemas/DoctorSchema');
+const PathologySchema = require('../Schemas/PathologySchema');
 const auth = require('../Authentication/GetBearerToken')
+const { genSaltSync, hashSync, compareSync } = require("bcrypt");
+const fetchuser = require('../Middlewares/fetchuser');
+const router = express.Router();
 
 router.post('/signup', async (req, res) => {
     try {
         const salt = genSaltSync(10);
         req.body.password = hashSync(req.body.password, salt);
-        const newNgo = new NgoSchema({
-            email: req.body.email,
+        const newLab = new PathologySchema({
             name: req.body.name,
             phone: req.body.phone,
             address: req.body.address,
-            password: req.body.password,
+            established: req.body.established,
+            email: req.body.email,
             regNo: req.body.regNo,
-            ngoType: req.body.ngoType,
+            password: req.body.password
         })
 
-        const saved = await newNgo.save();
-        newNgo.password = undefined;
-        const newNgoToken = {
-            name: newNgo.name,
-            email: newNgo.email
+        const saved = await newLab.save()
+        // console.log(saved)
+        newLab.password = undefined;
+        const newLabToken = {
+            name: newLab.name,
+            email: newLab.email
         }
-        const jsontoken = await auth.tokenGenerate(newNgoToken, req, res);
+        const jsontoken = await auth.tokenGenerate(newLabToken, req, res);
         res.status(200).json({
-            message: "Ngo added succesfully",
+            message: "Pathology added succesfully",
             token: jsontoken
         })
     } catch (err) {
@@ -38,7 +40,7 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     try {
-        const userFind = await NgoSchema.findOne({ email: req.body.email })
+        const userFind = await PathologySchema.findOne({ email: req.body.email })
         if (userFind) {
             const result = compareSync(req.body.password, userFind.password)
             if (result) {
@@ -71,6 +73,20 @@ router.post('/login', async (req, res) => {
                 }
             })
         }
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json(err.message);
+    }
+})
+
+router.post('/autologin', fetchuser, async (req, res) => {
+    try {
+        // const t = await req.user;
+        // console.log(req.user[0].booking[0]);
+        res.json({
+            message: 'Post created',
+            // s: t
+        });
     } catch (err) {
         console.log(err.message)
         res.status(500).json(err.message);

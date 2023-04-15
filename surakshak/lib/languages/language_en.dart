@@ -139,4 +139,10 @@ class LanguageEN extends Languages {
 
   @override
   String get logoutAccount => 'Logout of your account';
+  
+  @override
+  String get home => 'home';
+
+  @override
+  String get showLess => 'show less';
 }

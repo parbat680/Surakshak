@@ -1,29 +1,29 @@
-import 'dart:math';
+import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:surakshak/services/data/api.dart';
 
 import '../../models/health_details.dart';
 
-class HealthDetailsHandler {
-  
+class UpdateHealthDetailsHandler {
   static final ApiHandler _apiHandler = ApiHandler();
-  static Future<List<HealthDetailsModel>> update(HealthDetailsModel healthDetailsModel) async {
-
-    List<HealthDetailsModel> healthDetails=[];
+  static update(HealthDetailsModel healthDetailsModel) async {
     try {
+      print("try");
       var response = await _apiHandler.post("senior/add/healthdetails", {
-        "diabetes": healthDetailsModel.diabetes,
-        "sistolic": healthDetailsModel.sistolic,
-        "diastolic": healthDetailsModel.diastolic,
-        "pulseRate": healthDetailsModel.pulseRate,
+        'sistolic': healthDetailsModel.sistolic,
+        'diastolic': healthDetailsModel.diastolic,
+        'pulse': healthDetailsModel.pulseRate
       });
-      if(response.statusCode == 200){
+      print(response.data);
+      if (response.statusCode == 200) {
+        log('Successful');
         Get.snackbar("Success", "Request Success");
       }
     } catch (e) {
+      log(e.toString());
       Get.snackbar("Error", "Something went wrong");
     }
-    return healthDetails;
   }
 }
