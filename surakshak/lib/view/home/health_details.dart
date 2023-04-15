@@ -225,31 +225,35 @@ class _HealthDetailsState extends State<HealthDetails> {
                       ),
                       Row(
                         children: [
-                          const Text(
-                            'Select Parameter: ',
-                            style: TextStyle(
-                                fontSize: 17, fontWeight: FontWeight.w600),
+                          Flexible(
+                            child: const Text(
+                              'Select Parameter: ',
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.w600),
+                            ),
                           ),
-                          DropdownButton(
-                            // Initial Value
-                            value: dropDownvalue.value.toString(),
+                          Flexible(
+                            child: DropdownButton(
+                              // Initial Value
+                              value: dropDownvalue.value.toString(),
 
-                            // Down Arrow Icon
-                            icon: const Icon(Icons.keyboard_arrow_down),
+                              // Down Arrow Icon
+                              icon: const Icon(Icons.keyboard_arrow_down),
 
-                            // Array list of items
-                            items: items.map((String item) {
-                              return DropdownMenuItem(
-                                value: item,
-                                child: Text(item).paddingAll(8),
-                              );
-                            }).toList(),
-                            // After selecting the desired option,it will
-                            // change button value to selected value
-                            onChanged: (String? newValue) {
-                              dropDownvalue.value = newValue!;
-                              // Text('Hello');
-                            },
+                              // Array list of items
+                              items: items.map((String item) {
+                                return DropdownMenuItem(
+                                  value: item,
+                                  child: Text(item).paddingAll(8),
+                                );
+                              }).toList(),
+                              // After selecting the desired option,it will
+                              // change button value to selected value
+                              onChanged: (String? newValue) {
+                                dropDownvalue.value = newValue!;
+                                // Text('Hello');
+                              },
+                            ),
                           ),
                         ],
                       ),
