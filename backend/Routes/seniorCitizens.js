@@ -67,7 +67,7 @@ router.get('/get', fetchuser, async (req, res) => {
     try {
         // console.log(req.user)
         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
-        console.log(userFind)
+        // console.log(userFind)
         res.status(200).json(userFind)
     } catch (err) {
         console.log(err.message)
@@ -91,7 +91,7 @@ router.post('/add/healthdetails', fetchuser, async (req, res) => {
         })
 
         const saved = await newDeatils.save();
-        console.log(saved)
+        // console.log(saved)
         res.status(200).json("Details saved succesfully!")
     } catch (err) {
         console.log(err.message)
