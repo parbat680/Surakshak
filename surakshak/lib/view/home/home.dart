@@ -67,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () {
-          // Get.to(() => GPTPage());
+          Get.to(() => GPTPage());
         },
         child: const Icon(
           Icons.chat,
