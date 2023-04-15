@@ -90,86 +90,65 @@ class LanguageHN extends Languages {
   String get uploadImage => 'दवा छवि अपलोड करें';
 
   @override
-  // TODO: implement healthDetails
   String get healthDetails => "स्वास्थ्य विवरण";
 
-  // View reminders
   @override
   String get viewReminders => 'दवा प्रबंधन';
 
   @override
-  // TODO: implement addHealthDetails
   String get addHealthDetails => 'स्वास्थ्य विवरण जोड़ें';
 
   @override
-  // TODO: implement bookCab
   String get bookCab => 'सवारी खोज';
 
   @override
-  // TODO: implement changeLanguage
   String get changeLanguage => 'भाषा बदलें';
 
   @override
-  // TODO: implement date
   String get date => 'तारीख';
 
   @override
-  // TODO: implement delete
   String get delete => 'डिलीट';
 
   @override
-  // TODO: implement duration
-  String get duration => throw UnimplementedError();
+  String get duration => 'अवधि';
 
   @override
-  // TODO: implement help
-  String get help => throw UnimplementedError();
+  String get help => 'मदद';
 
   @override
-  // TODO: implement logoutAccount
-  String get logoutAccount => throw UnimplementedError();
+  String get logoutAccount => 'लॉगआउट';
 
   @override
-  // TODO: implement manageSettings
-  String get manageSettings => throw UnimplementedError();
+  String get manageSettings => 'सेटिंग्स प्रबंधित करें';
 
   @override
-  // TODO: implement music
-  String get music => throw UnimplementedError();
+  String get music => 'संगीत';
 
   @override
-  // TODO: implement news
-  String get news => throw UnimplementedError();
+  String get news => 'समाचार';
 
   @override
-  // TODO: implement notifications
-  String get notifications => throw UnimplementedError();
+  String get notifications => 'सूचनाएं';
 
   @override
-  // TODO: implement showMore
-  String get showMore => throw UnimplementedError();
+  String get showMore => 'और दिखाओ';
 
   @override
-  // TODO: implement support
-  String get support => throw UnimplementedError();
+  String get support => 'सहायता';
 
   @override
-  // TODO: implement time
-  String get time => throw UnimplementedError();
+  String get time => 'समय';
 
   @override
-  // TODO: implement toggleLanguages
-  String get toggleLanguages => throw UnimplementedError();
+  String get toggleLanguages => 'टॉगल भाषाएं';
 
   @override
-  // TODO: implement update
-  String get update => throw UnimplementedError();
+  String get update => 'अपडेट';
 
   @override
-  // TODO: implement userSettings
-  String get userSettings => throw UnimplementedError();
+  String get userSettings => 'उपयोगकर्ता सेटिंग';
 
   @override
-  // TODO: implement viewMap
-  String get viewMap => throw UnimplementedError();
+  String get viewMap => 'मानचित्र';
 }

@@ -2,8 +2,10 @@ import 'package:surakshak/extensions/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:surakshak/services/repo/health_details.dart';
 
 import '../../languages/language.dart';
+import '../../models/health_details.dart';
 import '../../models/medicine.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import '../../theme/fontStyles.dart';
@@ -19,6 +21,11 @@ final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
 final TextEditingController _diabetesTextController = TextEditingController();
+HealthDetailsModel? healthDetailsModel;
+
+updateInformation() async {
+  await HealthDetailsHandler.update(healthDetailsModel!);
+}
 
 class _HealthDetailsState extends State<HealthDetails> {
   final items = ['Blood Pressure', 'Pulse Rate', 'Diabetes'];
@@ -280,7 +287,12 @@ class _HealthDetailsState extends State<HealthDetails> {
                 ElevatedButton(
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                  onPressed: () {
+                  onPressed: () async {
+                    healthDetailsModel?.diabetes = _diabetesTextController.value as String;
+                    healthDetailsModel?.diastolic = _diabetesTextController.value as String;
+                    healthDetailsModel?.sistolic = _systolicTextController.value as String;
+                    healthDetailsModel?.pulseRate = _pulseRateTextController.value as String;
+                    await updateInformation();
                     Get.back();
                   },
                   child: const Text('Submit'),
