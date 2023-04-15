@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:surakshak/view/splash_screen.dart';
 
 import 'bloc/locale/locale_bloc.dart';
 
@@ -36,9 +37,10 @@ class MyApp extends StatelessWidget {
             title: 'Surakshak',
             debugShowCheckedModeBanner: false,
             theme: LightTheme,
-            home: CacheData().getToken() == null
-                ? const PasskeyScreen()
-                : BottomNavBar(),
+            // home: CacheData().getToken() == null
+            //     ? const PasskeyScreen()
+            //     : BottomNavBar(),
+            home: const SplashScreen(),
           );
         },
       ),

@@ -128,7 +128,7 @@ class _HealthDetailsState extends State<HealthDetails> {
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
                 child: Row(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Languages.of(context).days),
                     SizedBox(width: 40),
@@ -174,6 +174,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(date),
+                            
                                   // Text(
                                   //     '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}'),
                                   Row(
@@ -221,7 +222,6 @@ class _HealthDetailsState extends State<HealthDetails> {
                 ],
               ),
             )
-            // child: Text('" The purpose of our lives is to be happy." — Dalai Lama'),
 
             )
       ],

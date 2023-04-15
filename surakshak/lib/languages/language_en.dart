@@ -39,7 +39,7 @@ class LanguageEN extends Languages {
   String get bloodPressure => 'Blood Pressure';
 
   @override
-  String get pulseRate => 'Pulse Rate';
+  String get pulseRate => 'PulseRate';
 
   @override
   String get createAccount => 'Create Your Account';

@@ -51,6 +51,7 @@ dependencies:
   toggle_switch: ^2.0.1
   # geolocator: ^9.0.2
   # location: ^3.0.0
+  flutter_launcher_icons: ^0.13.0
   
   loader_overlay: ^2.1.0
   dio: ^4.0.6
