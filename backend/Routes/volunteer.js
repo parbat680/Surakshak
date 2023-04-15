@@ -24,7 +24,7 @@ router.post('/signup', async (req, res) => {
         })
 
         const saved = await newUser.save()
-        console.log(saved)
+        // console.log(saved)
         newUser.password = undefined;
         const newUserToken = {
             name: newUser.name,
@@ -86,7 +86,7 @@ router.post("/add", fetchuser, async (req, res) => {
             volunteerId: volunteerFind.id
         })
         const saved = await newUser.save()
-        console.log(saved)
+        // console.log(saved)
         res.status(200).json("Volunteer added successfully")
     } catch (err) {
         console.log(err.message)
@@ -99,7 +99,7 @@ router.get('/get', fetchuser, async (req, res) => {
         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
         // console.log(userFind)
         const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
-        console.log(volunteers)
+        // console.log(volunteers)
         res.status(200).json(volunteers)
     } catch (err) {
         console.log(err.message)

@@ -18,7 +18,7 @@ router.post('/add', fetchuser, multer.upload.single('image'), async (req, res) =
         })
 
         const saved = await newMedicine.save()
-        console.log(saved)
+        // console.log(saved)
         res.status(200).json(saved)
     } catch (err) {
         console.log(err.message)
