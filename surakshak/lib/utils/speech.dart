@@ -22,7 +22,7 @@ class SpeachToText {
   SpeachToText({required this.context, required this.onResult}) {
     _initSpeech();
 
-    timer = Timer(Duration(seconds: 2), () {
+    timer = Timer(Duration(seconds: 4), () {
       // This code will be executed after 2 seconds
       if (!cancelTimer) {
         Get.back(result: "hii");

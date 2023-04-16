@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:intl/intl.dart';
 import 'package:surakshak/extensions/card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:surakshak/services/repo/get_health_details.dart';
 import 'package:surakshak/services/repo/health_details.dart';
 
 import '../../languages/language.dart';
@@ -23,12 +25,15 @@ final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
 final TextEditingController _diabetesTextController = TextEditingController();
 HealthDetailsModel healthDetailsModel =
-    HealthDetailsModel(sistolic: '', diastolic: '', pulseRate: '');
+    HealthDetailsModel(sistolic: '', diastolic: '', pulseRate: '', date: '');
+
+List sevenDaysDetails = [];
 
 updateInformation() async {
   print("inside");
-  await HealthDetailsHandler.update(healthDetailsModel);
+  await UpdateHealthDetailsHandler.update(healthDetailsModel);
   log('Function executed');
+  Get.back();
 }
 
 class _HealthDetailsState extends State<HealthDetails> {
@@ -36,6 +41,11 @@ class _HealthDetailsState extends State<HealthDetails> {
   var value = 0;
 
   RxString dropDownvalue = "Blood Pressure".obs;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -65,18 +75,6 @@ class _HealthDetailsState extends State<HealthDetails> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
-            // ElevatedButton(
-            //   onPressed: () async {
-            //     await Get.to(() => AddMedicineScreen());
-            //     setState(() {});
-            //   },
-            //   child: Text(
-            //     "Add Medicine",
-            //     style: poppins.copyWith(
-            //         color: Colors.white, fontWeight: FontWeight.w400),
-            //   ),
-            //   style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            // ),
           ],
         ).marginSymmetric(horizontal: 20, vertical: 20),
         Container(
@@ -130,10 +128,12 @@ class _HealthDetailsState extends State<HealthDetails> {
               Padding(
                 padding: EdgeInsets.only(left: 30, right: 30),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Languages.of(context).days),
+                    SizedBox(width: 40),
                     Text(Languages.of(context).bloodPressure),
+                    SizedBox(width: 30),
                     Text(Languages.of(context).pulseRate),
                   ],
                 ),
@@ -141,34 +141,63 @@ class _HealthDetailsState extends State<HealthDetails> {
               const SizedBox(
                 height: 20,
               ),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // physics: NeverScrollableScrollPhysics(),
-                  itemCount: 7,
-                  itemBuilder: (_, index) {
-                    return Container(
-                      height: 40,
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(left: 30, right: 30),
-                      child: SizedBox(
-                        height: 40,
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text((index + 1).toString()),
-                            GestureDetector(
-                                onTap: () {}, child: const Text('100')),
-                            GestureDetector(
-                                onTap: () {}, child: const Text('100')),
-                          ],
-                        ),
+              //__________
+              FutureBuilder(
+                  future: HealthDetailsHandler.getHealthDetails(),
+                  builder: (context,
+                      AsyncSnapshot<List<HealthDetailsModel>> snapshot) {
+                    log(snapshot.data.toString());
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                          child: const CircularProgressIndicator()
+                              .marginOnly(top: 20));
+                    }
+                    List<HealthDetailsModel> healthDetails = snapshot.data!;
+                    return Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        // physics: NeverScrollableScrollPhysics(),
+                        itemCount: healthDetails.length,
+                        itemBuilder: (_, i) {
+                          var d = DateFormat('yyyy-MM-dd')
+                              .parse(healthDetails[i].date);
+                          var date = DateFormat('dd/MM/yyyy').format(d);
+                          return Container(
+                            height: 40,
+                            width: double.infinity,
+                            padding: const EdgeInsets.only(left: 10, right: 30),
+                            child: SizedBox(
+                              height: 40,
+                              width: double.infinity,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(date),
+                                  // Text(
+                                  //     '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}'),
+                                  Row(
+                                    children: [
+                                      Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / "),
+                                  Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}"),
+                                    ],
+                                  ),
+                                          
+                                  GestureDetector(
+                                      onTap: () {},
+                                      child: Text(healthDetails[i]
+                                          .pulseRate
+                                          .toString())),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     );
-                  },
-                ),
-              ),
+
+                    // return const Text("Error Occured");
+                  })
             ],
           ),
         ),
@@ -287,16 +316,11 @@ class _HealthDetailsState extends State<HealthDetails> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                 onPressed: () async {
-                  // Get.back();
-                  print('done');
-                  log('Pressed');
-                  healthDetailsModel.diastolic = _distolicTextController.value;
-                  healthDetailsModel.sistolic = _systolicTextController.value;
-                  healthDetailsModel.pulseRate = _pulseRateTextController.value;
-                  print('no error');
-                  log('Done????');
+                  healthDetailsModel.diastolic = _distolicTextController.text;
+                  healthDetailsModel.sistolic = _systolicTextController.text;
+                  healthDetailsModel.pulseRate = _pulseRateTextController.text;
+
                   await updateInformation();
-                  Get.back();
                 },
                 child: const Text('Submit'),
               ).marginSymmetric(horizontal: 21),
@@ -325,8 +349,8 @@ class _HealthDetailsState extends State<HealthDetails> {
               height: 60,
               child: SizedBox(
                 height: 60,
-                child: NumberInputWithIncrementDecrement(
-                  min: 0,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
                   controller: _pulseRateTextController,
                 ),
               ),

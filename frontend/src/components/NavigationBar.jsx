@@ -97,6 +97,16 @@ function DrawerAppBar(props) {
     navigate('/yoga')
   }
 
+  const navigateToDashboard = () => {
+    if(localStorage.getItem('type'==='doctor')){
+      navigate('/doctordashboard')
+    }else if(localStorage.getItem('type'==='volunteer')){
+      navigate('/volunteerdashboard')
+    }else if(localStorage.getItem('type'==='ngo')){
+      navigate('/addevent')
+    }
+  }
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -160,7 +170,7 @@ function DrawerAppBar(props) {
             <Button onClick={navigateToEvents} href="#events" sx={{ color: '#3f83f8' }}>Events</Button>
             <Button href="#service" sx={{ color: '#3f83f8' }}>Services</Button>
             <Button onClick={navigateToYoga} sx={{ color: '#3f83f8' }}>Yogas</Button>
-            <Button href="#" sx={{ color: '#3f83f8' }}>Dashboard</Button>
+            <Button onClick={navigateToDashboard} sx={{ color: '#3f83f8' }}>Dashboard</Button>
           </Box>
 
           

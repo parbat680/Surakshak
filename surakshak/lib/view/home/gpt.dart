@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class _GPTPageState extends State<GPTPage> {
   final TextEditingController _prompt = TextEditingController();
 
   void _chatGpt3ExampleStream() async {
-    isLoading(true);
+    context.loaderOverlay.show();
     history.add(_prompt.text);
 
     final request = CompleteText(
@@ -72,12 +73,13 @@ class _GPTPageState extends State<GPTPage> {
     }).onError((err) {
       print(err.toString());
     });
+    context.loaderOverlay.hide();
   }
 
   @override
   void dispose() {
     _prompt.dispose();
-
+    
     openAI.close();
     super.dispose();
   }
@@ -85,46 +87,49 @@ class _GPTPageState extends State<GPTPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade300,
-        body: Container(
-          margin: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                  child: ListView.builder(
-                      itemCount: history.length,
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return Container(
-                          child: Text(history[index]),
-                        );
-                      })),
-              // Expanded(
-              //   child: StreamBuilder<CTResponse?>(
-              //       stream: tController.stream,
-              //       builder: (context, snapshot) {
-              //         if (snapshot.hasData) {
-              //           return SingleChildScrollView(
-              //             child: Text(
-              //               snapshot.data!.choices.last.text,
-              //               style: poppins.copyWith(fontSize: 18),
-              //             ),
-              //           );
-              //         } else if (snapshot.data == null) {
-              //           return Text(
-              //             "Ask me Anything you want",
-              //             style: poppins.copyWith(fontSize: 18),
-              //           );
-              //         }
+      child: LoaderOverlay(
+        overlayColor: Colors.transparent,
+        child: Scaffold(
+          backgroundColor: Colors.grey.shade300,
+          body: Container(
+            margin: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                    child: ListView.builder(
+                        itemCount: history.length,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: Text(history[index]),
+                          );
+                        })),
+                // Expanded(
+                //   child: StreamBuilder<CTResponse?>(
+                //       stream: tController.stream,
+                //       builder: (context, snapshot) {
+                //         if (snapshot.hasData) {
+                //           return SingleChildScrollView(
+                //             child: Text(
+                //               snapshot.data!.choices.last.text,
+                //               style: poppins.copyWith(fontSize: 18),
+                //             ),
+                //           );
+                //         } else if (snapshot.data == null) {
+                //           return Text(
+                //             "Ask me Anything you want",
+                //             style: poppins.copyWith(fontSize: 18),
+                //           );
+                //         }
 
-              //         return Text("loading");
-              //       }),
-              // ),
-              _inputCard(MediaQuery.of(context).size),
-            ],
+                //         return Text("loading");
+                //       }),
+                // ),
+                _inputCard(MediaQuery.of(context).size),
+              ],
+            ),
           ),
         ),
       ),

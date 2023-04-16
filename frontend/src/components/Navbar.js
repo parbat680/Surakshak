@@ -45,7 +45,7 @@ const Header = () => {
                 </div>
                 <div className="flex ml-auto text-xl pr-3">
                     <Button className='bg-teal-400'>
-                        <Link to='/login'>Sign In</Link>
+                        <Link to='/login'>Login</Link>
                     </Button>
                     <Navbar.Toggle />
                 </div>
@@ -65,6 +65,9 @@ const Header = () => {
                         <Dropdown.Divider />
                         <Dropdown.Item>
                             <Link to='/volunteersignup'>As Volunteer</Link>
+                        </Dropdown.Item>
+                        <Dropdown.Item>
+                            <Link to='/doctorsignup'>As Doctor</Link>
                         </Dropdown.Item>
                     </Dropdown>
                     <Navbar.Toggle />

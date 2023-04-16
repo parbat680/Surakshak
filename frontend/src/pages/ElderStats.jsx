@@ -23,26 +23,22 @@ export default function ElderStats() {
     const [page, setPage] = useState(0);
 
     const rows = [
-        createData('19th April', 159, 6.0),
-        createData('19th April', 237, 9.0),
-        createData('19th April', 262, 16.0),
-        createData('19th April', 305, 3.7),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0),
-        createData('19th April', 356, 16.0)
+        createData('19 April', 159, 6.0),
+        createData('20 April', 237, 9.0),
+        createData('21 April', 262, 16.0),
+        createData('22 April', 305, 3.7),
+        createData('19 April', 356, 16.0),
+        createData('20 April', 231, 9.10),
+        createData('21 April', 245, 13.3),
+        createData('22 April', 199, 10.2),
+        createData('23 April', 300, 15.5),
+        createData('24 April', 223, 16.1),
+        createData('25 April', 231, 13.6),
+        createData('26 April', 245, 16.2),
+        createData('27 April', 356, 15.1),
+        createData('28 April', 300, 14.9),
+        createData('29 April', 250, 16.0),
+        createData('30 April', 218, 15.0),
     ];
 
     // handle changing the page

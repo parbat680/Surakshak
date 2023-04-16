@@ -45,10 +45,11 @@ const NGOSignUp = () => {
 
             if (response.status === 200) {
                 const resp = await response.json();
+                alert('Your NGO is registered successfully!!')
                 toast.success("Your Registration Successful");
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("type", 'ngo');
-                navigate('/')
+                navigate('/addevent')
             } else {
                 alert("Something went wrong")
             }
