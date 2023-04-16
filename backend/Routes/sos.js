@@ -13,7 +13,7 @@ router.post('/fire', fetchuser, async (req, res) => {
 
         const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
         console.log("first")
-        if (req.body.condition == 'severe') {
+        if (req.body.condition == 'Severe') {
             console.log("inside")
             flag = true
             const hospitals = await HospitalSchema.findOne({ address: { $regex: `${req.body.address}`, $options: 'i' } })
