@@ -15,7 +15,7 @@ router.post('/fire', fetchuser, async (req, res) => {
         if (req.body.condition == 'severe') {
             flag = true
             const hospitals = await HospitalSchema.findOne({ address: { $regex: `${req.body.address}`, $options: 'i' } })
-            // console.log(hospitals)
+            console.log(hospitals)
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
