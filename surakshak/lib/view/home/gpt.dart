@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:surakshak/env.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class _GPTPageState extends State<GPTPage> {
   void initState() {
     super.initState();
     openAI = OpenAI.instance.build(
-        token: "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",
+        token: API_KEY_GPT,
         baseOption: HttpSetup(receiveTimeout: 60 * 1000),
         isLogger: true);
   }

@@ -1,6 +1,7 @@
 import 'package:surakshak/services/repo/cached.dart';
 import 'package:surakshak/theme/light.dart';
 import 'package:surakshak/utils/cache_language.dart';
+import 'package:surakshak/utils/global_nav.dart';
 import 'package:surakshak/utils/speech.dart';
 import 'package:surakshak/view/home/bottom_nav.dart';
 import 'package:surakshak/view/home/passkey.dart';
@@ -21,9 +22,14 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   CacheData cache = CacheData();
 
   // This widget is the root of your application.
@@ -32,15 +38,21 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => LocaleBloc(),
       child: BlocBuilder<LocaleBloc, LocaleState>(
+        buildWhen: (previous, current) {
+          if(current is ChangeLocale){
+            return true;
+          }
+          return false;
+        },
         builder: (context, state) {
           return GetMaterialApp(
             title: 'Surakshak',
             debugShowCheckedModeBanner: false,
             theme: LightTheme,
-            // home: CacheData().getToken() == null
-            //     ? const PasskeyScreen()
-            //     : BottomNavBar(),
-            home: const SplashScreen(),
+            home: CacheData().getToken() == null
+                ? PasskeyScreen()
+                : BottomNavBar(),
+            navigatorKey: GlobalNvaigator.navigatorKey,
           );
         },
       ),

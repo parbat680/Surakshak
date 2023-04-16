@@ -1,13 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:surakshak/bloc/locale/locale_bloc.dart';
 import 'package:surakshak/models/user.dart';
 import 'package:surakshak/services/repo/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:surakshak/utils/cache_language.dart';
+import 'package:surakshak/utils/global_nav.dart';
+import 'package:surakshak/view/home/bottom_nav.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 import '../../languages/language.dart';
+
+late BuildContext ck;
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -18,6 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
+    ck=context;
   }
 
   @override
@@ -110,7 +116,7 @@ class SettingsItemModel {
   });
 }
 
-const List<SettingsItemModel> settingsItems = [
+ List<SettingsItemModel> settingsItems = [
   // SettingsItemModel(
   //   icon: Icons.edit,
   //   color: Color(0xff8D7AEE),
@@ -121,25 +127,25 @@ const List<SettingsItemModel> settingsItems = [
     // context: context,
     icon: Icons.settings,
     color: Color(0xffF468B7),
-    title: 'Settings',
+    title: Languages.of(ck).settings,
     description: 'Manage app Settings',
   ),
   SettingsItemModel(
     icon: Icons.notifications,
     color: Color(0xff5FD0D3),
-    title: 'Notifications',
+    title: Languages.of(GlobalNvaigator.navigatorKey.currentContext!).notifications,
     description: 'Take over the news in time',
   ),
   SettingsItemModel(
     icon: Icons.question_answer,
     color: Color(0xffBFACAA),
-    title: 'Support',
+    title: Languages.of(GlobalNvaigator.navigatorKey.currentContext!).support,
     description: 'We are here to help',
   ),
   SettingsItemModel(
     icon: Icons.exit_to_app,
     color: Color(0xffFEC85C),
-    title: 'Logout',
+    title: Languages.of(GlobalNvaigator.navigatorKey.currentContext!).logout,
     description: "Logout of your account",
   ),
 ];
@@ -363,6 +369,7 @@ class _SettingsItemToggleState extends State<SettingsItemToggle> {
         } else {
           _localeBloc.add(ChangeLocaleInfo(locale: 'hn'));
         }
+        Get.offAll(()=> BottomNavBar());
       },
     );
   }
