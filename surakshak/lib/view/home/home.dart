@@ -5,10 +5,12 @@ import 'package:surakshak/extensions/card.dart';
 import 'package:surakshak/services/repo/sos.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:surakshak/view/home/gpt.dart';
+import 'package:surakshak/view/home/yoga_web.dart';
 import 'package:surakshak/view/widgets/volenteer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -50,6 +52,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.white),
                 ),
+                // ElevatedButton(
+                //     onPressed: () {
+                //       try {
+                //         launchUrl(
+                //           Uri.parse('https://surakshakapp.web.app/yoga'),
+                //           mode: LaunchMode.externalApplication,
+                //         );
+                //       } catch (e) {
+                //         log(e.toString());
+                //       }
+                //     },
+                //     child: Text("Yoga Trainer"))
               ],
             ).wrapCard(Colors.blue.shade200).marginOnly(
                   left: 20,

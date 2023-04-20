@@ -60,6 +60,7 @@ dependencies:
   equatable: ^2.0.5
   bloc: ^8.1.1
   speech_to_text: ^6.1.1
+  webview_flutter: ^4.0.7
   
   
 
