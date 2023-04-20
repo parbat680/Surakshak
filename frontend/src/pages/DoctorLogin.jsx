@@ -22,7 +22,7 @@ const DoctorLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch("http://35.154.145.51:5000/api/v1/doctor/login",
+            const response = await ("https://surakshak-api.el.r.appspot.com/api/v1/doctor/login",
                 {
                     method: "POST",
                     headers: {

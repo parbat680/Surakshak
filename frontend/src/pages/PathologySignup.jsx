@@ -30,7 +30,7 @@ const PathologySignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://35.154.145.51:5000/api/v1/pathology/signup",
+      const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/pathology/signup",
         {
           method: "POST",
           headers: {

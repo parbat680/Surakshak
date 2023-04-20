@@ -56,7 +56,7 @@ const DoctorDashboard = () => {
  
 
   useEffect(() => {
-    fetch("http://35.154.145.51:5000/api/v1/doctor/get/patients", {
+    fetch("https://surakshak-api.el.r.appspot.com/api/v1/doctor/get/patients", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const DoctorDashboard = () => {
 const year = today.getFullYear();
 const month = (today.getMonth() + 1).toString().padStart(2, '0');
 const day = today.getDate().toString().padStart(2, '0');
-    fetch("http://35.154.145.51:5000/api/v1/doctor/get/patientdetails", {
+    fetch("https://surakshak-api.el.r.appspot.com/api/v1/doctor/get/patientdetails", {
       method: "POST",
       
       headers: {
@@ -107,7 +107,7 @@ const day = today.getDate().toString().padStart(2, '0');
     var heart=[];
     console.log(patientData,"data")
     for(var i=0;i<patientData.length;i++){
-      bp[i]=patientData[i].bloodPressure.sistolic;
+      bp[i]=patientData[i].bloodPressure.sistolic === -1?patientData[i].bloodPressure.sistolic:"NA";
 
       if(patientData[i].pulse===-1) continue;
       heart[i]= patientData[i].pulse;
