@@ -12,14 +12,16 @@ router.post('/fire', fetchuser, async (req, res) => {
         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
 
         const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
-        if (req.body.condition == 'severe') {
+        console.log("first")
+        if (req.body.condition == 'Severe') {
+            console.log("inside")
             flag = true
             const hospitals = await HospitalSchema.findOne({ address: { $regex: `${req.body.address}`, $options: 'i' } })
-            // console.log(hospitals)
+            console.log(hospitals)
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
-                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly come asap!`,
+                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly send amubulance asap!`,
                     to: `whatsapp:${hospitals.phone}`
                 })
                 .then(message => console.log(message.sid));
@@ -30,7 +32,7 @@ router.post('/fire', fetchuser, async (req, res) => {
             client.messages
                 .create({
                     from: 'whatsapp:+14155238886',
-                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly send amubulance asap!`,
+                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly come asap!`,
                     to: `whatsapp:${volunteers[i].volunteerId.phone}`
                 })
                 .then(message => console.log(message.sid));
