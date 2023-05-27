@@ -47,7 +47,7 @@ router.post('/login', async (req, res) => {
             const jsontoken = await auth.tokenGenerate(newUserToken, req, res);
             return res.status(200).json({
                 success: 1,
-                message: "Successful signup",
+                message: "Successful login",
                 token: jsontoken,
             });
         }
