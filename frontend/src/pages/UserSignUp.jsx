@@ -35,7 +35,7 @@ const UserSignUp = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     }
 
     try {
-      const response = await fetch("http://35.154.145.51:5000/api/v1/senior/signup",
+      const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/senior/signup",
         {
           method: "POST",
           headers: {

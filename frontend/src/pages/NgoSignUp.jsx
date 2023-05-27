@@ -32,7 +32,7 @@ const NGOSignUp = () => {
         }
         // console.log(name, email, ngotype, address, helpline, regisnum, password);
         try {
-            const response = await fetch("http://35.154.145.51:5000/api/v1/ngo/signup",
+            const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/ngo/signup",
                 {
                     method: "POST",
                     headers: {

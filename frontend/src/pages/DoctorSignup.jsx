@@ -30,7 +30,7 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://35.154.145.51:5000/api/v1/doctor/signup",
+      const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/doctor/signup",
         {
           method: "POST",
           headers: {
