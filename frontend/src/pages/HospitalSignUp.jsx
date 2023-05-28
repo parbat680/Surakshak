@@ -32,7 +32,7 @@ const HospitalSignUp = () => {
           }
           //http://3.108.219.67:5000/
         try{
-            const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/hospital/signup",
+            const response = await fetch("http://34.93.44.181/api/v1/hospital/signup",
                 {
                     method: "POST",
                     headers: {

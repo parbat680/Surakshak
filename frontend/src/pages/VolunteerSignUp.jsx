@@ -36,7 +36,7 @@ const VolunteerSignUp = () => {
     // toast.success("Login Successful!")
 
     try {
-      const response = await fetch("https://surakshak-api.el.r.appspot.com/api/v1/volunteer/signup",
+      const response = await fetch("http://34.93.44.181/api/v1/volunteer/signup",
         {
           method: "POST",
           headers: {

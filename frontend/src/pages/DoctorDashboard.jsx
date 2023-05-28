@@ -56,7 +56,7 @@ const DoctorDashboard = () => {
  
 
   useEffect(() => {
-    fetch("https://surakshak-api.el.r.appspot.com/api/v1/doctor/get/patients", {
+    fetch("http://34.93.44.181/api/v1/doctor/get/patients", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ const DoctorDashboard = () => {
 const year = today.getFullYear();
 const month = (today.getMonth() + 1).toString().padStart(2, '0');
 const day = today.getDate().toString().padStart(2, '0');
-    fetch("https://surakshak-api.el.r.appspot.com/api/v1/doctor/get/patientdetails", {
+    fetch("http://34.93.44.181/api/v1/doctor/get/patientdetails", {
       method: "POST",
       
       headers: {

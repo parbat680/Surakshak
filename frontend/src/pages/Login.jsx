@@ -35,7 +35,7 @@ const Login = () => {
         e.preventDefault();
         console.log(email, password, type)
         try {
-            const response = await fetch(`https://surakshak-api.el.r.appspot.com/api/v1/${type}/login`,
+            const response = await fetch(`http://34.93.44.181/api/v1/${type}/login`,
                 {
                     method: "POST",
                     headers: {
