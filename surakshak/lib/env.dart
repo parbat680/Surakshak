@@ -1,0 +1,1 @@
+String API_KEY_GPT = "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";
