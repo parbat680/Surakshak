@@ -1,1 +1,1 @@
-String url = "https://surakshak-api.el.r.appspot.com/api/v1";
+String url = "http://34.93.44.181/api/v1";
