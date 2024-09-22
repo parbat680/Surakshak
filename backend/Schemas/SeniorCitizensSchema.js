@@ -26,6 +26,14 @@ const SeniorCitizensSchema = mongoose.Schema({
     uniqueId: {
         type: String,
         required: true
+    },
+    otp: {
+        type: Number,
+        required: true
+    },
+    otpVerified: {
+        type: Boolean,
+        default: false
     }
 });
 

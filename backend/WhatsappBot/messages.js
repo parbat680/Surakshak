@@ -2,6 +2,11 @@ const cron = require('node-cron')
 
 const MedicineSchema = require('../Schemas/MedicineSchema')
 var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+// const accountSid = 'AC556c5f29a1a095c7798a52f873c90836';
+// const authToken = 'c1dd61de8ad045e63ed630379cf4c892';
+
+
+// const client = require('twilio')(accountSid, authToken);
 
 
 async function getCronTimeFromDate(date) {
@@ -49,7 +54,6 @@ async function scheduleMessages() {
         });
     }
 }
-
 
 
 scheduleMessages();
