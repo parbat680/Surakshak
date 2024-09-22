@@ -5,7 +5,12 @@ const SeniorCitizensSchema = require('../Schemas/SeniorCitizensSchema');
 const VolunteerMap = require('../Schemas/VolunteerMap');
 const HospitalSchema = require('../Schemas/HospitalSchema');
 const router = express.Router();
-var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+// var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+const accountSid = 'AC556c5f29a1a095c7798a52f873c90836';
+const authToken = 'c1dd61de8ad045e63ed630379cf4c892';
+
+
+const client = require('twilio')(accountSid, authToken);
 
 router.post('/fire', fetchuser, async (req, res) => {
     try {
