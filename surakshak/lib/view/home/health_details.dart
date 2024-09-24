@@ -152,7 +152,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                           child: const CircularProgressIndicator()
                               .marginOnly(top: 20));
                     }
-                    List<HealthDetailsModel> healthDetails = snapshot.data!;
+                    List<HealthDetailsModel> healthDetails = snapshot.data ?? [];
                     return Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
