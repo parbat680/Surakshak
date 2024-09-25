@@ -17,20 +17,23 @@ const DoctorLogin = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false);
+
 
     // const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
-            const response = await ("http://34.93.44.181/api/v1/doctor/login",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password }),
+            const response = await ("https://surakshak-apis.onrender.com/api/v1/doctor/login",
+            {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password }),
 
-                }
+            }
             );
             console.log(response);
 
@@ -41,6 +44,8 @@ const DoctorLogin = () => {
         } catch (err) {
             console.log(err);
             alert("Something Went Wrong");
+        } finally {
+            setLoading(false);
         }
         setEmail("");
         setPassword("");
@@ -95,7 +100,12 @@ const DoctorLogin = () => {
                                 </div>
 
 
-                                <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign In</button>
+                                <button type="submit" className={`w-full text-white font-medium rounded-lg text-base px-5 py-2.5 text-center focus:ring-4 focus:outline-none 
+              focus:ring-primary-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                                    disabled={loading}
+                                >
+                                    {loading ? 'Signing In' : 'Sign In'}
+                                </button>
                                 <p className="text-base font-normal text-gray-800">
                                     Don't have an account yet ? <label className='text-teal-400'>Sign Up</label>
                                     <div>

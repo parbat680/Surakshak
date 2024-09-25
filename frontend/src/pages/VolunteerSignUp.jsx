@@ -22,6 +22,7 @@ const VolunteerSignUp = () => {
   const [age, setAge] = useState(18);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,9 +35,10 @@ const VolunteerSignUp = () => {
     }
 
     // toast.success("Login Successful!")
+    setLoading(true);
 
     try {
-      const response = await fetch("http://34.93.44.181/api/v1/volunteer/signup",
+      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/volunteer/signup",
         {
           method: "POST",
           headers: {
@@ -61,6 +63,8 @@ const VolunteerSignUp = () => {
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");
+    } finally {
+      setLoading(false); // Stop loading state
     }
     //  setEmail("");
     //  setPassword("");
@@ -97,7 +101,12 @@ const VolunteerSignUp = () => {
               </div>
 
 
-              <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign Up</button>
+              <button type="submit" className={`w-full text-white font-medium rounded-lg text-base px-5 py-2.5 text-center focus:ring-4 focus:outline-none 
+              focus:ring-primary-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                disabled={loading}
+              >
+                {loading ? 'Signing Up' : 'Sign Up'}
+              </button>
               <p className="text-base font-normal text-gray-800">
                 Alreay have an account ? <a href="/login" className="font-medium text-lg text-teal-500 hover:underline ">Login</a>
               </p>

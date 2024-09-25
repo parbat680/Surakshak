@@ -30,13 +30,13 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://34.93.44.181/api/v1/doctor/signup",
+      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/doctor/signup",
         {
           method: "POST",
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ email, name, address, phone, password, experience}),
+          body: JSON.stringify({ email, name, address, phone, password, experience }),
 
         }
       );
@@ -48,7 +48,7 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
         localStorage.setItem("type", 'doctor');
         navigate('/doctordashboard')
       }
-      
+
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");

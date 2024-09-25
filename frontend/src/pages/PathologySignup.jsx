@@ -30,7 +30,7 @@ const PathologySignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://34.93.44.181/api/v1/pathology/signup",
+      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/pathology/signup",
         {
           method: "POST",
           headers: {
@@ -48,7 +48,7 @@ const PathologySignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
         localStorage.setItem("type", 'pathology');
         navigate('/')
       }
-      
+
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");

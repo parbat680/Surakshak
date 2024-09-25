@@ -22,6 +22,7 @@ const UserSignUp = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
   const [age, setAge] = useState(55);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
 
   const handleSubmit = async (e) => {
@@ -34,8 +35,10 @@ const UserSignUp = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
       toast.error("Password must contain atleast 6 characters")
     }
 
+    setLoading(true);
+
     try {
-      const response = await fetch("http://34.93.44.181/api/v1/senior/signup",
+      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/senior/signup",
         {
           method: "POST",
           headers: {
@@ -52,12 +55,16 @@ const UserSignUp = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
         localStorage.setItem("uniqueId", res.uniqueId);
         localStorage.setItem("type", 'user');
         alert(`This is your unique key ${res.uniqueId}`)
-        navigate('/')
+        navigate('/verification')
+      }else{
+        alert("Something went wrong");
       }
-      
+
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");
+    } finally {
+      setLoading(false); // Stop loading state
     }
   }
   return (
@@ -92,7 +99,12 @@ const UserSignUp = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
               </div>
 
 
-              <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign Up</button>
+              <button type="submit" className={`w-full text-white font-medium rounded-lg text-base px-5 py-2.5 text-center focus:ring-4 focus:outline-none 
+              focus:ring-primary-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                disabled={loading}
+              >
+                {loading ? 'Signing Up' : 'Sign Up'}
+              </button>
               <p className="text-base font-normal text-gray-800">
                 Alreay have an account ? <a href="/login" className="font-medium text-lg text-teal-500 hover:underline ">Login</a>
               </p>
