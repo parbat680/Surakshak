@@ -33,7 +33,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                Languages.of(context).viewReminders,
+                Languages.of().viewReminders,
                 style: poppins.copyWith(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -46,7 +46,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                 },
                 style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                 child: Text(
-                  Languages.of(context).addMedicine,
+                  Languages.of().addMedicine,
                   style: poppins.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w400),
                 ),

@@ -40,11 +40,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //   child: FastForm(
                 //     formKey: _formKey,
                 //     children: [
-                //       LabelText("${Languages.of(context).addMedicine}"),
+                //       LabelText("${Languages.of().addMedicine}"),
                 //       FastTextField(
                 //         contentPadding: const EdgeInsets.all(15),
                 //         name: 'medicine_name',
-                //         labelText: '${Languages.of(context).medicineName}',
+                //         labelText: '${Languages.of().medicineName}',
                 //         placeholder: 'Medicine Name',
                 //         validator: (value) {
                 //           if (value == null || value.isEmpty) {
@@ -63,8 +63,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //         keyboardType: TextInputType.number,
                 //         contentPadding: const EdgeInsets.all(15),
                 //         name: 'medicine_duration',
-                //         labelText: '${Languages.of(context).duration}',
-                //         placeholder: '${Languages.of(context).duration}',
+                //         labelText: '${Languages.of().duration}',
+                //         placeholder: '${Languages.of().duration}',
                 //         validator: (value) {
                 //           if (value == null || value.isEmpty) {
                 //             return "Enter medicine dosage";
@@ -80,7 +80,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //       ),
                 //       // FastChoiceChips(
                 //       //   name: 'choice_chips',
-                //       //   labelText: '${Languages.of(context).choiceChips}',
+                //       //   labelText: '${Languages.of().choiceChips}',
                 //       //   alignment: WrapAlignment.center,
                 //       //   chipPadding: const EdgeInsets.all(8.0),
                 //       //   onSaved: (value) {
@@ -90,34 +90,34 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //       //     FastChoiceChip(
                 //       //       avatar: const Icon(Icons.calendar_view_week),
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).everyday}',
+                //       //       value: '${Languages.of().everyday}',
                 //       //     ),
                 //       //     FastChoiceChip(
-                //       //       value: '${Languages.of(context).monday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of(context).tuesday}',
+                //       //       value: '${Languages.of().monday}',
                 //       //     ),
                 //       //     FastChoiceChip(
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).wednesday}',
+                //       //       value: '${Languages.of().tuesday}',
                 //       //     ),
                 //       //     FastChoiceChip(
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).thursday}',
+                //       //       value: '${Languages.of().wednesday}',
                 //       //     ),
                 //       //     FastChoiceChip(
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).friday}',
+                //       //       value: '${Languages.of().thursday}',
                 //       //     ),
                 //       //     FastChoiceChip(
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).saturday}',
+                //       //       value: '${Languages.of().friday}',
                 //       //     ),
                 //       //     FastChoiceChip(
                 //       //       selected: false,
-                //       //       value: '${Languages.of(context).sunday}',
+                //       //       value: '${Languages.of().saturday}',
+                //       //     ),
+                //       //     FastChoiceChip(
+                //       //       selected: false,
+                //       //       value: '${Languages.of().sunday}',
                 //       //     ),
                 //       //   ],
                 //       //   validator: (value) => value == null || value.isEmpty
@@ -129,7 +129,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //       ),
                 //       FastTimePicker(
                 //         name: 'time',
-                //         labelText: '${Languages.of(context).dosageTime}',
+                //         labelText: '${Languages.of().dosageTime}',
                 //         onChanged: (TimeOfDay? value) {
                 //           if (!dosage_time.contains(value)) {
                 //             dosage_time.add(value!);
@@ -155,7 +155,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //                 ))
                 //             .toList(),
                 //       ),
-                //       LabelText("${Languages.of(context).uploadImage}"),
+                //       LabelText("${Languages.of().uploadImage}"),
                 //       Container(
                 //               padding: const EdgeInsets.all(20),
                 //               height: 200,
@@ -204,7 +204,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                 //             minimumSize: const Size(double.infinity, 50),
                 //             backgroundColor: Colors.green),
                 //         child: Text(
-                //           "${Languages.of(context).addMedicine}",
+                //           "${Languages.of().addMedicine}",
                 //           style: poppins.copyWith(
                 //               color: Colors.white, fontWeight: FontWeight.w400),
                 //         ),

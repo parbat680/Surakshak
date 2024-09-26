@@ -60,7 +60,7 @@ class _HealthDetailsState extends State<HealthDetails> {
               minimumSize: const Size(double.infinity, 50),
               backgroundColor: Colors.green),
           child: Text(
-            "Add Health Details",
+            Languages.of().addHealthDetails,
             style: poppins.copyWith(
                 color: Colors.white, fontWeight: FontWeight.w400),
           ),
@@ -69,7 +69,7 @@ class _HealthDetailsState extends State<HealthDetails> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              Languages.of(context).health,
+              Languages.of().health,
               style: poppins.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -130,11 +130,11 @@ class _HealthDetailsState extends State<HealthDetails> {
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(Languages.of(context).days),
+                    Text(Languages.of().days),
                     SizedBox(width: 40),
-                    Text(Languages.of(context).bloodPressure),
+                    Text(Languages.of().bloodPressure),
                     SizedBox(width: 30),
-                    Text(Languages.of(context).pulseRate),
+                    Text(Languages.of().pulseRate),
                   ],
                 ),
               ),
@@ -240,9 +240,9 @@ class _HealthDetailsState extends State<HealthDetails> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Enter Health Details',
-                style: TextStyle(
+              Text(
+                Languages.of().enterHealthDetails,
+                style: const TextStyle(
                   fontSize: 24,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -265,9 +265,9 @@ class _HealthDetailsState extends State<HealthDetails> {
                     ),
                     Row(
                       children: [
-                        const Text(
-                          'Select Parameter: ',
-                          style: TextStyle(
+                        Text(
+                          Languages.of().selectParameter,
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w600),
                         ),
                         DropdownButton(
@@ -293,11 +293,11 @@ class _HealthDetailsState extends State<HealthDetails> {
                         ),
                       ],
                     ),
-                    if (dropDownvalue.value == 'Blood Pressure')
+                    if (dropDownvalue.value == Languages.of().bloodPressure)
                       bloodPressure()
-                    else if (dropDownvalue.value == 'Pulse Rate')
+                    else if (dropDownvalue.value == Languages.of().pulseRate)
                       pulseRate()
-                    else if (dropDownvalue.value == 'Diabetes')
+                    else if (dropDownvalue.value == Languages.of().pulseRate)
                       diabetes()
                   ])),
               // Obx(
@@ -325,7 +325,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                 child: const Text('Submit'),
               ).marginSymmetric(horizontal: 21),
             ],
-          ).paddingAll(10),
+          ).paddingAll(8),
         );
       }),
     );
@@ -340,9 +340,9 @@ class _HealthDetailsState extends State<HealthDetails> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
-              'Rate: ',
-              style: TextStyle(fontSize: 18),
+            Text(
+              Languages.of().rate,
+              style: const TextStyle(fontSize: 18),
             ),
             SizedBox(
               width: 150,
@@ -371,9 +371,9 @@ diabetes() {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Sugar level: ',
-            style: TextStyle(fontSize: 18),
+          Text(
+            "Suagr level",
+            style: const TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
@@ -381,7 +381,7 @@ diabetes() {
             child: TextField(
               controller: _diabetesTextController,
               decoration: const InputDecoration(
-                  hintText: 'Enter value',
+                  hintText: 'Enter Value',
                   border: OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
@@ -411,22 +411,22 @@ bloodPressure() {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Systolic: ',
-            style: TextStyle(fontSize: 18),
+          Text(
+            Languages.of().systolic,
+            style: const TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
             height: 40,
             child: TextField(
               controller: _systolicTextController,
-              decoration: const InputDecoration(
-                  hintText: 'Enter value',
-                  border: OutlineInputBorder(
+              decoration: InputDecoration(
+                  hintText: 'Enter Value',
+                  border: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   )),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   ))),
@@ -441,22 +441,22 @@ bloodPressure() {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Distolic: ',
-            style: TextStyle(fontSize: 18),
+          Text(
+            Languages.of().distolic,
+            style: const TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
             height: 40,
             child: TextField(
               controller: _distolicTextController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   hintText: 'Enter value',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   )),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   ))),

@@ -96,7 +96,7 @@ class EventCard extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "${Languages.of(context).date} : ",
+                    "${Languages.of().date} : ",
                     style: poppins.copyWith(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -108,7 +108,7 @@ class EventCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "${Languages.of(context).time} :",
+                    "${Languages.of().time} :",
                     style: poppins.copyWith(
                         fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -137,7 +137,7 @@ class EventCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue),
                       child: Text(
-                        "${Languages.of(context).bookCab}",
+                        "${Languages.of().bookCab}",
                         style: poppins.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w400),
                       ),
@@ -161,7 +161,7 @@ class EventCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange),
                       child: Text(
-                        "${Languages.of(context).viewMap}",
+                        "${Languages.of().viewMap}",
                         style: poppins.copyWith(
                             color: Colors.white, fontWeight: FontWeight.w400),
                       ),
@@ -196,7 +196,7 @@ class EventCard extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_drop_down),
                   label: Text(
-                    showMore.value ? Languages.of(context).showLess : Languages.of(context).showMore,
+                    showMore.value ? Languages.of().showLess : Languages.of().showMore,
                     style: poppins.copyWith(color: Colors.blue),
                   )),
             )

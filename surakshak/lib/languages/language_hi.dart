@@ -114,7 +114,7 @@ class LanguageHN extends Languages {
   String get duration => 'अवधि';
 
   @override
-  String get help => 'मदद';
+  String get help => 'हम सहायता के लिए यहां उपलब्ध हैं';
 
   @override
   String get logoutAccount => 'लॉगआउट';
@@ -126,7 +126,7 @@ class LanguageHN extends Languages {
   String get music => 'संगीत';
 
   @override
-  String get news => 'समाचार';
+  String get news => 'समय रहते खबर संभालें';
 
   @override
   String get notifications => 'सूचनाएं';
@@ -157,4 +157,40 @@ class LanguageHN extends Languages {
 
   @override
   String get showLess => 'कम दिखाएं';
+
+  @override
+  String get welcomeToSurakshak => 'सुरक्षा में आपका स्वागत है';
+
+  @override
+  String get volunteers => "स्वयंसेवकों";
+
+  @override
+  String get enterHealthDetails => "स्वास्थ्य विवरण दर्ज करें";
+
+  @override
+  String get selectParameter => "चयन करें";
+
+  @override
+  String get enterValue => "विवरण दर्ज करें";
+
+  @override
+  String get systolic => "सिस्टोलिक";
+
+  @override
+  String get distolic => "डायस्टोलिक";
+
+  @override
+  String get rate => "विवरण";
+
+  @override
+  String get sugarLevel => "शुगर लेवल";
+
+  @override
+  String get severe => "गंभीर";
+
+  @override
+  String get moderate => "मध्यम";
+
+  @override
+  String get mild => "हल्का";
 }
