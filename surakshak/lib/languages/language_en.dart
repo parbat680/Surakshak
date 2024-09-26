@@ -145,4 +145,40 @@ class LanguageEN extends Languages {
 
   @override
   String get showLess => 'show less';
+
+  @override
+  String get welcomeToSurakshak => 'Welcome to Surakshak';
+
+  @override
+  String get volunteers => "Volunteers";
+
+  @override
+  String get enterHealthDetails => "Enter Health Details";
+
+  @override
+  String get selectParameter => "Select Parameter:";
+
+  @override
+  String get enterValue => "Enter value";
+
+  @override
+  String get systolic => "Systolic";
+
+  @override
+  String get distolic => "Distolic";
+
+  @override
+  String get rate => "Rate";
+
+  @override
+  String get sugarLevel => "Sugar Level";
+
+  @override
+  String get severe => "Severe";
+
+  @override
+  String get moderate => "Moderate";
+
+  @override
+  String get mild => "Mild";
 }

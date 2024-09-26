@@ -37,7 +37,7 @@ class _HealthTabScreenState extends State<HealthTabScreen> {
               child: Align(
                 alignment: Alignment.topLeft,
                 child: Text(
-                  Languages.of(context).health,
+                  Languages.of().health,
                   style: HeadingText,
                 ),
               ),
@@ -61,10 +61,10 @@ class _HealthTabScreenState extends State<HealthTabScreen> {
                     color: const Color.fromRGBO(14, 61, 154, 1)),
                 tabs: [
                   Tab(
-                    text: Languages.of(context).viewReminders,
+                    text: Languages.of().viewReminders,
                   ),
                   Tab(
-                    text: Languages.of(context).healthDetails,
+                    text: Languages.of().healthDetails,
                   )
                 ],
                 onTap: (index) {

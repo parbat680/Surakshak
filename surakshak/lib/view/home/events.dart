@@ -30,7 +30,7 @@ class _EventsScreenState extends State<EventsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            Languages.of(context).eventsPage,
+            Languages.of().eventsPage,
             style: poppins.copyWith(
                 fontSize: 26, fontWeight: FontWeight.bold, color: Colors.black),
           ).marginSymmetric(horizontal: 20, vertical: 20),

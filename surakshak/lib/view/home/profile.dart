@@ -31,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return <Widget>[
       Text(
-        '${Languages.of(context).userSettings}',
+        '${Languages.of().userSettings}',
         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
       ).alignment(Alignment.center).padding(bottom: 20),
       UserCard(),
@@ -110,7 +110,7 @@ class SettingsItemModel {
   });
 }
 
-const List<SettingsItemModel> settingsItems = [
+List<SettingsItemModel> settingsItems = [
   // SettingsItemModel(
   //   icon: Icons.edit,
   //   color: Color(0xff8D7AEE),
@@ -121,26 +121,26 @@ const List<SettingsItemModel> settingsItems = [
     // context: context,
     icon: Icons.settings,
     color: Color(0xffF468B7),
-    title: 'Settings',
-    description: 'Manage app Settings',
+    title: Languages.of().settings,
+    description: Languages.of().manageSettings,
   ),
   SettingsItemModel(
     icon: Icons.notifications,
     color: Color(0xff5FD0D3),
-    title: 'Notifications',
-    description: 'Take over the news in time',
+    title: Languages.of().notifications,
+    description: Languages.of().news,
   ),
   SettingsItemModel(
     icon: Icons.question_answer,
     color: Color(0xffBFACAA),
-    title: 'Support',
-    description: 'We are here to help',
+    title: Languages.of().support,
+    description: Languages.of().help,
   ),
   SettingsItemModel(
     icon: Icons.exit_to_app,
     color: Color(0xffFEC85C),
-    title: 'Logout',
-    description: "Logout of your account",
+    title: Languages.of().logout,
+    description: Languages.of().logoutAccount,
   ),
 ];
 
@@ -149,8 +149,8 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), '${Languages.of(context).changeLanguage}',
-            '${Languages.of(context).toggleLanguages}'),
+        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), '${Languages.of().changeLanguage}',
+            '${Languages.of().toggleLanguages}'),
         settingsItems
             .map((settingsItem) => SettingsItem(
 

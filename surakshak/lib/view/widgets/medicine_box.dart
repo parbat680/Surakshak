@@ -66,7 +66,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "${Languages.of(context).duration} : ${meds.duration.toString()}",
+                    "${Languages.of().duration} : ${meds.duration.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -75,7 +75,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "${Languages.of(context).time} : ${meds.time.toString()}",
+                    "${Languages.of().time} : ${meds.time.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -100,7 +100,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange),
                           child: Text(
-                            Languages.of(context).update,
+                            Languages.of().update,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -116,7 +116,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
                           child: Text(
-                            Languages.of(context).delete,
+                            Languages.of().delete,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -153,7 +153,7 @@ class MedicineCard extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_drop_down),
                   label: Text(
-                    showMore.value ? Languages.of(context).showLess : Languages.of(context).showMore,
+                    showMore.value ? Languages.of().showLess : Languages.of().showMore,
                     style: poppins.copyWith(color: Colors.blue),
                   )),
             )

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:surakshak/extensions/card.dart';
+import 'package:surakshak/languages/language.dart';
 import 'package:surakshak/services/repo/sos.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:surakshak/view/home/gpt.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 10,
                 ),
                 Text(
-                  "Welcome to Surakshak",
+                  Languages.of().welcomeToSurakshak,
                   style: poppins.copyWith(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: Text(
-                    "Severe",
+                    Languages.of().severe,
                     style: poppins.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -113,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red.shade300),
                   child: Text(
-                    "Moderate",
+                    Languages.of().moderate,
                     style: poppins.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -127,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                   child: Text(
-                    "Mild",
+                    Languages.of().mild,
                     style: poppins.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),

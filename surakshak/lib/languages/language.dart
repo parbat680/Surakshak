@@ -5,7 +5,7 @@ import 'language_en.dart';
 import 'language_hi.dart';
 
 abstract class Languages {
-  static Languages of(BuildContext context) {
+  static Languages of() {
     String lang = CacheLanguage.getLanguage();
     return loadLang(Locale(lang));
   }
@@ -81,4 +81,16 @@ abstract class Languages {
   String get logoutAccount;
   String get home;
   String get showLess;
+  String get welcomeToSurakshak;
+  String get volunteers;
+  String get enterHealthDetails;
+  String get selectParameter;
+  String get enterValue;
+  String get systolic;
+  String get distolic;
+  String get rate;
+  String get sugarLevel;
+  String get severe;
+  String get moderate;
+  String get mild;
 }

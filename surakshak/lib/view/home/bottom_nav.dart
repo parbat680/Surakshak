@@ -64,21 +64,21 @@ class _BottomNavBarState extends State<BottomNavBar>
 
   get _tabBar => [
         TabItem(
-            title: Languages.of(context).home,
+            title: Languages.of().home,
             icon: Icons.home_outlined,
             activeIcon: Icons.home_filled),
         TabItem(
-          title: Languages.of(context).events,
+          title: Languages.of().events,
           icon: Icons.event_available_outlined,
           activeIcon: Icons.event,
         ),
         TabItem(
-          title: Languages.of(context).health,
+          title: Languages.of().health,
           icon: Icons.health_and_safety_outlined,
           activeIcon: Icons.health_and_safety,
         ),
         TabItem(
-          title: Languages.of(context).profile,
+          title: Languages.of().profile,
           icon: Icons.account_circle_outlined,
           activeIcon: Icons.account_circle,
         ),
