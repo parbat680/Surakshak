@@ -4,6 +4,7 @@ import RegisterPic from '../assets/register.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const HospitalSignUp = () => {
     const DefaultOptions = {
@@ -35,28 +36,31 @@ const HospitalSignUp = () => {
         //http://3.108.219.67:5000/
         setLoading(true);
         try {
-            const response = await fetch("https://surakshak-apis.onrender.com/api/v1/hospital/signup",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, address, "phone": helpline, "regNo": regisnum, password }),
-
+            const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/hospital/signup", {
+                name,
+                email,
+                address,
+                phone: helpline, // Adjusting the key as per your naming convention
+                regNo: regisnum, // Registration number
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            );
+            });
 
             console.log(response);
 
             if (response.status === 200) {
-                const resp = await response.json();
+                const resp = response.data; // Directly access the response data
                 toast.success("Your Registration Successful");
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("type", 'hospital');
-                navigate('/')
+                navigate('/');
             } else {
-                alert("Some error occured")
+                alert("Some error occurred");
             }
+
         } catch (err) {
             console.log(err);
             alert("Something Went Wrong");

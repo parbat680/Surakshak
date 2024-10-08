@@ -5,6 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { unique } from '@tensorflow/tfjs-core';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 
 const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
   const navigate = useNavigate();
@@ -24,34 +26,45 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
   const [experience, setExperience] = useState(0);
   const [regNo, setRegNo] = useState("")
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
 
     try {
-      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/doctor/signup",
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, name, address, phone, password, experience }),
-
+      const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/doctor/signup", {
+        email,
+        name,
+        address,
+        phone,
+        password,
+        experience
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       if (response.status === 200) {
-        var res = await response.json();
-        console.log(res)
+        // Directly access response data with Axios
+        const res = response.data;  // No need for await or .json()
+        console.log(res);
+
+        // Store token and user type in local storage
         localStorage.setItem("token", res.token);
-        localStorage.setItem("type", 'doctor');
-        navigate('/doctordashboard')
+        localStorage.setItem("type", 'doctor');  // Store the type of user (doctor)
+
+        // Navigate to the doctor's dashboard
+        navigate('/doctordashboard');
       }
 
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");
+    } finally {
+      setLoading(false); // Reset loading state
     }
   }
   return (
@@ -92,7 +105,13 @@ const DoctorSignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
               </div>
 
 
-              <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign Up</button>
+              <button
+                type="submit"
+                className={`w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                disabled={loading} // Disable button when loading
+              >
+                {loading ? <CircularProgress size={24} color="inherit" /> : 'Sign Up'}
+              </button>
               <p className="text-base font-normal text-gray-800">
                 Alreay have an account ? <a href="/login" className="font-medium text-lg text-teal-500 hover:underline ">Login</a>
               </p>

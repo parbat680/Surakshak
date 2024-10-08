@@ -4,6 +4,7 @@ import RegisterPic from '../assets/register.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const VolunteerSignUp = () => {
   const DefaultOptions = {
@@ -38,24 +39,29 @@ const VolunteerSignUp = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/volunteer/signup",
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ name, email, phone, age, password }),
-
+      const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/volunteer/signup", {
+        name,
+        email,
+        phone,
+        age,
+        password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
+
 
       if (response.status === 200) {
-        alert('Signed Up successfully')
-        const resp = await response.json();
+        alert('Signed Up successfully');
+        const resp = response.data; // Directly access the parsed response data
         localStorage.setItem("token", resp.token);
         localStorage.setItem("type", 'volunteer');
-        navigate('/volunteerdashboard')
+        navigate('/volunteerdashboard'); // Redirect to the volunteer dashboard
+      } else {
+        alert("Something went wrong");
       }
+
 
 
       console.log(response);

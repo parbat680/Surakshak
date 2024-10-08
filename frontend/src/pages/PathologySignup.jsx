@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { unique } from '@tensorflow/tfjs-core';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const PathologySignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
   const navigate = useNavigate();
@@ -30,24 +31,28 @@ const PathologySignup = ({ isLoggedIn, setisLoggedIn, setuserid }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://surakshak-apis.onrender.com/api/v1/pathology/signup",
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email, name, address, phone, password, established, regNo }),
-
+      const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/pathology/signup", {
+        email,
+        name,
+        address,
+        phone,
+        password,
+        established,
+        regNo
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       if (response.status === 200) {
-        var res = await response.json();
-        console.log(res)
+        const res = response.data; // Directly access the response data
+        console.log(res);
         localStorage.setItem("token", res.token);
         localStorage.setItem("type", 'pathology');
-        navigate('/')
+        navigate('/');
       }
+
 
     } catch (err) {
       console.log(err);

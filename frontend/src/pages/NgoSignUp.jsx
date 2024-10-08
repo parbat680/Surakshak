@@ -4,6 +4,7 @@ import RegisterPic from '../assets/register.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const NGOSignUp = () => {
     const DefaultOptions = {
@@ -35,26 +36,29 @@ const NGOSignUp = () => {
         // console.log(name, email, ngotype, address, helpline, regisnum, password);
         setLoading(true);
         try {
-            const response = await fetch("https://surakshak-apis.onrender.com/api/v1/ngo/signup",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, "ngoType": ngotype, address, "phone": helpline, "regNo": regisnum, password }),
-
+            const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/ngo/signup", {
+                name,
+                email,
+                ngoType: ngotype, // NGO type passed as a variable
+                address,
+                phone: helpline, // Adjusting the key for phone
+                regNo: regisnum, // Registration number
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            );
+            });
 
             if (response.status === 200) {
-                const resp = await response.json();
-                alert('Your NGO is registered successfully!!')
+                const resp = response.data; // Directly access the response data
+                alert('Your NGO is registered successfully!!');
                 toast.success("Your Registration Successful");
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("type", 'ngo');
-                navigate('/addevent')
+                navigate('/addevent');
             } else {
-                alert("Something went wrong")
+                alert("Something went wrong");
             }
 
 
@@ -82,7 +86,7 @@ const NGOSignUp = () => {
                             </div>
                             <div>
                                 <label for="ngotype" className="block mb-1 text-base font-medium text-gray-900">Select NGO Type</label>
-                                <select value={ngotype} onChange={(e) => setNgotype(e.target.value)} id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                <select value={ngotype} onChange={(e) => setNgotype(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                     <option selected>Choose a NGO Type</option>
                                     <option value="private">Private Sector Companies (Sec 8/25)</option>
                                     <option value="society">Registered Societies (Non-Government)</option>

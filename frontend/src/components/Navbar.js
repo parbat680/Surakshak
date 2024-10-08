@@ -24,21 +24,21 @@ const Header = () => {
                     {/* <Navbar.Collapse>
                         <Navbar.Link
                             href="/"
-                            class='text-lg text-cyan-400'
+                            className='text-lg text-cyan-400'
                         // active={true}
                         >
                             Home
                         </Navbar.Link>
-                        <Navbar.Link href="#events" class='text-lg text-cyan-400'>
+                        <Navbar.Link href="#events" className='text-lg text-cyan-400'>
                             Events
                         </Navbar.Link>
-                        <Navbar.Link href="#service" class='text-lg text-cyan-400'>
+                        <Navbar.Link href="#service" className='text-lg text-cyan-400'>
                             Services
                         </Navbar.Link>
-                        <Navbar.Link href="/yoga" class='text-lg text-cyan-400'>
+                        <Navbar.Link href="/yoga" className='text-lg text-cyan-400'>
                             Yogas
                         </Navbar.Link>
-                        <Navbar.Link href="/" class='text-lg text-cyan-400'>
+                        <Navbar.Link href="/" className='text-lg text-cyan-400'>
                             Dashboard
                         </Navbar.Link>
                     </Navbar.Collapse> */}
