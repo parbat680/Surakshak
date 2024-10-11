@@ -24,6 +24,8 @@ const HospitalSignUp = () => {
     const [helpline, setHelpline] = useState("");
     const [regisnum, setRegisnum] = useState("");
     const [password, setPassword] = useState("");
+    const [longitude, setLongitude] = useState("");
+    const [latitude, setLatitude] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
@@ -35,14 +37,20 @@ const HospitalSignUp = () => {
         }
         //http://3.108.219.67:5000/
         setLoading(true);
+        getLocation();
+        console.log(name, email, address, helpline, regisnum, password, latitude, longitude);
+
         try {
             const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/hospital/signup", {
                 name,
                 email,
                 address,
-                phone: helpline, // Adjusting the key as per your naming convention
-                regNo: regisnum, // Registration number
-                password
+                phone: helpline,
+                regNo: regisnum,
+                password,
+                latitude,
+                longitude
+
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -56,6 +64,7 @@ const HospitalSignUp = () => {
                 toast.success("Your Registration Successful");
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("type", 'hospital');
+                alert("Registration Successful");
                 navigate('/');
             } else {
                 alert("Some error occurred");
@@ -68,6 +77,25 @@ const HospitalSignUp = () => {
             setLoading(false); // Stop loading state
         }
     }
+
+    //get location
+    // Function to get the user's current location
+    const getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLongitude(position.coords.longitude);
+                    setLatitude(position.coords.latitude);
+                },
+                (error) => {
+                    toast.error("Unable to retrieve your location");
+                    console.error("Error retrieving location: ", error);
+                }
+            );
+        } else {
+            toast.error("Geolocation is not supported by this browser");
+        }
+    };
     return (
         <div className='grid grid-cols-2 bg-gray-50'>
             <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen pl-28 lg:py-0">
