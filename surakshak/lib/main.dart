@@ -14,7 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import 'bloc/locale/locale_bloc.dart';
 
 void main() async {
-  Gemini.init(apiKey: GEMINI_API_KEY);
+  Gemini.init(apiKey: "");
   runApp(MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await CacheLanguage.init();
