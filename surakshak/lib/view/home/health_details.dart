@@ -23,7 +23,7 @@ class HealthDetails extends StatefulWidget {
 final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
-final TextEditingController _diabetesTextController = TextEditingController();
+// final TextEditingController _diabetesTextController = TextEditingController();
 HealthDetailsModel healthDetailsModel =
     HealthDetailsModel(sistolic: '', diastolic: '', pulseRate: '', date: '');
 
@@ -37,7 +37,7 @@ updateInformation() async {
 }
 
 class _HealthDetailsState extends State<HealthDetails> {
-  final items = ['Blood Pressure', 'Pulse Rate', 'Diabetes'];
+  final items = ['Blood Pressure', 'Pulse Rate'];
   var value = 0;
 
   RxString dropDownvalue = "Blood Pressure".obs;
@@ -45,6 +45,10 @@ class _HealthDetailsState extends State<HealthDetails> {
   void initState() {
     super.initState();
   }
+
+  List<HealthDetailsModel> healthDetails = [];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +113,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                     GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.keyboard_arrow_left_outlined)),
-                    const Text('14 Apr - 21 Apr'),
+                    const Text('This week'),
                     GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.keyboard_arrow_right_outlined)),
@@ -152,7 +156,8 @@ class _HealthDetailsState extends State<HealthDetails> {
                           child: const CircularProgressIndicator()
                               .marginOnly(top: 20));
                     }
-                    List<HealthDetailsModel> healthDetails = snapshot.data ?? [];
+                    healthDetails = snapshot.data ?? [];
+                    // healthDetails ;
                     return Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -165,7 +170,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                           return Container(
                             height: 40,
                             width: double.infinity,
-                            padding: const EdgeInsets.only(left: 10, right: 30),
+                            padding: const EdgeInsets.only(left: 10, right: 50),
                             child: SizedBox(
                               height: 40,
                               width: double.infinity,
@@ -176,18 +181,21 @@ class _HealthDetailsState extends State<HealthDetails> {
                                   Text(date),
                                   // Text(
                                   //     '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}'),
-                                  Row(
-                                    children: [
-                                      Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / "),
-                                  Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}"),
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: Row(
+                                      children: [
+                                        Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / ", style: TextStyle(color: (healthDetails[i].sistolic >= 90 && healthDetails[i].sistolic <= 120) ? Colors.black : Colors.red),),
+                                    Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}", style: TextStyle(color: (healthDetails[i].diastolic >= 60 && healthDetails[i].diastolic <= 80) ? Colors.black : Colors.red),),
+                                      ],
+                                    ),
                                   ),
                                           
                                   GestureDetector(
                                       onTap: () {},
                                       child: Text(healthDetails[i]
                                           .pulseRate
-                                          .toString())),
+                                          .toString(), style: TextStyle(color: (healthDetails[i].pulseRate >= 60 && healthDetails[i].pulseRate <= 100) ? Colors.black : Colors.red),)),
                                 ],
                               ),
                             ),
@@ -297,8 +305,8 @@ class _HealthDetailsState extends State<HealthDetails> {
                       bloodPressure()
                     else if (dropDownvalue.value == Languages.of().pulseRate)
                       pulseRate()
-                    else if (dropDownvalue.value == Languages.of().pulseRate)
-                      diabetes()
+                    // else if (dropDownvalue.value == Languages.of().pulseRate)
+                    //   diabetes()
                   ])),
               // Obx(
               //   () => Flexible(child: Text("Auto request in: $_start")),
@@ -321,6 +329,11 @@ class _HealthDetailsState extends State<HealthDetails> {
                   healthDetailsModel.pulseRate = _pulseRateTextController.text;
 
                   await updateInformation();
+                  List<HealthDetailsModel> temp = await HealthDetailsHandler.getHealthDetails();
+                  setState(() {
+                    healthDetails = temp;
+                  }); 
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Submit'),
               ).marginSymmetric(horizontal: 21),
@@ -362,45 +375,45 @@ class _HealthDetailsState extends State<HealthDetails> {
   }
 }
 
-diabetes() {
-  return Column(
-    children: [
-      const SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text(
-            "Suagr level",
-            style: const TextStyle(fontSize: 18),
-          ),
-          SizedBox(
-            width: 150,
-            height: 40,
-            child: TextField(
-              controller: _diabetesTextController,
-              decoration: const InputDecoration(
-                  hintText: 'Enter Value',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Colors.black38,
-                  )),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Colors.black38,
-                  ))),
-              maxLines: 1,
-            ),
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-    ],
-  );
-}
+// diabetes() {
+//   return Column(
+//     children: [
+//       const SizedBox(
+//         height: 20,
+//       ),
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           Text(
+//             "Suagr level",
+//             style: const TextStyle(fontSize: 18),
+//           ),
+//           SizedBox(
+//             width: 150,
+//             height: 40,
+//             child: TextField(
+//               controller: _diabetesTextController,
+//               decoration: const InputDecoration(
+//                   hintText: 'Enter Value',
+//                   border: OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                     color: Colors.black38,
+//                   )),
+//                   enabledBorder: OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                     color: Colors.black38,
+//                   ))),
+//               maxLines: 1,
+//             ),
+//           ),
+//         ],
+//       ),
+//       const SizedBox(
+//         height: 10,
+//       ),
+//     ],
+//   );
+// }
 
 bloodPressure() {
   return Column(

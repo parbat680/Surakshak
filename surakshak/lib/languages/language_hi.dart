@@ -193,4 +193,7 @@ class LanguageHN extends Languages {
 
   @override
   String get mild => "हल्का";
+
+  @override
+  String get thisWeek => "इस सप्ताह";
 }

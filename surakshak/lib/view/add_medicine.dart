@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:developer';
 
+import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:surakshak/extensions/card.dart';
 import 'package:surakshak/services/repo/medicines.dart';
 import 'package:surakshak/theme/fontStyles.dart';
@@ -36,182 +37,181 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
           child: SingleChildScrollView(
             child: Row(
               children: [
-                // Expanded(
-                //   child: FastForm(
-                //     formKey: _formKey,
-                //     children: [
-                //       LabelText("${Languages.of().addMedicine}"),
-                //       FastTextField(
-                //         contentPadding: const EdgeInsets.all(15),
-                //         name: 'medicine_name',
-                //         labelText: '${Languages.of().medicineName}',
-                //         placeholder: 'Medicine Name',
-                //         validator: (value) {
-                //           if (value == null || value.isEmpty) {
-                //             return "Enter medicine name";
-                //           }
-                //           return null;
-                //         },
-                //         onSaved: (value) {
-                //           name = value;
-                //         },
-                //       ),
-                //       const SizedBox(
-                //         height: 20,
-                //       ),
-                //       FastTextField(
-                //         keyboardType: TextInputType.number,
-                //         contentPadding: const EdgeInsets.all(15),
-                //         name: 'medicine_duration',
-                //         labelText: '${Languages.of().duration}',
-                //         placeholder: '${Languages.of().duration}',
-                //         validator: (value) {
-                //           if (value == null || value.isEmpty) {
-                //             return "Enter medicine dosage";
-                //           }
-                //           return null;
-                //         },
-                //         onSaved: (val) {
-                //           dosage = val;
-                //         },
-                //       ),
-                //       const SizedBox(
-                //         height: 20,
-                //       ),
-                //       // FastChoiceChips(
-                //       //   name: 'choice_chips',
-                //       //   labelText: '${Languages.of().choiceChips}',
-                //       //   alignment: WrapAlignment.center,
-                //       //   chipPadding: const EdgeInsets.all(8.0),
-                //       //   onSaved: (value) {
-                //       //     days = value!;
-                //       //   },
-                //       //   chips: [
-                //       //     FastChoiceChip(
-                //       //       avatar: const Icon(Icons.calendar_view_week),
-                //       //       selected: false,
-                //       //       value: '${Languages.of().everyday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       value: '${Languages.of().monday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().tuesday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().wednesday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().thursday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().friday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().saturday}',
-                //       //     ),
-                //       //     FastChoiceChip(
-                //       //       selected: false,
-                //       //       value: '${Languages.of().sunday}',
-                //       //     ),
-                //       //   ],
-                //       //   validator: (value) => value == null || value.isEmpty
-                //       //       ? 'Please select at least one day'
-                //       //       : null,
-                //       // ),
-                //       const SizedBox(
-                //         height: 20,
-                //       ),
-                //       FastTimePicker(
-                //         name: 'time',
-                //         labelText: '${Languages.of().dosageTime}',
-                //         onChanged: (TimeOfDay? value) {
-                //           if (!dosage_time.contains(value)) {
-                //             dosage_time.add(value!);
-                //           }
-                //           setState(() {});
-                //         },
-                //         validator: (value) {
-                //           if (dosage_time.isEmpty) {
-                //             return "Selct atleast one slot";
-                //           }
-                //           return null;
-                //         },
-                //       ),
-                //       const SizedBox(
-                //         height: 20,
-                //       ),
-                //       Wrap(
-                //         spacing: 10,
-                //         children: dosage_time
-                //             .map((e) => Container(
-                //                   child: Text(e.format(context))
-                //                       .wrapCard(Colors.blue.shade200),
-                //                 ))
-                //             .toList(),
-                //       ),
-                //       LabelText("${Languages.of().uploadImage}"),
-                //       Container(
-                //               padding: const EdgeInsets.all(20),
-                //               height: 200,
-                //               decoration: BoxDecoration(
-                //                   border: Border.all(width: 1),
-                //                   borderRadius: BorderRadius.circular(20)),
-                //               child: _image == null
-                //                   ? Center(
-                //                       child: IconButton(
-                //                         icon: const Icon(
-                //                           Icons.camera_alt,
-                //                           size: 30,
-                //                         ),
-                //                         onPressed: () {
-                //                           PopupSelector(context);
-                //                         },
-                //                       ),
-                //                     )
-                //                   : Image.file(
-                //                       _image!,
-                //                       fit: BoxFit.contain,
-                //                     ))
-                //           .roundCard(Colors.transparent),
-                //       ElevatedButton(
-                //         onPressed: () async {
-                //           if (_formKey.currentState!.validate() &&
-                //               _image != null) {
-                //             _formKey.currentState!.save();
-                //             log("$name $dosage $dosage_time $days");
-                //             List time = [];
-                //             for (int i = 0; i < dosage_time.length; i++) {
-                //               time.add(
-                //                   "${dosage_time[i].hour}:${dosage_time[i].minute}");
-                //             }
-                //             context.loaderOverlay.show();
-                //             try {
-                //               await MedicineHandler.addMedicines(name!, dosage!,
-                //                   days.join(","), time.join(","), _image!);
-                //             } catch (e) {
-                //               log(e.toString());
-                //             }
-                //             context.loaderOverlay.hide();
-                //           }
-                //         },
-                //         style: ElevatedButton.styleFrom(
-                //             minimumSize: const Size(double.infinity, 50),
-                //             backgroundColor: Colors.green),
-                //         child: Text(
-                //           "${Languages.of().addMedicine}",
-                //           style: poppins.copyWith(
-                //               color: Colors.white, fontWeight: FontWeight.w400),
-                //         ),
-                //       ).marginOnly(top: 10),
-                //     ],
-                //   ).marginSymmetric(horizontal: 20, vertical: 10),
-                // ),
+                Expanded(
+                  child: FastForm(
+                    formKey: _formKey,
+                    children: [
+                      LabelText(Languages.of().addMedicine),
+                      FastTextField(
+                        contentPadding: const EdgeInsets.all(15),
+                        name: 'medicine_name',
+                        labelText: Languages.of().medicineName,
+                        placeholder: 'Medicine Name',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter medicine name";
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          name = value;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FastTextField(
+                        keyboardType: TextInputType.number,
+                        contentPadding: const EdgeInsets.all(15),
+                        name: 'medicine_duration',
+                        labelText: Languages.of().duration,
+                        placeholder: Languages.of().duration,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter medicine dosage";
+                          }
+                          return null;
+                        },
+                        onSaved: (val) {
+                          dosage = val;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FastChoiceChips(
+                        name: 'choice_chips',
+                        labelText: Languages.of().choiceChips,
+                        alignment: WrapAlignment.center,
+                        chipPadding: const EdgeInsets.all(8.0),
+                        onSaved: (value) {
+                          days = value!;
+                        },
+                        chips: [
+                          FastChoiceChip(
+                            avatar: const Icon(Icons.calendar_view_week),
+                            selected: false,
+                            value: Languages.of().everyday,
+                          ),
+                          FastChoiceChip(
+                            value: Languages.of().monday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().tuesday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().wednesday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().thursday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().friday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().saturday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().sunday,
+                          ),
+                        ],
+                        validator: (value) => value == null || value.isEmpty
+                            ? 'Please select at least one day'
+                            : null,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      FastTimePicker(
+                        name: 'time',
+                        labelText: Languages.of().dosageTime,
+                        onChanged: (TimeOfDay? value) {
+                          if (!dosage_time.contains(value)) {
+                            dosage_time.add(value!);
+                          }
+                          setState(() {});
+                        },
+                        validator: (value) {
+                          if (dosage_time.isEmpty) {
+                            return "Selct atleast one slot";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Wrap(
+                        spacing: 10,
+                        children: dosage_time
+                            .map((e) => Container(
+                                  child: Text(e.format(context))
+                                      .wrapCard(Colors.blue.shade200),
+                                ))
+                            .toList(),
+                      ),
+                      // LabelText(Languages.of().uploadImage),
+                      // Container(
+                      //         padding: const EdgeInsets.all(20),
+                      //         height: 200,
+                      //         decoration: BoxDecoration(
+                      //             border: Border.all(width: 1),
+                      //             borderRadius: BorderRadius.circular(20)),
+                      //         child: _image == null
+                      //             ? Center(
+                      //                 child: IconButton(
+                      //                   icon: const Icon(
+                      //                     Icons.camera_alt,
+                      //                     size: 30,
+                      //                   ),
+                      //                   onPressed: () {
+                      //                     PopupSelector(context);
+                      //                   },
+                      //                 ),
+                      //               )
+                      //             : Image.file(
+                      //                 _image!,
+                      //                 fit: BoxFit.contain,
+                      //               ))
+                      //     .roundCard(Colors.transparent),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            log("$name $dosage $dosage_time $days");
+                            List time = [];
+                            for (int i = 0; i < dosage_time.length; i++) {
+                              time.add(
+                                  "${dosage_time[i].hour.toString().padLeft(2, '0')}:${dosage_time[i].minute.toString().padLeft(2, '0')}");
+                            }
+                            context.loaderOverlay.show();
+                            try {
+                              await MedicineHandler.addMedicines(name!, dosage!,
+                                  days.join(","), time.join(","));
+                            } catch (e) {
+                              log(e.toString());
+                            }
+                            context.loaderOverlay.hide();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 50),
+                            backgroundColor: Colors.green),
+                        child: Text(
+                          Languages.of().addMedicine,
+                          style: poppins.copyWith(
+                              color: Colors.white, fontWeight: FontWeight.w400),
+                        ),
+                      ).marginOnly(top: 10),
+                    ],
+                  ).marginSymmetric(horizontal: 20, vertical: 10),
+                ),
               ],
             ),
           ),
@@ -245,7 +245,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                   onTap: () async {
                     Navigator.pop(context);
-                    _image = await picker.galleryPick();
+                    // _image = await picker.galleryPick();
+                    await picker.galleryPick();
                     setState(() {});
                   },
                 ),
@@ -256,7 +257,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   title: const Text("Choose from camera", style: TextStyle()),
                   onTap: () async {
                     Navigator.pop(context);
-                    _image = await picker.cameraPick();
+                    // _image = await picker.cameraPick();
+                    await picker.cameraPick();
                     setState(() {});
                   },
                 ),

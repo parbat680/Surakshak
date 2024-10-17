@@ -44,43 +44,113 @@ class _GPTPageState extends State<GPTPage> {
   void initState() {
     super.initState();
     openAI = OpenAI.instance.build(
-        token: "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",
-        baseOption: HttpSetup(receiveTimeout: 60 * 1000),
-        isLogger: true);
+        // token: "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",
+        token:
+            "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",
+        // baseOption: HttpSetup(receiveTimeout: 60 * 1000),
+        baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 10)),
+        enableLog: true);
   }
 
   late OpenAI openAI;
 
   ///t => translate
-  final tController = StreamController<CTResponse?>.broadcast();
+  final tController = StreamController.broadcast();
   final TextEditingController _prompt = TextEditingController();
 
   void _chatGpt3ExampleStream() async {
     context.loaderOverlay.show();
     history.add(_prompt.text);
 
-    final request = CompleteText(
-        prompt: _prompt.text, model: kTranslateModelV3, maxTokens: 200);
+    final request = ChatCompleteText(
+      messages: [
+        Map.of({
+          "role": "user",
+          "content": _prompt.text
+        }) // Setting the prompt in message format
+      ],
+      maxToken: 200,
+      model: GptTurboChatModel(),
+    );
 
     _prompt.text = "";
 
-    openAI.onCompleteStream(request: request).listen((it) {
+    // openAI.onCompleteStream(request: request).listen((it) {
+    //   _prompt.clear();
+    //   debugPrint(it.toString());
+    //   isLoading(false);
+    //   history.add(it!.choices.last.text);
+    //   setState(() {});
+    // }).onError((err) {
+    //   print(err.toString());
+    // });
+    openAI.onChatCompletionSSE(request: request).listen((it) {
+      // Clear the prompt and hide loader
       _prompt.clear();
       debugPrint(it.toString());
       isLoading(false);
-      history.add(it!.choices.last.text);
+
+      // Add the response content to the history
+      if (it.choices != null && it.choices!.isNotEmpty) {
+        history.add(it.choices!.first.message!.content);
+      }
+
+      // Trigger UI update
       setState(() {});
     }).onError((err) {
+      // Handle errors
       print(err.toString());
     });
     context.loaderOverlay.hide();
   }
 
+  // late OpenAI openAI;
+
+  // ///t => translate
+  // final tController = StreamController<CTResponse?>.broadcast();
+  // final TextEditingController _prompt = TextEditingController();
+
+  // void _chatGpt3ExampleStream() async {
+  //   context.loaderOverlay.show();
+  //   history.add(_prompt.text);
+
+  //   final request = ChatCompleteText(messages: [
+  //     Map.of({"role": "user", "content": "Your prompt here"})
+  //   ], model: kChatGptTurboModel, maxToken: 200);
+
+  //   _prompt.text = "";
+
+  //   // openAI.onCompleteStream(request: request).listen((it) {
+  //   //   _prompt.clear();
+  //   //   debugPrint(it.toString());
+  //   //   isLoading(false);
+  //   //   history.add(it!.choices.last.text);
+  //   //   setState(() {});
+  //   // }).onError((err) {
+  //   //   print(err.toString());
+  //   // });
+  //   openAI.onChatCompletionSSE(request: request).listen((it) {
+  //     _prompt.clear();
+  //     debugPrint(it.toString());
+  //     isLoading(false);
+
+  //     if (it!.choices.isNotEmpty) {
+  //       history.add(it.choices.last.message
+  //           .content); // Accessing 'content' from 'message'
+  //     }
+
+  //     setState(() {});
+  //   }).onError((err) {
+  //     print(err.toString());
+  //   });
+  //   context.loaderOverlay.hide();
+  // }
+
   @override
   void dispose() {
     _prompt.dispose();
-    
-    openAI.close();
+
+    // openAI.close();
     super.dispose();
   }
 

@@ -181,4 +181,7 @@ class LanguageEN extends Languages {
 
   @override
   String get mild => "Mild";
+
+  @override
+  String get thisWeek => "This Week";
 }
