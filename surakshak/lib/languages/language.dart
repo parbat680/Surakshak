@@ -93,4 +93,5 @@ abstract class Languages {
   String get severe;
   String get moderate;
   String get mild;
+  String get thisWeek;
 }

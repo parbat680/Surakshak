@@ -149,18 +149,33 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SettingsItemToggle(Icons.edit, Color(0xff8D7AEE), '${Languages.of().changeLanguage}',
-            '${Languages.of().toggleLanguages}'),
-        settingsItems
-            .map((settingsItem) => SettingsItem(
-
-                  settingsItem.icon,
-                  settingsItem.color,
-                  settingsItem.title,
-                  settingsItem.description,
-                ))
-            .toList()
-            .toColumn()
+        SettingsItemToggle(
+            Icons.edit,
+            Color(0xff8D7AEE),
+            '${Languages.of().changeLanguage}',
+            '${Languages.of().toggleLanguages}',
+            true),
+        SettingsItemToggle(
+            Icons.settings,
+            Color(0xffF468B7),
+            '${Languages.of().settings}',
+            '${Languages.of().manageSettings}',
+            false),
+        SettingsItemToggle(Icons.notifications, Color(0xff5FD0D3),
+            Languages.of().notifications, Languages.of().news, false),
+        SettingsItemToggle(Icons.question_answer, Color(0xffBFACAA),
+            Languages.of().support, Languages.of().help, false),
+        SettingsItemToggle(Icons.exit_to_app, Color(0xffFEC85C),
+            Languages.of().logout, Languages.of().logoutAccount, false),
+        // settingsItems
+        //     .map((settingsItem) => SettingsItem(
+        //           settingsItem.icon,
+        //           settingsItem.color,
+        //           settingsItem.title,
+        //           settingsItem.description,
+        //         ))
+        //     .toList()
+        //     .toColumn()
       ],
     );
   }
@@ -261,12 +276,13 @@ class _SettingsItemState extends State<SettingsItem> {
 
 class SettingsItemToggle extends StatefulWidget {
   const SettingsItemToggle(
-      this.icon, this.iconBgColor, this.title, this.description);
+      this.icon, this.iconBgColor, this.title, this.description, this.toggle);
 
   final IconData icon;
   final Color iconBgColor;
   final String title;
   final String description;
+  final bool toggle;
   // final Icon
 
   @override
@@ -345,7 +361,7 @@ class _SettingsItemToggleState extends State<SettingsItemToggle> {
         SizedBox(
           width: 7,
         ),
-        trailingToggleButton(),
+        widget.toggle ? trailingToggleButton() : SizedBox(),
       ].toRow(),
     );
   }

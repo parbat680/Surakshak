@@ -5,12 +5,10 @@ import 'package:get/get.dart';
 
 class SosHelper {
   static final ApiHandler _apiHandler = ApiHandler();
-  static Future sendSos(String condition) async {
+  static Future sendSos(String condition, double latitude, double longitude) async {
     try {
       var response = await _apiHandler
-          .post("sos/fire", {"condition": condition, "address": "Bor"});
-
-      log(response.toString());
+          .post("sos/fire", {"condition": condition, "latitude": latitude, "longitude": longitude});
       if (response.statusCode == 200) {
         Get.snackbar("Success", "SOS send Successfully");
       } else {

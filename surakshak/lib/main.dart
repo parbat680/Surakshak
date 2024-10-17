@@ -1,3 +1,5 @@
+import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:surakshak/constants.dart';
 import 'package:surakshak/services/repo/cached.dart';
 import 'package:surakshak/theme/light.dart';
 import 'package:surakshak/utils/cache_language.dart';
@@ -12,6 +14,7 @@ import 'package:get_storage/get_storage.dart';
 import 'bloc/locale/locale_bloc.dart';
 
 void main() async {
+  Gemini.init(apiKey: GEMINI_API_KEY);
   runApp(MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await CacheLanguage.init();
