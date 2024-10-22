@@ -11,46 +11,46 @@ var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILI
 
 // const client = require('twilio')(accountSid, authToken);
 
+// router.post('/fire', fetchuser, async (req, res) => {
+//     try {
+//         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
+
+//         const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
+//         console.log("first")
+//         if (req.body.condition == 'Severe') {
+//             console.log("inside")
+//             flag = true
+//             const hospitals = await HospitalSchema.findOne({ address: { $regex: `${req.body.address}`, $options: 'i' } })
+//             console.log(hospitals)
+//             client.messages
+//                 .create({
+//                     from: 'whatsapp:+14155238886',
+//                     body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly send amubulance asap!`,
+//                     to: `whatsapp:${hospitals.phone}`
+//                 })
+//                 .then(message => console.log(message.sid));
+//         }
+//         // console.log(volunteers)
+//         for (let i = 0; i < volunteers.length; i++) {
+//             // console.log(volunteers[i].volunteerId.phone)
+//             client.messages
+//                 .create({
+//                     from: 'whatsapp:+14155238886',
+//                     body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly come asap!`,
+//                     to: `whatsapp:${volunteers[i].volunteerId.phone}`
+//                 })
+//                 .then(message => console.log(message.sid));
+//         }
+//         res.status(200).json("Succesfully fired SOS!")
+//     } catch (err) {
+//         console.log(err.message)
+//         res.status(500).json(err.message);
+//     }
+// })
+
+
+
 router.post('/fire', fetchuser, async (req, res) => {
-    try {
-        const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
-
-        const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
-        console.log("first")
-        if (req.body.condition == 'Severe') {
-            console.log("inside")
-            flag = true
-            const hospitals = await HospitalSchema.findOne({ address: { $regex: `${req.body.address}`, $options: 'i' } })
-            console.log(hospitals)
-            client.messages
-                .create({
-                    from: 'whatsapp:+14155238886',
-                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly send amubulance asap!`,
-                    to: `whatsapp:${hospitals.phone}`
-                })
-                .then(message => console.log(message.sid));
-        }
-        // console.log(volunteers)
-        for (let i = 0; i < volunteers.length; i++) {
-            // console.log(volunteers[i].volunteerId.phone)
-            client.messages
-                .create({
-                    from: 'whatsapp:+14155238886',
-                    body: `Hello, there is an emergency with ${userFind.name}.It is ${req.body.condition}. Kindly come asap!`,
-                    to: `whatsapp:${volunteers[i].volunteerId.phone}`
-                })
-                .then(message => console.log(message.sid));
-        }
-        res.status(200).json("Succesfully fired SOS!")
-    } catch (err) {
-        console.log(err.message)
-        res.status(500).json(err.message);
-    }
-})
-
-
-
-router.post('/firenow', fetchuser, async (req, res) => {
     try {
         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
         // const volunteers = await VolunteerMap.find({ seniorId: userFind.id }).populate('volunteerId')
