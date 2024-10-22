@@ -9,7 +9,6 @@ var client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILI
 // const accountSid = 'AC556c5f29a1a095c7798a52f873c90836';
 // const authToken = 'c1dd61de8ad045e63ed630379cf4c892';
 
-
 // const client = require('twilio')(accountSid, authToken);
 
 router.post('/fire', fetchuser, async (req, res) => {
