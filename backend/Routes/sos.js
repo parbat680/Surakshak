@@ -65,6 +65,8 @@ router.post('/firenow', fetchuser, async (req, res) => {
 
             const latitude = req.body.latitude;
             const longitude = req.body.longitude;
+            const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+            
             console.log("Latitude:", latitude);
             console.log("Longitude:", longitude);
             const maxDistance = 50000; // Maximum distance in meters
@@ -106,7 +108,7 @@ router.post('/firenow', fetchuser, async (req, res) => {
                 client.messages
                     .create({
                         from: 'whatsapp:+14155238886',
-                        body: `Hello, there is an emergency with ${userFind.name}. It is ${req.body.condition}. Kindly send ambulance asap!`,
+                        body: `Hello, there is an emergency with ${userFind.name}. It is ${req.body.condition}. Kindly send ambulance asap! The location is ${googleMapsUrl}`,
                         to: `whatsapp:${nearestHospital.phone}`
                     })
                     .then(message => console.log(message.sid));
