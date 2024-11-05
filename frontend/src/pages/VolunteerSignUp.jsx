@@ -4,6 +4,7 @@ import RegisterPic from '../assets/register.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const VolunteerSignUp = () => {
   const DefaultOptions = {
@@ -22,6 +23,7 @@ const VolunteerSignUp = () => {
   const [age, setAge] = useState(18);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,26 +36,32 @@ const VolunteerSignUp = () => {
     }
 
     // toast.success("Login Successful!")
+    setLoading(true);
 
     try {
-      const response = await fetch("http://34.93.44.181/api/v1/volunteer/signup",
-        {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ name, email, phone, age, password }),
-
+      const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/volunteer/signup", {
+        name,
+        email,
+        phone,
+        age,
+        password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
         }
-      );
+      });
+
 
       if (response.status === 200) {
-        alert('Signed Up successfully')
-        const resp = await response.json();
+        alert('Signed Up successfully');
+        const resp = response.data; // Directly access the parsed response data
         localStorage.setItem("token", resp.token);
         localStorage.setItem("type", 'volunteer');
-        navigate('/volunteerdashboard')
+        navigate('/volunteerdashboard'); // Redirect to the volunteer dashboard
+      } else {
+        alert("Something went wrong");
       }
+
 
 
       console.log(response);
@@ -61,6 +69,8 @@ const VolunteerSignUp = () => {
     } catch (err) {
       console.log(err);
       alert("Something Went Wrong");
+    } finally {
+      setLoading(false); // Stop loading state
     }
     //  setEmail("");
     //  setPassword("");
@@ -97,7 +107,12 @@ const VolunteerSignUp = () => {
               </div>
 
 
-              <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign Up</button>
+              <button type="submit" className={`w-full text-white font-medium rounded-lg text-base px-5 py-2.5 text-center focus:ring-4 focus:outline-none 
+              focus:ring-primary-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                disabled={loading}
+              >
+                {loading ? 'Signing Up' : 'Sign Up'}
+              </button>
               <p className="text-base font-normal text-gray-800">
                 Alreay have an account ? <a href="/login" className="font-medium text-lg text-teal-500 hover:underline ">Login</a>
               </p>

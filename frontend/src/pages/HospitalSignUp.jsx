@@ -4,6 +4,7 @@ import RegisterPic from '../assets/register.json'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const HospitalSignUp = () => {
     const DefaultOptions = {
@@ -23,42 +24,78 @@ const HospitalSignUp = () => {
     const [helpline, setHelpline] = useState("");
     const [regisnum, setRegisnum] = useState("");
     const [password, setPassword] = useState("");
+    const [longitude, setLongitude] = useState("");
+    const [latitude, setLatitude] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (name.length < 3) {
             toast.error("Name must contain atleast 3 characters")
-          }else if (password.length < 5) {
+        } else if (password.length < 5) {
             toast.error("Password must contain atleast 6 characters")
-          }
-          //http://3.108.219.67:5000/
-        try{
-            const response = await fetch("http://34.93.44.181/api/v1/hospital/signup",
-                {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ name, email, address, "phone":helpline, "regNo":regisnum, password }),
+        }
+        //http://3.108.219.67:5000/
+        setLoading(true);
+        getLocation();
+        console.log(name, email, address, helpline, regisnum, password, latitude, longitude);
 
+        try {
+            const response = await axios.post("https://surakshak-apis.onrender.com/api/v1/hospital/signup", {
+                name,
+                email,
+                address,
+                phone: helpline,
+                regNo: regisnum,
+                password,
+                latitude,
+                longitude
+
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
                 }
-            );
+            });
 
             console.log(response);
 
-            if(response.status===200){
-                const resp = await response.json();
+            if (response.status === 200) {
+                const resp = response.data; // Directly access the response data
                 toast.success("Your Registration Successful");
                 localStorage.setItem("token", resp.token);
                 localStorage.setItem("type", 'hospital');
-                navigate('/')
-            }else{
-                alert("Some error occured")
+                alert("Registration Successful");
+                navigate('/');
+            } else {
+                alert("Some error occurred");
             }
-          }catch(err){
-           console.log(err);
-           alert("Something Went Wrong");
-         }
+
+        } catch (err) {
+            console.log(err);
+            alert("Something Went Wrong");
+        } finally {
+            setLoading(false); // Stop loading state
+        }
     }
+
+    //get location
+    // Function to get the user's current location
+    const getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    setLongitude(position.coords.longitude);
+                    setLatitude(position.coords.latitude);
+                },
+                (error) => {
+                    toast.error("Unable to retrieve your location");
+                    console.error("Error retrieving location: ", error);
+                }
+            );
+        } else {
+            toast.error("Geolocation is not supported by this browser");
+        }
+    };
     return (
         <div className='grid grid-cols-2 bg-gray-50'>
             <div className="w-full flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen pl-28 lg:py-0">
@@ -95,7 +132,12 @@ const HospitalSignUp = () => {
                                     cols={40} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="" />
                             </div>
 
-                            <button type="submit" className="w-full text-white bg-teal-400 hover:bg-teal-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center ">Sign Up</button>
+                            <button type="submit" className={`w-full text-white font-medium rounded-lg text-base px-5 py-2.5 text-center focus:ring-4 focus:outline-none 
+                             focus:ring-primary-300 ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-teal-400 hover:bg-teal-500'}`}
+                                disabled={loading}
+                            >
+                                {loading ? 'Signing Up' : 'Sign Up'}
+                            </button>
                             <p className="text-base font-normal text-gray-800">
                                 Alreay have an account ? <a href="/login" className="font-medium text-lg text-teal-500 hover:underline ">Login</a>
                             </p>
