@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:surakshak/languages/language.dart';
 import 'package:surakshak/languages/language_hi.dart';
 import 'package:surakshak/models/medicine.dart';
@@ -14,9 +16,11 @@ class MedicineCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(meds.days!);
+    log(meds.time.toString());
     return Container(
       constraints: const BoxConstraints(
-        maxHeight: 380,
+        maxHeight: 250,
       ),
       child: AspectRatio(
         aspectRatio: 8 / 12.5,
@@ -36,25 +40,27 @@ class MedicineCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Flexible(
-                    child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20)),
-                        child: meds.image == null
-                            ? Image.asset(
-                                "assets/medicine.png",
-                                fit: BoxFit.fill,
-                                width: double.infinity,
-                                height: 200,
-                              )
-                            : Image.network(
-                                meds.image!,
-                                fit: BoxFit.fill,
-                                width: double.infinity,
-                                height: 200,
-                              )),
-                  ),
+                  // Flexible(
+                  //   child: ClipRRect(
+                  //       borderRadius: const BorderRadius.only(
+                  //           topLeft: Radius.circular(20),
+                  //           topRight: Radius.circular(20)),
+                  //       child: meds.image == null
+                  //           ? Text("No Image")
+                  //           : Text("ajsdlkf"))
+                  //           // ? Image.asset(
+                  //           //     "assets/medicine.png",
+                  //           //     fit: BoxFit.fill,
+                  //           //     width: double.infinity,
+                  //           //     height: 200,
+                  //           //   )
+                  //           // : Image.network(
+                  //           //     meds.image!,
+                  //           //     fit: BoxFit.fill,
+                  //           //     width: double.infinity,
+                  //           //     height: 200,
+                  //           //   )),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -66,7 +72,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "${Languages.of(context).duration} : ${meds.duration.toString()}",
+                    "${Languages.of().duration} : ${meds.duration.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -75,7 +81,7 @@ class MedicineCard extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    "${Languages.of(context).time} : ${meds.time.toString()}",
+                    "${Languages.of().time} : ${meds.time.toString()}",
                     style: HeadingText.copyWith(
                       fontSize: 14,
                     ),
@@ -100,7 +106,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.orange),
                           child: Text(
-                            Languages.of(context).update,
+                            Languages.of().update,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -116,7 +122,7 @@ class MedicineCard extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.red),
                           child: Text(
-                            Languages.of(context).delete,
+                            Languages.of().delete,
                             style: poppins.copyWith(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w400),
@@ -153,7 +159,7 @@ class MedicineCard extends StatelessWidget {
                   },
                   icon: const Icon(Icons.arrow_drop_down),
                   label: Text(
-                    showMore.value ? Languages.of(context).showLess : Languages.of(context).showMore,
+                    showMore.value ? Languages.of().showLess : Languages.of().showMore,
                     style: poppins.copyWith(color: Colors.blue),
                   )),
             )

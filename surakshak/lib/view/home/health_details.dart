@@ -23,7 +23,7 @@ class HealthDetails extends StatefulWidget {
 final TextEditingController _pulseRateTextController = TextEditingController();
 final TextEditingController _systolicTextController = TextEditingController();
 final TextEditingController _distolicTextController = TextEditingController();
-final TextEditingController _diabetesTextController = TextEditingController();
+// final TextEditingController _diabetesTextController = TextEditingController();
 HealthDetailsModel healthDetailsModel =
     HealthDetailsModel(sistolic: '', diastolic: '', pulseRate: '', date: '');
 
@@ -37,7 +37,7 @@ updateInformation() async {
 }
 
 class _HealthDetailsState extends State<HealthDetails> {
-  final items = ['Blood Pressure', 'Pulse Rate', 'Diabetes'];
+  final items = ['Blood Pressure', 'Pulse Rate'];
   var value = 0;
 
   RxString dropDownvalue = "Blood Pressure".obs;
@@ -45,6 +45,10 @@ class _HealthDetailsState extends State<HealthDetails> {
   void initState() {
     super.initState();
   }
+
+  List<HealthDetailsModel> healthDetails = [];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +64,7 @@ class _HealthDetailsState extends State<HealthDetails> {
               minimumSize: const Size(double.infinity, 50),
               backgroundColor: Colors.green),
           child: Text(
-            "Add Health Details",
+            Languages.of().addHealthDetails,
             style: poppins.copyWith(
                 color: Colors.white, fontWeight: FontWeight.w400),
           ),
@@ -69,7 +73,7 @@ class _HealthDetailsState extends State<HealthDetails> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              Languages.of(context).health,
+              Languages.of().health,
               style: poppins.copyWith(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -109,7 +113,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                     GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.keyboard_arrow_left_outlined)),
-                    const Text('14 Apr - 21 Apr'),
+                    const Text('This week'),
                     GestureDetector(
                         onTap: () {},
                         child: const Icon(Icons.keyboard_arrow_right_outlined)),
@@ -130,11 +134,11 @@ class _HealthDetailsState extends State<HealthDetails> {
                 child: Row(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(Languages.of(context).days),
+                    Text(Languages.of().days),
                     SizedBox(width: 40),
-                    Text(Languages.of(context).bloodPressure),
+                    Text(Languages.of().bloodPressure),
                     SizedBox(width: 30),
-                    Text(Languages.of(context).pulseRate),
+                    Text(Languages.of().pulseRate),
                   ],
                 ),
               ),
@@ -152,7 +156,8 @@ class _HealthDetailsState extends State<HealthDetails> {
                           child: const CircularProgressIndicator()
                               .marginOnly(top: 20));
                     }
-                    List<HealthDetailsModel> healthDetails = snapshot.data!;
+                    healthDetails = snapshot.data ?? [];
+                    // healthDetails ;
                     return Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -165,7 +170,7 @@ class _HealthDetailsState extends State<HealthDetails> {
                           return Container(
                             height: 40,
                             width: double.infinity,
-                            padding: const EdgeInsets.only(left: 10, right: 30),
+                            padding: const EdgeInsets.only(left: 10, right: 50),
                             child: SizedBox(
                               height: 40,
                               width: double.infinity,
@@ -176,18 +181,21 @@ class _HealthDetailsState extends State<HealthDetails> {
                                   Text(date),
                                   // Text(
                                   //     '${healthDetails[i].sistolic}/${healthDetails[i].diastolic}'),
-                                  Row(
-                                    children: [
-                                      Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / "),
-                                  Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}"),
-                                    ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 20.0),
+                                    child: Row(
+                                      children: [
+                                        Text(healthDetails[i].sistolic<0 ? '- / ' : " ${healthDetails[i].sistolic} / ", style: TextStyle(color: (healthDetails[i].sistolic >= 90 && healthDetails[i].sistolic <= 120) ? Colors.black : Colors.red),),
+                                    Text(healthDetails[i].diastolic<0 ? '-' : " ${healthDetails[i].diastolic}", style: TextStyle(color: (healthDetails[i].diastolic >= 60 && healthDetails[i].diastolic <= 80) ? Colors.black : Colors.red),),
+                                      ],
+                                    ),
                                   ),
                                           
                                   GestureDetector(
                                       onTap: () {},
                                       child: Text(healthDetails[i]
                                           .pulseRate
-                                          .toString())),
+                                          .toString(), style: TextStyle(color: (healthDetails[i].pulseRate >= 60 && healthDetails[i].pulseRate <= 100) ? Colors.black : Colors.red),)),
                                 ],
                               ),
                             ),
@@ -240,9 +248,9 @@ class _HealthDetailsState extends State<HealthDetails> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                'Enter Health Details',
-                style: TextStyle(
+              Text(
+                Languages.of().enterHealthDetails,
+                style: const TextStyle(
                   fontSize: 24,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -265,9 +273,9 @@ class _HealthDetailsState extends State<HealthDetails> {
                     ),
                     Row(
                       children: [
-                        const Text(
-                          'Select Parameter: ',
-                          style: TextStyle(
+                        Text(
+                          Languages.of().selectParameter,
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w600),
                         ),
                         DropdownButton(
@@ -293,12 +301,12 @@ class _HealthDetailsState extends State<HealthDetails> {
                         ),
                       ],
                     ),
-                    if (dropDownvalue.value == 'Blood Pressure')
+                    if (dropDownvalue.value == Languages.of().bloodPressure)
                       bloodPressure()
-                    else if (dropDownvalue.value == 'Pulse Rate')
+                    else if (dropDownvalue.value == Languages.of().pulseRate)
                       pulseRate()
-                    else if (dropDownvalue.value == 'Diabetes')
-                      diabetes()
+                    // else if (dropDownvalue.value == Languages.of().pulseRate)
+                    //   diabetes()
                   ])),
               // Obx(
               //   () => Flexible(child: Text("Auto request in: $_start")),
@@ -321,11 +329,16 @@ class _HealthDetailsState extends State<HealthDetails> {
                   healthDetailsModel.pulseRate = _pulseRateTextController.text;
 
                   await updateInformation();
+                  List<HealthDetailsModel> temp = await HealthDetailsHandler.getHealthDetails();
+                  setState(() {
+                    healthDetails = temp;
+                  }); 
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Submit'),
               ).marginSymmetric(horizontal: 21),
             ],
-          ).paddingAll(10),
+          ).paddingAll(8),
         );
       }),
     );
@@ -340,9 +353,9 @@ class _HealthDetailsState extends State<HealthDetails> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
-              'Rate: ',
-              style: TextStyle(fontSize: 18),
+            Text(
+              Languages.of().rate,
+              style: const TextStyle(fontSize: 18),
             ),
             SizedBox(
               width: 150,
@@ -362,45 +375,45 @@ class _HealthDetailsState extends State<HealthDetails> {
   }
 }
 
-diabetes() {
-  return Column(
-    children: [
-      const SizedBox(
-        height: 20,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Text(
-            'Sugar level: ',
-            style: TextStyle(fontSize: 18),
-          ),
-          SizedBox(
-            width: 150,
-            height: 40,
-            child: TextField(
-              controller: _diabetesTextController,
-              decoration: const InputDecoration(
-                  hintText: 'Enter value',
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Colors.black38,
-                  )),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Colors.black38,
-                  ))),
-              maxLines: 1,
-            ),
-          ),
-        ],
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-    ],
-  );
-}
+// diabetes() {
+//   return Column(
+//     children: [
+//       const SizedBox(
+//         height: 20,
+//       ),
+//       Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: [
+//           Text(
+//             "Suagr level",
+//             style: const TextStyle(fontSize: 18),
+//           ),
+//           SizedBox(
+//             width: 150,
+//             height: 40,
+//             child: TextField(
+//               controller: _diabetesTextController,
+//               decoration: const InputDecoration(
+//                   hintText: 'Enter Value',
+//                   border: OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                     color: Colors.black38,
+//                   )),
+//                   enabledBorder: OutlineInputBorder(
+//                       borderSide: BorderSide(
+//                     color: Colors.black38,
+//                   ))),
+//               maxLines: 1,
+//             ),
+//           ),
+//         ],
+//       ),
+//       const SizedBox(
+//         height: 10,
+//       ),
+//     ],
+//   );
+// }
 
 bloodPressure() {
   return Column(
@@ -411,22 +424,22 @@ bloodPressure() {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Systolic: ',
-            style: TextStyle(fontSize: 18),
+          Text(
+            Languages.of().systolic,
+            style: const TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
             height: 40,
             child: TextField(
               controller: _systolicTextController,
-              decoration: const InputDecoration(
-                  hintText: 'Enter value',
-                  border: OutlineInputBorder(
+              decoration: InputDecoration(
+                  hintText: 'Enter Value',
+                  border: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   )),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   ))),
@@ -441,22 +454,22 @@ bloodPressure() {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const Text(
-            'Distolic: ',
-            style: TextStyle(fontSize: 18),
+          Text(
+            Languages.of().distolic,
+            style: const TextStyle(fontSize: 18),
           ),
           SizedBox(
             width: 150,
             height: 40,
             child: TextField(
               controller: _distolicTextController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                   hintText: 'Enter value',
-                  border: OutlineInputBorder(
+                  border: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   )),
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                     color: Colors.black38,
                   ))),

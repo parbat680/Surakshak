@@ -54,24 +54,27 @@ class ApiHandler {
     return response;
   }
 
-  uploadImage(File file, String endpoint, Map<String, String> formdata) async {
-    String fileName = file.path.split('/').last;
-    print(fileName);
+  uploadImage(String endpoint, String name, String days, String time, int duration) async {
+    // String fileName = file.path.split('/').last;
+    // print(fileName);
 
-    FormData data = FormData.fromMap({
-      "image": await MultipartFile.fromFile(file.path,
-          filename: fileName, contentType: MediaType('image', 'png')),
-      "name": formdata['name'],
-      "days": formdata['days'],
-      "time": formdata['time'],
-      "duration": formdata['duration']
-    });
+    // FormData data = FormData.fromMap({
+    //   "name": formdata['name'],
+    //   "days": formdata['days'],
+    //   "time": formdata['time'],
+    //   "duration": formdata['duration']
+    // });
 
     Dio dio = Dio();
 
     var response = await dio.post("$url/$endpoint",
-        data: data, options: Options(headers: {"token": _cache.getToken()}));
+        data: {
+          "name" : name,
+          "days" : days,
+          "time": time,
+          "duration" : duration
+        }, options: Options(headers: {"token": _cache.getToken()}));
 
     return response;
-  }
+  } 
 }

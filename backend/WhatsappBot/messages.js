@@ -51,10 +51,12 @@ async function scheduleMessages() {
         // Schedule the message to be sent at the custom time
         cron.schedule(cronTime, () => {
             sendWhatsAppMessage(users[i].seniorId.phone, `Its time to take your medicine named ${users[i].name}`);
+            console.log(users[i].seniorId.phone, `Its time to take your medicine named ${users[i].name}`)
+            console.log(`Message scheduled for ${users[i].seniorId.phone} at ${scheduledTime}`);
         });
     }
 }
 
 
-scheduleMessages();
-setInterval(scheduleMessages, 40000); // Run once per day (24 hours)
+// scheduleMessages();
+// setInterval(scheduleMessages, 40000); // Run once per day (24 hours)

@@ -71,33 +71,33 @@ router.post('/verify-otp', async (req, res) => {
     }
 });
 
-// router.post('/login', async (req, res) => {
-//     try {
-//         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.body.id })
-//         if (userFind) {
-//             userFind.password = undefined;
-//             const newUserToken = {
-//                 name: userFind.name,
-//                 uniqueId: userFind.uniqueId
-//             }
-//             const jsontoken = await auth.tokenGenerate(newUserToken, req, res);
-//             return res.status(200).json({
-//                 success: 1,
-//                 message: "Successful login",
-//                 token: jsontoken,
-//             });
-//         }
-//         else {
-//             res.status(401).json({
-//                 message: "Unauthorized access!"
-//             })
-//         }
+router.post('/login', async (req, res) => {
+    try {
+        const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.body.id })
+        if (userFind) {
+            userFind.password = undefined;
+            const newUserToken = {
+                name: userFind.name,
+                uniqueId: userFind.uniqueId
+            }
+            const jsontoken = await auth.tokenGenerate(newUserToken, req, res);
+            return res.status(200).json({
+                success: 1,
+                message: "Successful login",
+                token: jsontoken,
+            });
+        }
+        else {
+            res.status(401).json({
+                message: "Unauthorized access!"
+            })
+        }
 
-//     } catch (err) {
-//         console.log(err.message)
-//         res.status(500).json(err.message);
-//     }
-// })
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json(err.message);
+    }
+})
 
 // router.get('/get', fetchuser, async (req, res) => {
 //     try {
@@ -136,44 +136,44 @@ router.post('/verify-otp', async (req, res) => {
 // })
 
 // Login Route
-router.post('/login', async (req, res) => {
-    try {
-        const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.body.id });
-        if (!userFind) {
-            return res.status(401).json({
-                message: "Unauthorized access!"
-            });
-        }
+// router.post('/login', async (req, res) => {
+//     try {
+//         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.body.id });
+//         if (!userFind) {
+//             return res.status(401).json({
+//                 message: "Unauthorized access!"
+//             });
+//         }
 
-        if (!userFind.otpVerified) {
-            return res.status(401).json({ message: "OTP not verified" });
-        }
+//         if (!userFind.otpVerified) {
+//             return res.status(401).json({ message: "OTP not verified" });
+//         }
 
-        // Compare provided password with stored hashed password
-        const isPasswordValid = compareSync(req.body.password, userFind.password);
-        console.log(isPasswordValid);
-        if (!isPasswordValid) {
-            return res.status(401).json({ message: "Invalid password" });
-        }
+//         // Compare provided password with stored hashed password
+//         const isPasswordValid = compareSync(req.body.password, userFind.password);
+//         console.log(isPasswordValid);
+//         if (!isPasswordValid) {
+//             return res.status(401).json({ message: "Invalid password" });
+//         }
 
-        userFind.password = undefined;
-        const newUserToken = {
-            name: userFind.name,
-            uniqueId: userFind.uniqueId
-        };
-        console.log("Token:", newUserToken);
-        const jsontoken = await auth.tokenGenerate(newUserToken, req, res);
-        console.log("JWT: ", jsontoken);
-        return res.status(200).json({
-            success: 1,
-            message: "Successful login",
-            token: jsontoken,
-        });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).json(err.message);
-    }
-});
+//         userFind.password = undefined;
+//         const newUserToken = {
+//             name: userFind.name,
+//             uniqueId: userFind.uniqueId
+//         };
+//         console.log("Token:", newUserToken);
+//         const jsontoken = await auth.tokenGenerate(newUserToken, req, res);
+//         console.log("JWT: ", jsontoken);
+//         return res.status(200).json({
+//             success: 1,
+//             message: "Successful login",
+//             token: jsontoken,
+//         });
+//     } catch (err) {
+//         console.log(err.message);
+//         res.status(500).json(err.message);
+//     }
+// });
 
 // Get User Route
 router.get('/get', fetchuser, async (req, res) => {

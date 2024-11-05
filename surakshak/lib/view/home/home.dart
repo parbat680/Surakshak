@@ -1,14 +1,21 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:location/location.dart';
 import 'package:surakshak/extensions/card.dart';
+import 'package:surakshak/languages/language.dart';
+import 'package:surakshak/services/repo/notification_services.dart';
 import 'package:surakshak/services/repo/sos.dart';
 import 'package:surakshak/theme/fontStyles.dart';
+import 'package:surakshak/view/home/chatbot_screen.dart';
 import 'package:surakshak/view/home/gpt.dart';
 import 'package:surakshak/view/widgets/volenteer_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:permission_handler/permission_handler.dart'
+    as PermissionHandler;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,8 +25,20 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> requestLocationPermission() async {
+    if (await PermissionHandler.Permission.location.isDenied) {
+      await PermissionHandler.Permission.location.request();
+    } else if (await PermissionHandler
+        .Permission.location.isPermanentlyDenied) {
+      await PermissionHandler.openAppSettings();
+    }
+  }
+
+
   @override
   void initState() {
+    requestLocationPermission();
+    NotificationServices().initializeNotification();
     super.initState();
   }
 
@@ -44,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 10,
                 ),
                 Text(
-                  "Welcome to Surakshak",
+                  Languages.of().welcomeToSurakshak,
                   style: poppins.copyWith(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
@@ -67,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.orange,
         onPressed: () {
-          Get.to(() => GPTPage());
+          Get.to(() => ChatBot());
         },
         child: const Icon(
           Icons.chat,
@@ -101,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                   child: Text(
-                    "Severe",
+                    Languages.of().severe,
                     style: poppins.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -113,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red.shade300),
                   child: Text(
-                    "Moderate",
+                    Languages.of().moderate,
                     style: poppins.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -127,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   style:
                       ElevatedButton.styleFrom(backgroundColor: Colors.orange),
                   child: Text(
-                    "Mild",
+                    Languages.of().mild,
                     style: poppins.copyWith(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -157,11 +176,38 @@ class _HomeScreenState extends State<HomeScreen> {
         }));
   }
 
-  sendSos(String condition) {
-    SosHelper.sendSos(condition);
+  sendSos(String condition) async {
+    LocationData? locationData = await getUserLocation();
+    if (locationData != null) {
+      SosHelper.sendSos(condition, locationData.latitude ?? 0.0,
+          locationData.longitude ?? 0.0);
+    } else {
+      await requestLocationPermission();
+    }
     _timer.cancel();
 
     Get.back();
+  }
+
+  Future<LocationData?> getUserLocation() async {
+    Location location = Location();
+    bool serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return null;
+      }
+    }
+
+    PermissionStatus permissionGranted = await location.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await location.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return null;
+      }
+    }
+
+    return await location.getLocation();
   }
 
   final RxInt _start = 10.obs;

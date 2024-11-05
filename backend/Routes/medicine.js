@@ -5,26 +5,46 @@ const fetchuser = require('../Middlewares/fetchuser');
 const MedicineSchema = require('../Schemas/MedicineSchema');
 const SeniorCitizensSchema = require('../Schemas/SeniorCitizensSchema');
 
-router.post('/add', fetchuser, multer.upload.single('image'), async (req, res) => {
+// router.post('/add', fetchuser, multer.upload.single('image'), async (req, res) => {
+//     try {
+//         const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
+//         const newMedicine = new MedicineSchema({
+//             seniorId: userFind.id,
+//             name: req.body.name,
+//             days: req.body.days,
+//             time: req.body.time,
+//             duration: parseInt(req.body.duration),
+//             image: `${process.env.URI}api/image/${req.file.filename}`
+//         })
+
+//         const saved = await newMedicine.save()
+//         // console.log(saved)
+//         res.status(200).json(saved)
+//     } catch (err) {
+//         console.log(err.message)
+//         res.status(500).json(err.message);
+//     }
+// })
+
+router.post('/add', fetchuser, async (req, res) => {
     try {
-        const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId })
+        const userFind = await SeniorCitizensSchema.findOne({ uniqueId: req.user.uniqueId });
+        
         const newMedicine = new MedicineSchema({
             seniorId: userFind.id,
             name: req.body.name,
             days: req.body.days,
             time: req.body.time,
-            duration: parseInt(req.body.duration),
-            image: `${process.env.URI}api/image/${req.file.filename}`
-        })
+            duration: parseInt(req.body.duration)
+        });
 
-        const saved = await newMedicine.save()
-        // console.log(saved)
-        res.status(200).json(saved)
+        const saved = await newMedicine.save();
+        res.status(200).json(saved);
     } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
         res.status(500).json(err.message);
     }
-})
+});
 
 router.get('/get', fetchuser, async (req, res) => {
     try {

@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'dart:developer';
 
+import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:surakshak/extensions/card.dart';
 import 'package:surakshak/services/repo/medicines.dart';
 import 'package:surakshak/theme/fontStyles.dart';
 import 'package:surakshak/utils/image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_fast_forms/flutter_fast_forms.dart';
+// import 'package:flutter_fast_forms/flutter_fast_forms.dart';
 import 'package:get/get.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import '../extensions/card.dart';
@@ -40,11 +41,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   child: FastForm(
                     formKey: _formKey,
                     children: [
-                      LabelText("${Languages.of(context).addMedicine}"),
+                      LabelText(Languages.of().addMedicine),
                       FastTextField(
                         contentPadding: const EdgeInsets.all(15),
                         name: 'medicine_name',
-                        labelText: '${Languages.of(context).medicineName}',
+                        labelText: Languages.of().medicineName,
                         placeholder: 'Medicine Name',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -63,8 +64,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                         keyboardType: TextInputType.number,
                         contentPadding: const EdgeInsets.all(15),
                         name: 'medicine_duration',
-                        labelText: '${Languages.of(context).duration}',
-                        placeholder: '${Languages.of(context).duration}',
+                        labelText: Languages.of().duration,
+                        placeholder: Languages.of().duration,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "Enter medicine dosage";
@@ -80,7 +81,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       ),
                       FastChoiceChips(
                         name: 'choice_chips',
-                        labelText: '${Languages.of(context).choiceChips}',
+                        labelText: Languages.of().choiceChips,
                         alignment: WrapAlignment.center,
                         chipPadding: const EdgeInsets.all(8.0),
                         onSaved: (value) {
@@ -90,34 +91,34 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                           FastChoiceChip(
                             avatar: const Icon(Icons.calendar_view_week),
                             selected: false,
-                            value: '${Languages.of(context).everyday}',
+                            value: Languages.of().everyday,
                           ),
                           FastChoiceChip(
-                            value: '${Languages.of(context).monday}',
-                          ),
-                          FastChoiceChip(
-                            selected: false,
-                            value: '${Languages.of(context).tuesday}',
+                            value: Languages.of().monday,
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: '${Languages.of(context).wednesday}',
+                            value: Languages.of().tuesday,
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: '${Languages.of(context).thursday}',
+                            value: Languages.of().wednesday,
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: '${Languages.of(context).friday}',
+                            value: Languages.of().thursday,
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: '${Languages.of(context).saturday}',
+                            value: Languages.of().friday,
                           ),
                           FastChoiceChip(
                             selected: false,
-                            value: '${Languages.of(context).sunday}',
+                            value: Languages.of().saturday,
+                          ),
+                          FastChoiceChip(
+                            selected: false,
+                            value: Languages.of().sunday,
                           ),
                         ],
                         validator: (value) => value == null || value.isEmpty
@@ -129,7 +130,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                       ),
                       FastTimePicker(
                         name: 'time',
-                        labelText: '${Languages.of(context).dosageTime}',
+                        labelText: Languages.of().dosageTime,
                         onChanged: (TimeOfDay? value) {
                           if (!dosage_time.contains(value)) {
                             dosage_time.add(value!);
@@ -155,45 +156,44 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                 ))
                             .toList(),
                       ),
-                      LabelText("${Languages.of(context).uploadImage}"),
-                      Container(
-                              padding: const EdgeInsets.all(20),
-                              height: 200,
-                              decoration: BoxDecoration(
-                                  border: Border.all(width: 1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: _image == null
-                                  ? Center(
-                                      child: IconButton(
-                                        icon: const Icon(
-                                          Icons.camera_alt,
-                                          size: 30,
-                                        ),
-                                        onPressed: () {
-                                          PopupSelector(context);
-                                        },
-                                      ),
-                                    )
-                                  : Image.file(
-                                      _image!,
-                                      fit: BoxFit.contain,
-                                    ))
-                          .roundCard(Colors.transparent),
+                      // LabelText(Languages.of().uploadImage),
+                      // Container(
+                      //         padding: const EdgeInsets.all(20),
+                      //         height: 200,
+                      //         decoration: BoxDecoration(
+                      //             border: Border.all(width: 1),
+                      //             borderRadius: BorderRadius.circular(20)),
+                      //         child: _image == null
+                      //             ? Center(
+                      //                 child: IconButton(
+                      //                   icon: const Icon(
+                      //                     Icons.camera_alt,
+                      //                     size: 30,
+                      //                   ),
+                      //                   onPressed: () {
+                      //                     PopupSelector(context);
+                      //                   },
+                      //                 ),
+                      //               )
+                      //             : Image.file(
+                      //                 _image!,
+                      //                 fit: BoxFit.contain,
+                      //               ))
+                      //     .roundCard(Colors.transparent),
                       ElevatedButton(
                         onPressed: () async {
-                          if (_formKey.currentState!.validate() &&
-                              _image != null) {
+                          if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
                             log("$name $dosage $dosage_time $days");
                             List time = [];
                             for (int i = 0; i < dosage_time.length; i++) {
                               time.add(
-                                  "${dosage_time[i].hour}:${dosage_time[i].minute}");
+                                  "${dosage_time[i].hour.toString().padLeft(2, '0')}:${dosage_time[i].minute.toString().padLeft(2, '0')}");
                             }
                             context.loaderOverlay.show();
                             try {
                               await MedicineHandler.addMedicines(name!, dosage!,
-                                  days.join(","), time.join(","), _image!);
+                                  days.join(","), time.join(","));
                             } catch (e) {
                               log(e.toString());
                             }
@@ -204,7 +204,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             minimumSize: const Size(double.infinity, 50),
                             backgroundColor: Colors.green),
                         child: Text(
-                          "${Languages.of(context).addMedicine}",
+                          Languages.of().addMedicine,
                           style: poppins.copyWith(
                               color: Colors.white, fontWeight: FontWeight.w400),
                         ),
@@ -245,7 +245,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   ),
                   onTap: () async {
                     Navigator.pop(context);
-                    _image = await picker.galleryPick();
+                    // _image = await picker.galleryPick();
+                    await picker.galleryPick();
                     setState(() {});
                   },
                 ),
@@ -256,7 +257,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   title: const Text("Choose from camera", style: TextStyle()),
                   onTap: () async {
                     Navigator.pop(context);
-                    _image = await picker.cameraPick();
+                    // _image = await picker.cameraPick();
+                    await picker.cameraPick();
                     setState(() {});
                   },
                 ),

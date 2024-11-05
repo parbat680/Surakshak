@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:surakshak/extensions/card.dart';
+import 'package:surakshak/languages/language.dart';
 import 'package:surakshak/models/volunteer.dart';
 import 'package:surakshak/services/repo/volenteers.dart';
 import 'package:surakshak/theme/fontStyles.dart';
@@ -16,7 +17,7 @@ class VolunteerCard extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Volunteers",
+          Languages.of().volunteers,
           style: poppins.copyWith(fontSize: 16, fontWeight: FontWeight.bold),
         ),
         const Divider(),
