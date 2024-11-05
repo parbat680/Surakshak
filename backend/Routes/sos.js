@@ -65,6 +65,8 @@ router.post('/fire', fetchuser, async (req, res) => {
             const latitude = req.body.latitude;
             const longitude = req.body.longitude;
             const googleMapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+            console.log("Maps URL:", googleMapsUrl);
             
             console.log("Latitude:", latitude);
             console.log("Longitude:", longitude);
